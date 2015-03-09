@@ -2,7 +2,15 @@
     <div class="menu">
       <div class="row">
         <!-- <div class="logo"><a href="{{site.baseurl}}"><img src="{{site.baseurl}}/img/logo.png" /></a></div> -->
-        <div class="logo"><h1><a href="{{site.baseurl}}/"><span>Logging</span> Roads</a></h1></div>
+        <div class="logo">
+          <h1>
+            {% if page.layout == 'map' %}
+              <a href="{{site.baseurl}}/"><span>Logging Roads</span> {{page.title}}</a>
+            {% else %}
+              <a href="{{site.baseurl}}/"><span>Logging</span> Roads</a>
+            {% endif %}
+          </h1>
+        </div>
         <div class="navigation">
           <ul>
             <li><a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a></li>
@@ -12,6 +20,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="description small-12 medium-4 columns mvm">{{site.description_short}}</div>
+      {% if page.layout == 'main' or page.layout == 'home' %}
+        <div class="description small-12 medium-4 columns mvm">{{site.description_short}}</div>
+      {% endif %}
     </div>
   </div>

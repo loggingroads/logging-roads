@@ -135,6 +135,7 @@ table {
   }
   .header .navigation ul {
   	list-style-type: none;
+    margin-bottom: 0;
   }
   .header .navigation ul li {
   	display: inline-block;
@@ -156,7 +157,6 @@ table {
 
 .menu {
   width: 100%;
-  height: 90px;
   padding-top: 30px;
   }
   .past-main {
@@ -165,7 +165,6 @@ table {
     transition: background ease-in-out 0.2s;
     position: fixed;
     top: 0;
-    height: 50px;
     z-index: 9999;
     padding-top: 10px;
     border-bottom: 4px solid #777;
