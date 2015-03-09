@@ -9,16 +9,11 @@
 
   <div class="content">
     <div class="map-container">
-      <div id="map country-page"></div>
+      <div id="map"></div>
       <div class="map-gradient"></div>
     </div>
-
-    <div>
-
-    </div>
+    {{content}}
   </div>
-
-  {{content}}
 
   {% include footer.html %}
 
@@ -27,7 +22,7 @@
       baseLayer: '{{page.baseLayer}}',
       center: [{{page.center.lat}}, {{page.center.lon}}],
       zoom: {{page.center.zoom}},
-      task_number: {{page.task_number}}
+      task_number: {% if page.task_number %}{{page.task_number}}{% else %}undefined{% endif %}
     }
   </script>
   <script src="{{site.baseurl}}/js/vendor/jquery.js"></script>
