@@ -32,7 +32,7 @@ var app = {
 
   loadTaskGeoJSON: function(){
     if(! pageConfig.task_number){ return false; }
-    var taskURL = 'http://tasks.dev.hotosm.org/project/' + pageConfig.task_number + '/tasks.json'
+    var taskURL = 'http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json'
 
     $.ajax({
       url: taskURL,
