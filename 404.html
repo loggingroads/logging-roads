@@ -1,0 +1,24 @@
+---
+title: 404 Error
+---
+<!doctype html>
+<html class="no-js" lang="en">
+  {% include dochead.html %}
+  <body>
+
+  <div class="row mvl">
+    <div class="small-6 small-push-3 columns error-404">
+      <h1 class="pvl text-center"><span>404</span>: This Page Does Not Exist</h1>
+      <p class="text-center">Oops, looks like something went wrong.  If this looks like an error on our part, feel free to <a href="https://github.com/crowdcover/logging-roads/issues" target="_blank">post an issue to github</a> or get in touch <a href="mailto:info@crowdcover.org">by email</a>.</p>
+      <p class="text-center"><a href="{{site.baseurl}}/">Click Here</a> to return to the home page.</p>
+    </div>
+  </div>
+
+  <script src="{{site.baseurl}}/js/vendor/jquery.js"></script>
+  <script src="{{site.baseurl}}/js/scripts.js"></script>
+  <script src="{{site.baseurl}}/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+  </body>
+</html>

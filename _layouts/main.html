@@ -1,0 +1,32 @@
+---
+---
+<!doctype html>
+<html class="no-js" lang="en">
+  {% include dochead.html %}
+  <body>
+
+  {% include header.html %}
+
+  {{content}}
+
+  {% include footer.html %}
+
+  <script>
+    var pageConfig = {
+      baseLayer: '{{page.baseLayer}}',
+      center: [{{page.center.lat}}, {{page.center.lon}}],
+      zoom: {{page.center.zoom}}
+    }
+  </script>
+  <script src="{{site.baseurl}}/js/vendor/jquery.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
+  <script src="{{site.baseurl}}/js/scripts.js"></script>
+  <script src="{{site.baseurl}}/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+  </body>
+</html>

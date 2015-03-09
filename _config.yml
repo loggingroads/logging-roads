@@ -1,0 +1,17 @@
+title: LoggingRoads
+email: jamesconkling@crowdcover.org
+description_short: |
+                   An Open Data initiative to map all logging roads in the Congo Basin Rainforest.
+description: |
+             The Logging Roads Initiative is a joint project of the World Resource Institute and CrowdCover that aims to analyze and make available geographic data on all logging roads in the Congo Basin region of Central Africa.  Using fifteen years of satellite imagery, the project will record the precise spread of logging roads over time.  All data will be added to the OpenStreetMap.org database and licensed in the public domain.
+baseurl: "/logging-roads" # the subpath of your site, e.g. /blog/
+url: "http://crowdcover.github.io/logging-roads" # the base hostname & protocol for your site
+twitter_username: CongoMines
+github_username:  CrowdCover
+
+collections:
+  countries:
+    output: true
+
+# Build settings
+markdown: kramdown

@@ -1,0 +1,10 @@
+{% for document in (1..include.columns) %}
+  <div class="large-{{ 12 | divided_by: include.columns }} columns">
+    <article class="divborder">
+      <h3 class="inline"><a href="{{site.baseurl}}/document/">Document Title</a></h3>
+      <h4>Author Name</h4>
+      <p><span class="meta">Date</span> Jan 24, 2015</p>
+      <p>Fusce ante lectus, pulvinar sed lacus scelerisque, bibendum commodo mauris. Vivamus erat velit, so  lacus scelerisque, bibendum commodo mauris.</p>
+    </article>
+  </div>
+{% endfor %}
