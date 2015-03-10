@@ -30,6 +30,19 @@ css for map elements
     color: #555;
     z-index: 1;
   }
+  .leaflet-bottom .leaflet-control-scale.leaflet-control {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0;
+    margin-left: 10px;
+  }
+  .leaflet-control-scale-line {
+    background: transparent;
+    color: #FFF;
+    border: 1px solid #FFF;
+    border-right: 0;
+    border-top: 0;
+  }
 
 .toggle-full-screen {
   position: absolute;
@@ -41,11 +54,11 @@ css for map elements
   font-weight: 200;
   padding-top: 10px;
   cursor: pointer;
-}
+  }
+  .toggle-full-screen:hover {
+    color: $primary;
+  }
 
-.toggle-full-screen:hover {
-  color: $primary;
-}
 
 /*********************************************************
 css for geojson data (e.g. project areas and project grids)
