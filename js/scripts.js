@@ -1,3 +1,5 @@
+---
+---
 (function(){
 var app = {
   init: function(){
@@ -14,7 +16,10 @@ var app = {
     // map functions
     if(pageConfig){
       this.buildMap();
-      this.loadTaskGeoJSON();
+      if(pageConfig.project_areas){
+        this.loadTMProjectAreas(pageConfig.project_areas)
+      }
+      this.loadTMProjectGrid();
     }
   },
 
@@ -30,9 +35,26 @@ var app = {
 
   },
 
-  loadTaskGeoJSON: function(){
+  loadTMProjectAreas: function(geojsonFile){
+    if(! pageConfig.task_number){ return false; }
+    var filePath = '{{site.baseurl}}/data/' + geojsonFile;
+
+    var projectAreaJSON = $.getJSON(filePath, function(projectAreaJSON){
+      var projectAreaJSON = L.geoJson(projectAreaJSON, {
+        style: function(feature){
+          return { className: 'project-area' };
+        }
+      }).addTo(app.map);
+    });
+  },
+
+  loadTMProjectGrid: function(){
     if(! pageConfig.task_number){ return false; }
     var taskURL = 'http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json'
+    var addGridToolTip = function(feature, layer){
+      // to do
+      return;
+    };
 
     $.ajax({
       url: taskURL,
@@ -42,25 +64,14 @@ var app = {
         console.log(pageConfig.task_number, 'successfully loaded');
 
         app.taskGrid = L.geoJson(grid, {
-          style: app.styleGrid,
+          style: function(feature){
+            return { className: 'project-grid' };
+          },
           onEachFeature: app.addGridToolTip
         }).addTo(app.map);
       }
     });
 
-  },
-
-  styleGrid: function(feature){
-    return {
-      color: '#ccc',
-      weight: 1,
-      fillColor: '#ff9700'
-    };
-  },
-
-  addGridToolTip: function(feature, layer){
-    // to do
-    return;
   }
 
 };

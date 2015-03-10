@@ -24,7 +24,8 @@
       baseLayer: '{{page.baseLayer}}',
       center: [{{page.center.lat}}, {{page.center.lon}}],
       zoom: {{page.center.zoom}},
-      task_number: {% if page.task_number %}{{page.task_number}}{% else %}undefined{% endif %}
+      task_number: {% if page.task_number %}{{ page.task_number }}{% else %}undefined{% endif %},
+      project_areas: {% if page.project_areas %}'{{ page.project_areas }}'{% else %}undefined{% endif %},
     }
   </script>
   <script src="{{site.baseurl}}/js/vendor/jquery.js"></script>
