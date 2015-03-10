@@ -1,3 +1,6 @@
+---
+---
+@import 'palette';
 /*********************************************************
 css for map elements
 *********************************************************/
@@ -5,7 +8,7 @@ css for map elements
   position: relative;
   height: 400px;
   width: 100%;
-  transition: height 0.25s;
+  /*transition: height 0.25s;*/
   }
   #map {
     position:absolute;
@@ -27,6 +30,22 @@ css for map elements
     color: #555;
     z-index: 1;
   }
+
+.toggle-full-screen {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  background: transparent;
+  color: #666;
+  font-size: 0.8rem;
+  font-weight: 200;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+.toggle-full-screen:hover {
+  color: $primary;
+}
 
 /*********************************************************
 css for geojson data (e.g. project areas and project grids)

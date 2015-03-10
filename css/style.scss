@@ -1,11 +1,6 @@
 ---
 ---
-$bgcolor: #171617;
-$text: #F1F1F1;
-
-$primary: #F8842E;
-$med-d-gray: #323538;
-
+@import 'palette';
 ::selection {
 	color: #FFF;
 	background-color: rgba(80, 80, 80, 0.4) !important;
@@ -43,11 +38,12 @@ a:hover, a:focus { color: darken($primary, 12%); }
 
 button {
 	background: $primary;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Raleway', sans-serif;
 	padding: 20px 50px;
 	font-size: 1.1em;
 	font-weight: 200;
 	outline: 0;
+  transition: none;
   }
   button:hover {
     background: darken($primary, 10%);

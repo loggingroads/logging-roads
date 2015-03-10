@@ -11,7 +11,7 @@
         scrollWheelZoom: false
       });
 
-      L.control.fullscreen().addTo(this.map);
+      $('.toggle-full-screen').on('click', this.toggleFullScreen);
 
       if(pageConfig.project_areas){
         this.loadTMProjectAreas(pageConfig.project_areas)
@@ -19,7 +19,22 @@
       if(pageConfig.task_number){
         this.loadTMProjectGrid(pageConfig.task_number);
       }
+    },
 
+    toggleFullScreen: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var $this = $(this);
+
+      if($this.hasClass('has-full-screen')){
+        app.setMapContainerHeight(400);
+        $this.removeClass('has-full-screen');
+        $this.html('<em>view full screen</em>');
+      }else{
+        app.setMapContainerHeight(window.innerHeight);
+        $this.addClass('has-full-screen');
+        $this.html('<em>shrink map</em>');
+      }
     },
 
     loadTMProjectAreas: function(geojsonFile){
@@ -58,6 +73,15 @@
         }
       });
 
+    },
+
+    setMapContainerHeight: function(height){
+      $('.map-container').height(height);
+      app.map.invalidateSize({animate: true});
+      // // transition time must match .map-container { transition: height <time>; } in map.css
+      // window.setTimeout( function(){
+      //   app.map.invalidateSize({animate: true});
+      // }, 200);
     }
 
   });
