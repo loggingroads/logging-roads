@@ -1,0 +1,41 @@
+/*********************************************************
+css for map elements
+*********************************************************/
+.map-container {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  transition: height 0.25s;
+  }
+  #map {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:100%;
+    background: $bgcolor;
+  }
+  .map-gradient {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: $bgcolor;
+    background: linear-gradient(transparent 0%, $bgcolor 80%);
+  }
+  #map .leaflet-control-container .leaflet-control-attribution {
+    background: transparent;
+    color: #555;
+    z-index: 1;
+  }
+
+/*********************************************************
+css for geojson data (e.g. project areas and project grids)
+geojson's classes are set in js/map.js w/ the L.path className option: https://www.mapbox.com/mapbox.js/api/v2.1.5/l-path/#path-options
+*********************************************************/
+path.project-area {
+
+}
+
+path.project-grid {
+
+}
