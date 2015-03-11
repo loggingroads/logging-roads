@@ -37,6 +37,7 @@ p {
 
 a { color: $primary; }
 a:hover, a:focus { color: darken($primary, 12%); }
+a.disabled { pointer-events: none; }
 
 button {
 	background: $primary;
@@ -236,6 +237,9 @@ table {
   .country .mg,
   .country a:active {
     color: #EEE;
+  }
+  .country .disabled .mg {
+    color: #888;
   }
   .country .mg-fw:before {
     vertical-align: middle; /* vertically center mapglyph */
