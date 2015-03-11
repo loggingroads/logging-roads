@@ -61,9 +61,9 @@
       if(pageConfig.project_areas){
         this.loadTMProjectAreas(pageConfig.project_areas)
       }
-      if(pageConfig.task_number){
-        this.loadTMProjectGrid(pageConfig.task_number);
-      }
+      // if(pageConfig.task_number){
+      //   this.loadTMProjectGrid(pageConfig.task_number);
+      // }
     },
 
     toggleFullScreen: function(e){
@@ -96,6 +96,10 @@
         // set vector stroke width
         app.setVectorStrokeWidth();
 
+        // add project grid (this should be a callback)
+        if(pageConfig.task_number){
+          app.loadTMProjectGrid(pageConfig.task_number);
+        }
       });
 
     },
