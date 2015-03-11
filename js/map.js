@@ -145,7 +145,7 @@
       var zoomLevel = app.map.getZoom();
       $('.leaflet-objects-pane path.project-area').css('stroke-width', function(){
         if(zoomLevel <= 6){
-          return 0.6;
+          return 0.4;
         }else if(zoomLevel <= 8){
           return 1;
         }else{
