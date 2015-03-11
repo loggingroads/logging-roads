@@ -15,6 +15,7 @@
         zoomControl: false // we'll add it later
       });
 
+      // set controls
       var shareControl = L.control({position: 'topleft'});
       // https://developers.facebook.com/docs/sharing/reference/share-dialog
       shareControl.onAdd = function(){
@@ -45,6 +46,11 @@
             // grid: undefined,
             share: shareControl.addTo(this.map)
           }
+      });
+
+      // size vector stroke width by zoom level
+      this.map.on('zoomend', function(e){
+        app.setVectorStrokeWidth();
       });
 
       // add page event listeners
@@ -80,38 +86,82 @@
       if(! pageConfig.task_number){ return false; }
       var filePath = '{{site.baseurl}}/data/' + geojsonFile;
 
-      var projectAreaJSON = $.getJSON(filePath, function(projectAreaJSON){
+      $.getJSON(filePath, function(projectAreaJSON){
         var projectAreaJSON = L.geoJson(projectAreaJSON, {
           style: function(feature){
             return { className: 'project-area' };
           }
         }).addTo(app.map);
+
+        // set vector stroke width
+        app.setVectorStrokeWidth();
+
       });
+
     },
 
     loadTMProjectGrid: function(task_number){
-      var taskURL = 'http://tasks.hotosm.org/project/' + task_number + '/tasks.json'
-      var addGridToolTip = function(feature, layer){
-        // to do
-        return;
-      };
+      // var taskURL = 'http://tasks.hotosm.org/project/' + task_number + '/tasks.json'
+      // var addGridToolTip = function(feature, layer){
+      //   // to do
+      //   return;
+      // };
 
-      $.ajax({
-        url: taskURL,
-        // jsonp: 'callback',
-        dataType: 'jsonp',
-        success: function(grid){
-          console.log(pageConfig.task_number, 'successfully loaded');
+      // $.ajax({
+      //   url: taskURL,
+      //   dataType: 'jsonp',
+      //   success: function(grid){
+      //     console.log(pageConfig.task_number, 'successfully loaded');
 
-          app.taskGrid = L.geoJson(grid, {
-            style: function(feature){
-              return { className: 'project-grid' };
-            },
-            onEachFeature: app.addGridToolTip
-          }).addTo(app.map);
+      //     app.taskGrid = L.geoJson(grid, {
+      //       style: function(feature){
+      //         return { className: 'project-grid' };
+      //       },
+      //       onEachFeature: app.addGridToolTip
+      //     }).addTo(app.map);
+      //   }
+      // });
+      $.getJSON('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson', function(projectGrid){
+        L.geoJson(projectGrid, {
+          filter: function(feature){
+            // filter out all removed cells
+            return feature.properties['state'] !== -1;
+          },
+          style: function(feature){
+            var stateClass = 'state-' + feature.properties['state'],
+                lockedClass = 'locked-' + feature.properties['locked'];
+            return { className: 'project-grid ' + stateClass + ' ' + lockedClass };
+          }
+        }).addTo(app.map);
+
+        // set vector stroke width
+        app.setVectorStrokeWidth();
+
+      });
+
+    },
+
+    setVectorStrokeWidth: function(){
+      var zoomLevel = app.map.getZoom();
+      $('.leaflet-objects-pane path.project-area').css('stroke-width', function(){
+        if(zoomLevel <= 6){
+          return 0.6;
+        }else if(zoomLevel <= 8){
+          return 1;
+        }else{
+          return 2;
         }
       });
 
+      $('.leaflet-objects-pane path.project-grid').css('stroke-width', function(){
+        if(zoomLevel <= 6){
+          return 0.8;
+        }else if(zoomLevel <= 8){
+          return 2;
+        }else{
+          return 4;
+        }
+      });
     },
 
     setMapContainerHeight: function(height){
