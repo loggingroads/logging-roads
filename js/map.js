@@ -35,12 +35,8 @@
 
       L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map)
 
-      // size vector stroke width by zoom level
-      this.map.on('zoomend projectArea-loaded taskGrid-loaded', function(e){
-        app.setVectorStrokeWidth();
-      });
-
       // add page event listeners
+      this.map.on('zoomend projectArea-loaded taskGrid-loaded', this.setVectorStrokeWidth);
       $('.toggle-full-screen').on('click', this.toggleFullScreen);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
