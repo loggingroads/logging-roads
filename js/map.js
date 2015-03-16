@@ -15,7 +15,7 @@
         zoomControl: false // we'll add it later
       });
 
-      // set controls
+      // build custom leaflet controls
       var shareControl = L.control({position: 'topleft'});
       // https://developers.facebook.com/docs/sharing/reference/share-dialog
       shareControl.onAdd = function(){
@@ -34,22 +34,17 @@
         return controlHTML[0];
       }
 
+      // append custom leaflet controls to leaflet map object
       $.extend(this.map, {
-          // moabiLayers: {
-          //   baseLayer: baseLayer,
-          //   dataLayers: {}
-          // },
           appControls: {
             zoom: L.control.zoom({position: 'topleft'}).addTo(this.map),
             scale: L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map),
-            // legend: L.mapbox.legendControl().addLegend('<h3 class="center keyline-bottom">Legend</h3><div class="legend-contents"></div>').addTo(this.map),
-            // grid: undefined,
             share: shareControl.addTo(this.map)
           }
       });
 
       // size vector stroke width by zoom level
-      this.map.on('zoomend', function(e){
+      this.map.on('zoomend projectArea-loaded taskGrid-loaded', function(e){
         app.setVectorStrokeWidth();
       });
 
@@ -58,12 +53,10 @@
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
 
-      if(pageConfig.project_areas){
-        this.loadTMProjectAreas(pageConfig.project_areas)
-      }
-      // if(pageConfig.task_number){
-      //   this.loadTMProjectGrid(pageConfig.task_number);
-      // }
+      // load project areas
+      this.loadTMProjectAreas();
+      this.loadTMProjectGrid();
+
     },
 
     toggleFullScreen: function(e){
@@ -82,66 +75,32 @@
       }
     },
 
-    loadTMProjectAreas: function(geojsonFile){
-      if(! pageConfig.task_number){ return false; }
-      var filePath = '{{site.baseurl}}/data/' + geojsonFile;
+    loadTMProjectAreas: function(){
+      var projectArea = L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas)
+                          .on('ready', function(){
+                            this.setStyle({ className: 'project-area'})
+                                       .addTo(app.map);
 
-      $.getJSON(filePath, function(projectAreaJSON){
-        var projectAreaJSON = L.geoJson(projectAreaJSON, {
-          style: function(feature){
-            return { className: 'project-area' };
-          }
-        }).addTo(app.map);
-
-        // set vector stroke width
-        app.setVectorStrokeWidth();
-
-        // add project grid (this should be a callback)
-        if(pageConfig.task_number){
-          app.loadTMProjectGrid(pageConfig.task_number);
-        }
-      });
-
+                            app.map.fire('projectArea-loaded');
+                          });
     },
 
-    loadTMProjectGrid: function(task_number){
-      // var taskURL = 'http://tasks.hotosm.org/project/' + task_number + '/tasks.json'
-      // var addGridToolTip = function(feature, layer){
-      //   // to do
-      //   return;
-      // };
+    loadTMProjectGrid: function(){
+      var taskGrid = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.task_number + '.geojson')
+                  .on('ready', function(){
+                    this.setFilter(function(feature){
+                      // filter out all removed cells
+                      return feature.properties['state'] !== -1;
+                    })
+                    .eachLayer(function(layer){
+                      var stateClass = 'state-' + layer.feature.properties['state'],
+                          lockedClass = 'locked-' + layer.feature.properties['locked'];
+                      layer.setStyle({ className: 'project-grid ' + stateClass + ' ' + lockedClass });
+                    })
+                    .addTo(app.map);
 
-      // $.ajax({
-      //   url: taskURL,
-      //   dataType: 'jsonp',
-      //   success: function(grid){
-      //     console.log(pageConfig.task_number, 'successfully loaded');
-
-      //     app.taskGrid = L.geoJson(grid, {
-      //       style: function(feature){
-      //         return { className: 'project-grid' };
-      //       },
-      //       onEachFeature: app.addGridToolTip
-      //     }).addTo(app.map);
-      //   }
-      // });
-      $.getJSON('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson', function(projectGrid){
-        L.geoJson(projectGrid, {
-          filter: function(feature){
-            // filter out all removed cells
-            return feature.properties['state'] !== -1;
-          },
-          style: function(feature){
-            var stateClass = 'state-' + feature.properties['state'],
-                lockedClass = 'locked-' + feature.properties['locked'];
-            return { className: 'project-grid ' + stateClass + ' ' + lockedClass };
-          }
-        }).addTo(app.map);
-
-        // set vector stroke width
-        app.setVectorStrokeWidth();
-
-      });
+                    app.map.fire('taskGrid-loaded');
+                  });
 
     },
 
