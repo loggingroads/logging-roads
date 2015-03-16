@@ -11,13 +11,11 @@
         zoom: pageConfig.zoom,
         minZoom: 4,
         maxZoom: 18,
-        scrollWheelZoom: false,
-        zoomControl: false // we'll add it later
+        scrollWheelZoom: false
       });
 
-      // build custom leaflet controls
+      // build leaflet share and scale controls
       var shareControl = L.control({position: 'topleft'});
-      // https://developers.facebook.com/docs/sharing/reference/share-dialog
       shareControl.onAdd = function(){
         var controlHTML = $('<div>', {
           class: 'leaflet-bar leaflet-control',
@@ -33,15 +31,9 @@
         controlHTML.append(fbButton, twitterButton);
         return controlHTML[0];
       }
+      shareControl.addTo(this.map);
 
-      // append custom leaflet controls to leaflet map object
-      $.extend(this.map, {
-          appControls: {
-            zoom: L.control.zoom({position: 'topleft'}).addTo(this.map),
-            scale: L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map),
-            share: shareControl.addTo(this.map)
-          }
-      });
+      L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map)
 
       // size vector stroke width by zoom level
       this.map.on('zoomend projectArea-loaded taskGrid-loaded', function(e){
@@ -137,6 +129,7 @@
     },
 
     fbShareDialogue: function(){
+      // https://developers.facebook.com/docs/sharing/reference/share-dialog
       var url = 'https://www.facebook.com/sharer/sharer.php?u=';
       url += encodeURIComponent(location.href);
       // url += '&p[title]=Moabi';
