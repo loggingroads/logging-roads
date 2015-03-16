@@ -64,6 +64,7 @@
     },
 
     loadTMProjectAreas: function(){
+      // var projectArea = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
       var projectArea = L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas)
                           .on('ready', function(){
                             this.setStyle({ className: 'project-area'})
@@ -74,6 +75,7 @@
     },
 
     loadTMProjectGrid: function(){
+      // var taskGrid = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
       var taskGrid = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.task_number + '.geojson')
                   .on('ready', function(){
                     this.setFilter(function(feature){
