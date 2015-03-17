@@ -93,8 +93,9 @@
       }
 
       for(var i=0; i<pageConfig.task_number.length; i++){
+        var task_number = pageConfig.task_number[i];
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
-        L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.task_number[i] + '.geojson')
+        L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
                     .on('ready', function(e){
                       this.setFilter(function(feature){
                         // filter out all removed cells
@@ -119,8 +120,9 @@
                         });
 
                         layer.on('click', function(e){
+                          console.log('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
                           // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/920#task/60
-                          // window.open('http://tasks.hotosm.org/project/' + pageConfig.task_number[i] + '#task/' + layer.feature['id']);
+                          // window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
                         });
                       })
                       .addTo(app.map)
