@@ -76,7 +76,7 @@
         L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas[i])
                             .on('ready', function(){
                               this.setStyle({ className: 'project-area'})
-                                         .addTo(app.map);
+                                  .addTo(app.map);
 
                               app.map.fire('projectArea-loaded');
                             });
@@ -95,17 +95,36 @@
       for(var i=0; i<pageConfig.task_number.length; i++){
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
         L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.task_number[i] + '.geojson')
-                    .on('ready', function(){
+                    .on('ready', function(e){
                       this.setFilter(function(feature){
                         // filter out all removed cells
                         return feature.properties['state'] !== -1;
                       })
                       .eachLayer(function(layer){
+                        window.layer = layer;
                         var stateClass = 'state-' + layer.feature.properties['state'],
-                            lockedClass = 'locked-' + layer.feature.properties['locked'];
+                            lockedClass = 'locked-' + layer.feature.properties['locked'],
+                            popupContent = '<h2>' + layer.feature['id'] + '</h2>';
+
                         layer.setStyle({ className: 'project-grid ' + stateClass + ' ' + lockedClass });
+
+                        layer.bindPopup(popupContent, { className: 'project-grid-popup'} );
+
+                        layer.on('mouseover', function(e){
+                          e.layer.openPopup();
+                        });
+
+                        layer.on('mouseout', function(e){
+                          e.layer.closePopup();
+                        });
+
+                        layer.on('click', function(e){
+                          // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/920#task/60
+                          // window.open('http://tasks.hotosm.org/project/' + pageConfig.task_number[i] + '#task/' + layer.feature['id']);
+                        });
                       })
-                      .addTo(app.map);
+                      .addTo(app.map)
+                      .bringToFront();
 
                       app.map.fire('taskGrid-loaded');
                     });
