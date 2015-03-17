@@ -64,33 +64,52 @@
     },
 
     loadTMProjectAreas: function(){
-      // var projectArea = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
-      var projectArea = L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas)
-                          .on('ready', function(){
-                            this.setStyle({ className: 'project-area'})
-                                       .addTo(app.map);
+      // abort if pageConfig.project_areas is not defined
+      if(! pageConfig.project_areas){ return false; }
+      // make sure pageConfig.project_areas is an array
+      if(typeof pageConfig.project_areas === 'string'){
+        pageConfig.project_areas = [pageConfig.project_areas];
+      }
 
-                            app.map.fire('projectArea-loaded');
-                          });
+      for(var i=0; i<pageConfig.project_areas.length; i++){
+        // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
+        L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas[i])
+                            .on('ready', function(){
+                              this.setStyle({ className: 'project-area'})
+                                         .addTo(app.map);
+
+                              app.map.fire('projectArea-loaded');
+                            });
+      }
+
     },
 
     loadTMProjectGrid: function(){
-      // var taskGrid = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
-      var taskGrid = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.task_number + '.geojson')
-                  .on('ready', function(){
-                    this.setFilter(function(feature){
-                      // filter out all removed cells
-                      return feature.properties['state'] !== -1;
-                    })
-                    .eachLayer(function(layer){
-                      var stateClass = 'state-' + layer.feature.properties['state'],
-                          lockedClass = 'locked-' + layer.feature.properties['locked'];
-                      layer.setStyle({ className: 'project-grid ' + stateClass + ' ' + lockedClass });
-                    })
-                    .addTo(app.map);
+      // abort if pageConfig.task_number is not defined
+      if(! pageConfig.task_number){ return false; }
+      // make sure pageConfig.task_number is an array
+      if(typeof pageConfig.task_number === 'number'){
+        pageConfig.task_number = [pageConfig.task_number];
+      }
 
-                    app.map.fire('taskGrid-loaded');
-                  });
+      for(var i=0; i<pageConfig.task_number.length; i++){
+        // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
+        L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.task_number[i] + '.geojson')
+                    .on('ready', function(){
+                      this.setFilter(function(feature){
+                        // filter out all removed cells
+                        return feature.properties['state'] !== -1;
+                      })
+                      .eachLayer(function(layer){
+                        var stateClass = 'state-' + layer.feature.properties['state'],
+                            lockedClass = 'locked-' + layer.feature.properties['locked'];
+                        layer.setStyle({ className: 'project-grid ' + stateClass + ' ' + lockedClass });
+                      })
+                      .addTo(app.map);
+
+                      app.map.fire('taskGrid-loaded');
+                    });
+      }
 
     },
 
