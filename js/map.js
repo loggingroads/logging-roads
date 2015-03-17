@@ -43,7 +43,10 @@
 
       // load project areas
       this.loadTMProjectAreas();
-      this.loadTMProjectGrid();
+      // TODO: ensure project grid loads only once project areas is finished loading
+      // this.map.on('taskGrid-loaded', this.loadTMProjectGrid())
+      // TODO: rewrite deferred objects so that taskGrid-loaded and projectArea-loaded only fire at end of loop
+      this.loadTMProjectGrid()
 
     },
 
