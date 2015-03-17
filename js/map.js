@@ -23,11 +23,11 @@
         var fbButton = $('<a>',{
           class: 'fb-share mapbox-icon mapbox-icon-facebook',
           href: '#'
-        })
+        });
         var twitterButton = $('<a>',{
           class: 'twitter-share mapbox-icon mapbox-icon-twitter',
           href: '#'
-        })
+        });
         controlHTML.append(fbButton, twitterButton);
         return controlHTML[0];
       }
@@ -105,7 +105,7 @@
                         window.layer = layer;
                         var stateClass = 'state-' + layer.feature.properties['state'],
                             lockedClass = 'locked-' + layer.feature.properties['locked'],
-                            popupContent = '<h2>' + layer.feature['id'] + '</h2>';
+                            popupContent = {% include project-grid-popup.js %}
 
                         layer.setStyle({ className: 'project-grid ' + stateClass + ' ' + lockedClass });
 
