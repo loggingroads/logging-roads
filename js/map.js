@@ -46,7 +46,7 @@
       // TODO: ensure project grid loads only once project areas is finished loading
       // this.map.on('taskGrid-loaded', this.loadTMProjectGrid())
       // TODO: rewrite deferred objects so that taskGrid-loaded and projectArea-loaded only fire at end of loop
-      this.loadTMProjectGrid()
+      // this.loadTMProjectGrid()
 
     },
 
@@ -75,6 +75,8 @@
       }
 
       for(var i=0; i<pageConfig.project_areas.length; i++){
+        // check if last iteraiton of loop (TODO: replace this with deferred obj)
+        var is_last = (i === pageConfig.project_areas.length - 1);
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
         L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas[i])
                             .on('ready', function(){
@@ -82,6 +84,10 @@
                                   .addTo(app.map);
 
                               app.map.fire('projectArea-loaded');
+                              if(is_last){
+                                console.log('last');
+                                app.loadTMProjectGrid()
+                              }
                             });
       }
 
