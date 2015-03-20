@@ -96,7 +96,8 @@
       }
 
       for(var i=0; i<pageConfig.task_number.length; i++){
-        var task_number = pageConfig.task_number[i];
+        var task_number = pageConfig.task_number[i],
+            map_sidebar = $('#map-sidebar');
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
         L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
                     .on('ready', function(e){
@@ -106,25 +107,40 @@
                       })
                       .eachLayer(function(layer){
                         window.layer = layer;
-                        var stateClass = 'state-' + layer.feature.properties['state'],
-                            lockedClass = 'locked-' + layer.feature.properties['locked'],
-                            popupContent = {% include project-grid-popup.js %}
 
-                        layer.setStyle({ className: 'project-grid ' + stateClass + ' ' + lockedClass });
+                        var cell_state,
+                            locked_state,
+                            popupContent;
 
-                        layer.bindPopup(popupContent, { className: 'project-grid-popup'} );
+                        switch(layer.feature.properties['state']){
+                          case 0:
+                            cell_state = 'ready'; break;
+                          case 1:
+                            cell_state = 'invalidated'; break;
+                          case 2:
+                            cell_state = 'done'; break;
+                          case 3:
+                            cell_state = 'validated'; break;
+                          case -1:
+                            cell_state = 'removed'; break;
+                        }
+
+                        locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked';
+
+                        popupContent = {% include project-grid-popup.js %}
+
+                        layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
 
                         layer.on('mouseover', function(e){
-                          e.layer.openPopup();
+                          map_sidebar.html(popupContent);
                         });
 
                         layer.on('mouseout', function(e){
-                          e.layer.closePopup();
+                          // map_sidebar.html('');
                         });
 
                         layer.on('click', function(e){
-                          console.log('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
-                          // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/920#task/60
+                          // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
                           // window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
                         });
                       })

@@ -17,6 +17,48 @@ css for map elements
     width:100%;
     background: $bgcolor;
   }
+  #map-sidebar {
+    font-family: 'PT Mono', monospace !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    background: rgba(25, 25, 25, 0.9);
+    border-left: 2px solid $border;
+    padding-top: 16px;
+    h2{
+      font-family: inherit;
+      font-size: 1.6rem;
+      text-align: center;
+      color: $text;
+      margin-bottom: 24px;
+    }
+    strong {
+      color: $primary;
+      text-transform: lowercase;
+    }
+    ul {
+      list-style: none;
+      margin: 0 16px 18px;
+    }
+    ul strong { float: right; }
+    li {
+      border-bottom: 1px solid $border;
+      margin-bottom: 8px
+    }
+    p {
+      font-family: inherit;
+      text-align: center;
+      line-height: 1rem;
+      letter-spacing: 3px;
+    }
+    small {
+      text-align: center;
+      color: #AAA;
+      font-size: 74%;
+    }
+  }
   .map-gradient {
     position: absolute;
     bottom: 0;
@@ -30,7 +72,8 @@ css for map elements
     color: #555;
     z-index: 1;
   }
-  .leaflet-bottom .leaflet-control-scale.leaflet-control {
+
+.leaflet-bottom .leaflet-control-scale.leaflet-control {
     position: absolute;
     bottom: 0;
     margin-bottom: 0;
@@ -79,27 +122,22 @@ path.project-grid {
   fill-opacity: 0.1;
   stroke-linejoin: miter;
   }
-  path.project-grid.state-0 {
-    // ready
+  path.project-grid.state-ready {
     fill: #EDECE9;
   }
-  path.project-grid.state-1 {
-    // invalidated
+  path.project-grid.state-invalidated {
     fill: #999;
     fill-opacity: 0.5;
   }
-  path.project-grid.state-2 {
-    // done
+  path.project-grid.state-done {
     fill: #FFDB99;
     fill-opacity: 0.6;
   }
-  path.project-grid.state-3 {
-    // validated
+  path.project-grid.state-validated {
     fill: #99CC99;
     fill-opacity: 0.6;
   }
-  path.project-grid.state--1 {
-    // removed (these should be filtered out, but just in case)
+  path.project-grid.state-removed {
     stroke-opacity: 0;
     fill-opacity: 0;
   }
