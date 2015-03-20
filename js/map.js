@@ -56,9 +56,9 @@
       var $this = $(this);
 
       if($this.hasClass('has-full-screen')){
-        app.setMapContainerHeight(400);
+        app.setMapContainerHeight(520);
         $this.removeClass('has-full-screen');
-        $this.html('<em>view full screen</em>');
+        $this.html('<em>enlarge map</em>');
       }else{
         app.setMapContainerHeight(window.innerHeight);
         $this.addClass('has-full-screen');
