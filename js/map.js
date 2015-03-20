@@ -97,7 +97,7 @@
 
       for(var i=0; i<pageConfig.task_number.length; i++){
         var task_number = pageConfig.task_number[i],
-            map_sidebar = $('#map-sidebar');
+            map_tooltip = $('#map-tooltip');
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
         L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
                     .on('ready', function(e){
@@ -132,11 +132,11 @@
                         layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
 
                         layer.on('mouseover', function(e){
-                          map_sidebar.html(popupContent);
+                          map_tooltip.html(popupContent);
                         });
 
                         layer.on('mouseout', function(e){
-                          // map_sidebar.html('');
+                          // map_tooltip.html('');
                         });
 
                         layer.on('click', function(e){

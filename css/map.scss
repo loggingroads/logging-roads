@@ -19,15 +19,18 @@ css for map elements
     background: $bgcolor;
   }
   #map-sidebar {
-    font-family: 'PT Mono', monospace !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
     position: absolute;
     right: 0;
     height: 100%;
     background: rgba(25, 25, 25, 0.9);
+    font-family: 'PT Mono', monospace !important;
+    text-transform: uppercase;
+    letter-spacing: 3px;
     border-left: 2px solid $border;
-    padding-top: 16px;
+  }
+  #map-tooltip {
+    margin-top: 30%;
+    // padding-top: 16px;
     h2{
       font-family: inherit;
       font-size: 1.6rem;
@@ -41,24 +44,59 @@ css for map elements
     }
     ul {
       list-style: none;
-      margin: 0 16px 18px;
+      margin: 0 20px 20px;
     }
     ul strong { float: right; }
     li {
       border-bottom: 1px solid $border;
-      margin-bottom: 8px
+      margin-bottom: 8px;
+      font-size: 0.8rem;
     }
     p {
       font-family: inherit;
       text-align: center;
       line-height: 1rem;
-      letter-spacing: 3px;
     }
     small {
       text-align: center;
       color: #AAA;
-      font-size: 74%;
+      font-size: 64%;
     }
+  }
+  #map-legend {
+    position: absolute;
+    bottom: 20px;
+    margin-right: 14px;
+    h4 {
+      font-family: inherit;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    ul {
+      border-top: 1px solid #777;
+      border-bottom: 1px solid #777;
+      padding: 6px 6px 2px;
+      list-style: none;
+      margin-left: 0;
+    }
+    li {
+      font-size: 0.7rem;
+      line-height: 20px;
+      clear: both;
+    }
+    li span{
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      border: 1px solid $border;
+      display: block;
+      float: left;
+    }
+    span.ready { background-color: $ready_state; }
+    span.invalidated { background-color: $invalidated_state; }
+    span.done { background-color: $done_state; }
+    span.validated { background-color: $validated_state; }
   }
   .map-gradient {
     position: absolute;
@@ -124,18 +162,18 @@ path.project-grid {
   stroke-linejoin: miter;
   }
   path.project-grid.state-ready {
-    fill: #EDECE9;
+    fill: $ready_state;
   }
   path.project-grid.state-invalidated {
-    fill: #999;
+    fill: $invalidated_state;
     fill-opacity: 0.5;
   }
   path.project-grid.state-done {
-    fill: #FFDB99;
+    fill: $done_state;
     fill-opacity: 0.6;
   }
   path.project-grid.state-validated {
-    fill: #99CC99;
+    fill: $validated_state;
     fill-opacity: 0.6;
   }
   path.project-grid.state-removed {
