@@ -136,12 +136,12 @@
                         });
 
                         layer.on('mouseout', function(e){
-                          // map_tooltip.html('');
+                          map_tooltip.html('');
                         });
 
                         layer.on('click', function(e){
                           // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
-                          // window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
+                          window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
                         });
                       })
                       .addTo(app.map)
