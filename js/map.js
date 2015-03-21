@@ -36,17 +36,16 @@
       L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map)
 
       // add page event listeners
-      this.map.on('zoomend projectArea-loaded taskGrid-loaded', this.setVectorStrokeWidth);
+      this.map.on('zoomend', this.setVectorStrokeWidth);
       $('.toggle-full-screen').on('click', this.toggleFullScreen);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
 
-      // load project areas
+      // load project area(s) and task grid(s)
       this.loadTMProjectAreas();
-      // TODO: ensure project grid loads only once project areas is finished loading
-      // this.map.on('taskGrid-loaded', this.loadTMProjectGrid())
-      // TODO: rewrite deferred objects so that taskGrid-loaded and projectArea-loaded only fire at end of loop
-      // this.loadTMProjectGrid()
+      this.map.on('projectAreas-loaded', this.loadTMProjectGrid);
+      this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
+
 
     },
 
@@ -74,9 +73,11 @@
         pageConfig.project_areas = [pageConfig.project_areas];
       }
 
+
       for(var i=0; i<pageConfig.project_areas.length; i++){
-        // check if last iteraiton of loop (TODO: replace this with deferred obj)
+        // check if last iteraiton of loop
         var is_last = (i === pageConfig.project_areas.length - 1);
+
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
         L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas[i])
                             .on('ready', function(){
@@ -84,10 +85,7 @@
                                   .addTo(app.map);
 
                               app.map.fire('projectArea-loaded');
-                              if(is_last){
-                                console.log('last');
-                                app.loadTMProjectGrid()
-                              }
+                              if(is_last){ app.map.fire('projectAreas-loaded'); }
                             });
       }
 
@@ -102,8 +100,11 @@
       }
 
       for(var i=0; i<pageConfig.task_number.length; i++){
-        var task_number = pageConfig.task_number[i],
+        // check if last iteraiton of loop
+        var is_last = (i === pageConfig.project_areas.length - 1),
+            task_number = pageConfig.task_number[i],
             map_tooltip = $('#map-tooltip');
+
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
         L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
                     .on('ready', function(e){
@@ -154,6 +155,7 @@
                       .bringToFront();
 
                       app.map.fire('taskGrid-loaded');
+                      if(is_last){ app.map.fire('taskGrids-loaded'); }
                     });
       }
 
