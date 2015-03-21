@@ -1,6 +1,6 @@
 <div class="country small-12 medium-4 columns ptm keyline-bottom {% unless forloop.last %}keyline-right{% endunless %}">
   <a href="{{site.baseurl}}{{site.countries[include.country].url}}"
-     class="clearfix {% if site.countries[include.country].task_number == null %}disabled{% endif %}">
+     class="clearfix {% if site.countries[include.country].tm_projects == null %}disabled{% endif %}">
     <div class="large-12 columns mg mg-fw mg-6x {{site.countries[include.country].map_glyph}}"></div>
     <h4 class="text-center pam">{{site.countries[include.country].title}}</h4>
   </a>

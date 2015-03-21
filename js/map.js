@@ -3,6 +3,8 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
+    projectAreas: {},
+    projectGrids: {},
     initMap: function(){
       // set up map
       L.mapbox.accessToken = 'pk.eyJ1IjoiY3Jvd2Rjb3ZlciIsImEiOiI3akYtNERRIn0.uwBAdtR6Zk60Bp3vTKj-kg';
@@ -66,20 +68,24 @@
     },
 
     loadTMProjectAreas: function(){
-      // abort if pageConfig.project_areas is not defined
-      if(! pageConfig.project_areas){ return false; }
-      // make sure pageConfig.project_areas is an array
-      if(typeof pageConfig.project_areas === 'string'){
-        pageConfig.project_areas = [pageConfig.project_areas];
+      // // abort if pageConfig.project_areas is not defined
+      // if(! pageConfig.project_areas){ return false; }
+      // // make sure pageConfig.project_areas is an array
+      // if(typeof pageConfig.project_areas === 'string'){
+      //   pageConfig.project_areas = [pageConfig.project_areas];
+      // }
+
+      // sketchy way to determine if last country in loop
+      var final_country;
+      for(var country in pageConfig.tm_projects){
+        final_country = country;
       }
-
-
-      for(var i=0; i<pageConfig.project_areas.length; i++){
+      for(var country in pageConfig.tm_projects){
         // check if last iteraiton of loop
-        var is_last = (i === pageConfig.project_areas.length - 1);
+        var is_last = (country === final_country);
 
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
-        L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.project_areas[i])
+        app.projectAreas[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.tm_projects[country]['project_area'])
                             .on('ready', function(){
                               this.setStyle({ className: 'project-area'})
                                   .addTo(app.map);
@@ -92,21 +98,26 @@
     },
 
     loadTMProjectGrid: function(){
-      // abort if pageConfig.task_number is not defined
-      if(! pageConfig.task_number){ return false; }
-      // make sure pageConfig.task_number is an array
-      if(typeof pageConfig.task_number === 'number'){
-        pageConfig.task_number = [pageConfig.task_number];
-      }
+      // // abort if pageConfig.task_number is not defined
+      // if(! pageConfig.task_number){ return false; }
+      // // make sure pageConfig.task_number is an array
+      // if(typeof pageConfig.task_number === 'number'){
+      //   pageConfig.task_number = [pageConfig.task_number];
+      // }
 
-      for(var i=0; i<pageConfig.task_number.length; i++){
+      // sketchy way to determine if last country in loop
+      var final_country;
+      for(var country in pageConfig.tm_projects){
+        final_country = country;
+      }
+      for(var country in pageConfig.tm_projects){
         // check if last iteraiton of loop
-        var is_last = (i === pageConfig.project_areas.length - 1),
-            task_number = pageConfig.task_number[i],
+        var is_last = (country === final_country),
+            task_number = pageConfig.tm_projects[country]['task_number'],
             map_tooltip = $('#map-tooltip');
 
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
-        L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
+        app.projectGrids[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
                     .on('ready', function(e){
                       this.setFilter(function(feature){
                         // filter out all removed cells
@@ -183,6 +194,10 @@
         }
       });
     },
+
+    // zoomToVectorExtent: function(){
+
+    // },
 
     setMapContainerHeight: function(height){
       $('.map-container').height(height);

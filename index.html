@@ -9,12 +9,10 @@ center:
   zoom: 5
 
 # add more as new projects come on line
-task_number:   # TM project number
-  - 920
-  # - 921
-project_areas:   # file name of the geojson that defines the project's area, stored in data/
-  - drc_tm_area.geojson
-  # - car_tm_area.geojson
+tm_projects:
+  drc:
+    task_number: 920
+    project_area: drc_tm_area.geojson
 ---
 {% include map-container.html %}
 
