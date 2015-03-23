@@ -68,106 +68,99 @@
     },
 
     loadTMProjectAreas: function(){
-      // // abort if pageConfig.project_areas is not defined
-      // if(! pageConfig.project_areas){ return false; }
-      // // make sure pageConfig.project_areas is an array
-      // if(typeof pageConfig.project_areas === 'string'){
-      //   pageConfig.project_areas = [pageConfig.project_areas];
-      // }
-
-      // sketchy way to determine if last country in loop
+      // sketchy way to determine last country in loop
       var final_country;
       for(var country in pageConfig.tm_projects){
         final_country = country;
       }
+
+      // define clojure for project area callback
+      var projectAreaCallback = function(country){
+        return function(){
+          this.setStyle({ className: 'project-area'})
+              .addTo(app.map);
+
+          if(country === final_country){ app.map.fire('projectAreas-loaded'); }
+        }
+      };
+
       for(var country in pageConfig.tm_projects){
         // check if last iteraiton of loop
         var is_last = (country === final_country);
 
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
         app.projectAreas[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.tm_projects[country]['project_area'])
-                            .on('ready', function(){
-                              this.setStyle({ className: 'project-area'})
-                                  .addTo(app.map);
-
-                              app.map.fire('projectArea-loaded');
-                              if(is_last){ app.map.fire('projectAreas-loaded'); }
-                            });
+                            .on('ready', projectAreaCallback(country));
       }
 
     },
 
     loadTMProjectGrid: function(){
-      // // abort if pageConfig.task_number is not defined
-      // if(! pageConfig.task_number){ return false; }
-      // // make sure pageConfig.task_number is an array
-      // if(typeof pageConfig.task_number === 'number'){
-      //   pageConfig.task_number = [pageConfig.task_number];
-      // }
-
-      // sketchy way to determine if last country in loop
+      // sketchy way to determine last country in loop
       var final_country;
       for(var country in pageConfig.tm_projects){
         final_country = country;
       }
+
+      // define clojure for project grid callback
+      var projectGridCallback = function(country){
+        return function(){
+          var task_number = pageConfig.tm_projects[country]['task_number'],
+              map_tooltip = $('#map-tooltip');
+
+          this.setFilter(function(feature){
+            // filter out all removed cells
+            return feature.properties['state'] !== -1;
+          })
+          .eachLayer(function(layer){
+            window.layer = layer;
+
+            var cell_state,
+                locked_state,
+                popupContent;
+
+            switch(layer.feature.properties['state']){
+              case 0:
+                cell_state = 'ready'; break;
+              case 1:
+                cell_state = 'invalidated'; break;
+              case 2:
+                cell_state = 'done'; break;
+              case 3:
+                cell_state = 'validated'; break;
+              case -1:
+                cell_state = 'removed'; break;
+            }
+
+            locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked';
+
+            popupContent = {% include project-grid-popup.js %}
+
+            layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
+
+            layer.on('mouseover', function(e){
+              map_tooltip.html(popupContent);
+            });
+
+            layer.on('mouseout', function(e){
+              map_tooltip.html('');
+            });
+
+            layer.on('click', function(e){
+              // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
+              window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
+            });
+          })
+          .addTo(app.map)
+
+          if(country === final_country){ app.map.fire('taskGrids-loaded'); }
+        }
+      }
+
       for(var country in pageConfig.tm_projects){
-        // check if last iteraiton of loop
-        var is_last = (country === final_country),
-            task_number = pageConfig.tm_projects[country]['task_number'],
-            map_tooltip = $('#map-tooltip');
-
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
-        app.projectGrids[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
-                    .on('ready', function(e){
-                      this.setFilter(function(feature){
-                        // filter out all removed cells
-                        return feature.properties['state'] !== -1;
-                      })
-                      .eachLayer(function(layer){
-                        window.layer = layer;
-
-                        var cell_state,
-                            locked_state,
-                            popupContent;
-
-                        switch(layer.feature.properties['state']){
-                          case 0:
-                            cell_state = 'ready'; break;
-                          case 1:
-                            cell_state = 'invalidated'; break;
-                          case 2:
-                            cell_state = 'done'; break;
-                          case 3:
-                            cell_state = 'validated'; break;
-                          case -1:
-                            cell_state = 'removed'; break;
-                        }
-
-                        locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked';
-
-                        popupContent = {% include project-grid-popup.js %}
-
-                        layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
-
-                        layer.on('mouseover', function(e){
-                          map_tooltip.html(popupContent);
-                        });
-
-                        layer.on('mouseout', function(e){
-                          map_tooltip.html('');
-                        });
-
-                        layer.on('click', function(e){
-                          // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
-                          window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
-                        });
-                      })
-                      .addTo(app.map)
-                      .bringToFront();
-
-                      app.map.fire('taskGrid-loaded');
-                      if(is_last){ app.map.fire('taskGrids-loaded'); }
-                    });
+        app.projectGrids[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.tm_projects[country]['task_number'] + '.geojson')
+                                     .on('ready', projectGridCallback(country));
       }
 
     },
