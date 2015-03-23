@@ -195,9 +195,12 @@
       });
     },
 
-    // zoomToVectorExtent: function(){
-
-    // },
+    fitMapBoundsToVectorExtent: function(){
+      // build L.latLngBounds object out of all countries' bounds
+      var totalBounds = boundsArray.reduce(function(a,b){
+        return a.extend(b.getBounds());
+      });
+    },
 
     setMapContainerHeight: function(height){
       $('.map-container').height(height);
