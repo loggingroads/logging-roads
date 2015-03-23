@@ -47,7 +47,7 @@
       this.loadTMProjectAreas();
       this.map.on('projectAreas-loaded', this.loadTMProjectGrid);
       this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
-
+      // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
 
     },
 
@@ -188,11 +188,22 @@
       });
     },
 
-    fitMapBoundsToVectorExtent: function(){
+    fitMapBoundsToVector: function(){
       // build L.latLngBounds object out of all countries' bounds
-      var totalBounds = boundsArray.reduce(function(a,b){
-        return a.extend(b.getBounds());
+      var boundsArray = $.map(app.projectGrids, function(value, index){
+        return value.getBounds();
       });
+
+      var totalBounds = boundsArray[0];
+      for(var i = 1; i<boundsArray.length; i++){
+        totalBounds.extend(boundsArray[i]);
+      }
+
+      // var totalBounds = boundsArray.reduce(function(a,b){
+      //   return a.extend(b);
+      // }, boundsArray[0]);
+
+      app.map.fitBounds(totalBounds);
     },
 
     setMapContainerHeight: function(height){
