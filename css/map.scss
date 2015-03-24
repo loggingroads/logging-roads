@@ -151,6 +151,7 @@ path.project-area {
   stroke: #333;
   stroke-opacity: 1;
   fill: #F8842E;
+  // fill: url('/pattern/small.png');
   fill-opacity: 0.4;
 }
 
@@ -158,7 +159,7 @@ path.project-grid {
   // stroke-width set programaticly by setVectorStrokeWidth() in map.js
   stroke: #999;
   stroke-opacity: 1;
-  fill-opacity: 0.1;
+  fill-opacity: 0.05;
   stroke-linejoin: miter;
   }
   path.project-grid.state-ready {
@@ -166,17 +167,21 @@ path.project-grid {
   }
   path.project-grid.state-invalidated {
     fill: $invalidated_state;
-    fill-opacity: 0.5;
+    fill-opacity: 0.6;
   }
   path.project-grid.state-done {
     fill: $done_state;
-    fill-opacity: 0.6;
+    fill-opacity: 0.8;
   }
   path.project-grid.state-validated {
     fill: $validated_state;
-    fill-opacity: 0.6;
+    fill-opacity: 0.8;
   }
   path.project-grid.state-removed {
     stroke-opacity: 0;
     fill-opacity: 0;
   }
+  path.project-grid:hover {
+    fill: $primary;
+    fill-opacity: 0.8;
+}
