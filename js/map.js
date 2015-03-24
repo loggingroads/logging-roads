@@ -46,7 +46,7 @@
       // load project area(s) and task grid(s)
       this.loadTMProjectAreas();
       this.map.on('projectAreas-loaded', this.loadTMProjectGrid);
-      this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
+      this.map.on('taskGrid-loaded', this.setVectorStrokeWidth);
       // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
 
     },
@@ -97,10 +97,10 @@
 
     loadTMProjectGrid: function(){
       // sketchy way to determine last country in loop
-      var final_country;
-      for(var country in pageConfig.tm_projects){
-        final_country = country;
-      }
+      // var final_country;
+      // for(var country in pageConfig.tm_projects){
+      //   final_country = country;
+      // }
 
       // define clojure for project grid callback
       var projectGridCallback = function(country){
@@ -153,7 +153,10 @@
           })
           .addTo(app.map)
 
-          if(country === final_country){ app.map.fire('taskGrids-loaded'); }
+          // if(country === final_country){ app.map.fire('taskGrids-loaded'); }
+          // TODO: fire 'taskGrids-loaded' when all grids are loaded:
+            // http://stackoverflow.com/questions/18424712/how-to-loop-through-ajax-requests-inside-a-jquery-when-then-statment
+          app.map.fire('taskGrid-loaded');
         }
       }
 
