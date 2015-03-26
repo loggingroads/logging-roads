@@ -182,6 +182,7 @@ path.project-grid {
     fill-opacity: 0;
   }
   path.project-grid:hover {
-    fill: $primary;
-    fill-opacity: 0.8;
+    stroke: $primary;
+    // fill: $primary;
+    // fill-opacity: 0.8;
 }

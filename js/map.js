@@ -139,6 +139,7 @@
             layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
 
             layer.on('mouseover', function(e){
+              this.bringToFront();
               map_tooltip.html(popupContent);
             });
 
