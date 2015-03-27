@@ -44,8 +44,9 @@
       $('.twitter-share').on('click', this.twitterShareDialogue);
 
       // load project area(s) and task grid(s)
-      this.loadTMProjectAreas();
-      this.map.on('projectAreas-loaded', this.loadTMProjectGrid);
+      // this.loadTMProjectAreas();
+      // this.map.on('projectAreas-loaded', this.loadTMProjectGrid);
+      this.loadTMProjectGrid();
       this.map.on('taskGrid-loaded', this.setVectorStrokeWidth);
       // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
 
