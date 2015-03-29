@@ -161,6 +161,7 @@ path.project-grid {
   stroke-opacity: 1;
   fill-opacity: 0.05;
   stroke-linejoin: miter;
+  //clip-path: inset(10px 20px 5px 10px);
   }
   path.project-grid.state-ready {
     fill: $ready_state;

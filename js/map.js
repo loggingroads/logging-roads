@@ -163,7 +163,7 @@
       }
 
       for(var country in pageConfig.tm_projects){
-        // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.task_number + '/tasks.json')
+        // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.tm_projects[country]['task_number'] + '/tasks.json')
         app.projectGrids[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.tm_projects[country]['task_number'] + '.geojson')
                                      .on('ready', projectGridCallback(country));
       }
@@ -172,23 +172,23 @@
 
     setVectorStrokeWidth: function(){
       var zoomLevel = app.map.getZoom();
-      $('.leaflet-objects-pane path.project-area').css('stroke-width', function(){
-        if(zoomLevel <= 6){
-          return 0.4;
-        }else if(zoomLevel <= 8){
-          return 1;
-        }else{
-          return 2;
-        }
-      });
+      // $('.leaflet-objects-pane path.project-area').css('stroke-width', function(){
+      //   if(zoomLevel <= 6){
+      //     return 0.4;
+      //   }else if(zoomLevel <= 8){
+      //     return 1;
+      //   }else{
+      //     return 2;
+      //   }
+      // });
 
       $('.leaflet-objects-pane path.project-grid').css('stroke-width', function(){
         if(zoomLevel <= 6){
-          return 0.8;
+          return 0.5;
         }else if(zoomLevel <= 8){
-          return 2;
+          return 1.4;
         }else{
-          return 4;
+          return 2;
         }
       });
     },
