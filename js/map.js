@@ -69,104 +69,107 @@
     },
 
     loadTMProjectAreas: function(){
-      // sketchy way to determine last country in loop
-      var final_country;
-      for(var country in pageConfig.tm_projects){
-        final_country = country;
-      }
-
-      // define clojure for project area callback
-      var projectAreaCallback = function(country){
-        return function(){
-          this.setStyle({ className: 'project-area'})
-              .addTo(app.map);
-
-          if(country === final_country){ app.map.fire('projectAreas-loaded'); }
-        }
-      };
-
-      for(var country in pageConfig.tm_projects){
-        // check if last iteraiton of loop
-        var is_last = (country === final_country);
+      // load area geojsons for all projects in pageConfig.tm_projects
+      // and fire 'projectAreas-loaded' event when all have resolved
+        // NOT CURRENTLY IMPLEMENTED (as project areas are now baked into the tile layers themselves)
+      var countryProjectPromises = $.map(pageConfig.tm_projects, function(projectObj, projectKey){
+        var countryProjectPromise = $.Deferred();
 
         // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
-        app.projectAreas[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/' + pageConfig.tm_projects[country]['project_area'])
-                            .on('ready', projectAreaCallback(country));
-      }
+        app.projectAreas[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/' + projectObj['project_area'])
+          .on('ready', function(){
+            this.setStyle({ className: 'project-area'})
+                .addTo(app.map);
+
+            console.log('project area loaded: ' + projectKey);
+            countryProjectPromise.resolve();
+            app.map.fire('projectArea-loaded');
+          });
+
+        return countryProjectPromise;
+      });
+
+      $.when.apply($, countryProjectPromises).then(function(){
+        console.log('project areas loaded');
+        app.map.fire('projectAreas-loaded');
+      }).fail(function(){
+        console.log('project areas failed to load');
+      });
 
     },
 
     loadTMProjectGrid: function(){
-      // sketchy way to determine last country in loop
-      // var final_country;
-      // for(var country in pageConfig.tm_projects){
-      //   final_country = country;
-      // }
+      // load grid geojsons for all projects in pageConfig.tm_projects
+      // and fire 'projectGrids-loaded' event when all have resolved
+      var countryGridPromises = $.map(pageConfig.tm_projects, function(projectObj, projectKey){
+        var countryGridPromise = $.Deferred();
 
-      // define clojure for project grid callback
-      var projectGridCallback = function(country){
-        return function(){
-          var task_number = pageConfig.tm_projects[country]['task_number'],
-              map_tooltip = $('#map-tooltip');
+        // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '/tasks.json')
+        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + projectObj['task_number'] + '.geojson')
+          .on('ready', function(){
+            var task_number = projectObj['task_number'],
+                map_tooltip = $('#map-tooltip');
 
-          this.setFilter(function(feature){
-            // filter out all removed cells
-            return feature.properties['state'] !== -1;
-          })
-          .eachLayer(function(layer){
-            window.layer = layer;
+            this.setFilter(function(feature){
+              // filter out all removed cells
+              return feature.properties['state'] !== -1;
+            })
+            .eachLayer(function(layer){
+              var cell_state,
+                  locked_state,
+                  popupContent;
 
-            var cell_state,
-                locked_state,
-                popupContent;
+              switch(layer.feature.properties['state']){
+                case 0:
+                  cell_state = 'ready'; break;
+                case 1:
+                  cell_state = 'invalidated'; break;
+                case 2:
+                  cell_state = 'done'; break;
+                case 3:
+                  cell_state = 'validated'; break;
+                case -1:
+                  cell_state = 'removed'; break;
+              }
 
-            switch(layer.feature.properties['state']){
-              case 0:
-                cell_state = 'ready'; break;
-              case 1:
-                cell_state = 'invalidated'; break;
-              case 2:
-                cell_state = 'done'; break;
-              case 3:
-                cell_state = 'validated'; break;
-              case -1:
-                cell_state = 'removed'; break;
-            }
+              locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked';
 
-            locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked';
+              popupContent = {% include project-grid-popup.js %}
 
-            popupContent = {% include project-grid-popup.js %}
+              layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
 
-            layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
+              layer.on('mouseover', function(e){
+                this.bringToFront();
+                map_tooltip.html(popupContent);
+              });
 
-            layer.on('mouseover', function(e){
-              this.bringToFront();
-              map_tooltip.html(popupContent);
-            });
+              layer.on('mouseout', function(e){
+                map_tooltip.html('');
+              });
 
-            layer.on('mouseout', function(e){
-              map_tooltip.html('');
-            });
+              layer.on('click', function(e){
+                // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
+                window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
+              });
+            })
+            .addTo(app.map);
 
-            layer.on('click', function(e){
-              // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
-              window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
-            });
-          })
-          .addTo(app.map)
+            console.log('task grid loaded: ' + projectKey);
+            app.map.fire('taskGrid-loaded');
+            countryGridPromise.resolve();
 
-          // if(country === final_country){ app.map.fire('taskGrids-loaded'); }
-          // TODO: fire 'taskGrids-loaded' when all grids are loaded:
-            // http://stackoverflow.com/questions/18424712/how-to-loop-through-ajax-requests-inside-a-jquery-when-then-statment
-          app.map.fire('taskGrid-loaded');
-        }
-      }
+          });
 
-      for(var country in pageConfig.tm_projects){
-        // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.tm_projects[country]['task_number'] + '/tasks.json')
-        app.projectGrids[country] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + pageConfig.tm_projects[country]['task_number'] + '.geojson')
-                                     .on('ready', projectGridCallback(country));
-      }
+        return countryGridPromise;
+      });
+
+      // fire event when all grids have loaded [for reference, see: http://stackoverflow.com/questions/18424712/how-to-loop-through-ajax-requests-inside-a-jquery-when-then-statment]
+      $.when.apply($, countryGridPromises).then(function(){
+          console.log('taskGrids loaded');
+          app.map.fire('taskGrids-loaded');
+      }).fail(function(){
+          console.log('taskGrids failed to load');
+      });
 
     },
 
