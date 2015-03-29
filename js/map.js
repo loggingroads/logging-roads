@@ -102,56 +102,54 @@
       // load grid geojsons for all projects in pageConfig.tm_projects
       // and fire 'projectGrids-loaded' event when all have resolved
       var countryGridPromises = $.map(pageConfig.tm_projects, function(projectObj, projectKey){
-        var countryGridPromise = $.Deferred();
+        var countryGridPromise = $.Deferred(),
+            task_number = projectObj['task_number'];
+
+        var onEachProjectGridCell = function(layer){
+          // function called on each project grid cell, defined here for organization
+          var map_tooltip = $('#map-tooltip'),
+              cell_state = '',
+              locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked',
+              popupContent = {% include project-grid-popup.js %};
+
+          switch(layer.feature.properties['state']){
+            case 0:
+              cell_state = 'ready'; break;
+            case 1:
+              cell_state = 'invalidated'; break;
+            case 2:
+              cell_state = 'done'; break;
+            case 3:
+              cell_state = 'validated'; break;
+            case -1:
+              cell_state = 'removed'; break;
+          }
+
+          layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
+
+          layer.on('mouseover', function(e){
+            this.bringToFront();
+            map_tooltip.html(popupContent);
+          });
+
+          layer.on('mouseout', function(e){
+            map_tooltip.html('');
+          });
+
+          layer.on('click', function(e){
+            // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
+            window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
+          });
+        };
 
         // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '/tasks.json')
-        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + projectObj['task_number'] + '.geojson')
+        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
           .on('ready', function(){
-            var task_number = projectObj['task_number'],
-                map_tooltip = $('#map-tooltip');
-
             this.setFilter(function(feature){
               // filter out all removed cells
               return feature.properties['state'] !== -1;
             })
-            .eachLayer(function(layer){
-              var cell_state,
-                  locked_state,
-                  popupContent;
-
-              switch(layer.feature.properties['state']){
-                case 0:
-                  cell_state = 'ready'; break;
-                case 1:
-                  cell_state = 'invalidated'; break;
-                case 2:
-                  cell_state = 'done'; break;
-                case 3:
-                  cell_state = 'validated'; break;
-                case -1:
-                  cell_state = 'removed'; break;
-              }
-
-              locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked';
-
-              popupContent = {% include project-grid-popup.js %}
-
-              layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
-
-              layer.on('mouseover', function(e){
-                this.bringToFront();
-                map_tooltip.html(popupContent);
-              });
-
-              layer.on('mouseout', function(e){
-                map_tooltip.html('');
-              });
-
-              layer.on('click', function(e){
-                // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
-                window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
-              });
-            })
+            .eachLayer(onEachProjectGridCell)
             .addTo(app.map);
 
             console.log('task grid loaded: ' + projectKey);
