@@ -89,12 +89,15 @@
         return countryProjectPromise;
       });
 
-      $.when.apply($, countryProjectPromises).then(function(){
-        console.log('project areas loaded');
-        app.map.fire('projectAreas-loaded');
-      }).fail(function(){
-        console.log('project areas failed to load');
-      });
+      $.when.apply($, countryProjectPromises)
+        // .then(function(){
+        //   console.log('project areas loaded');
+        // }).fail(function(){
+        //   console.log('project areas failed to load');
+        // })
+        .always(function(){
+          app.map.fire('projectAreas-loaded');
+        });
 
     },
 
@@ -162,12 +165,16 @@
       });
 
       // fire event when all grids have loaded [for reference, see: http://stackoverflow.com/questions/18424712/how-to-loop-through-ajax-requests-inside-a-jquery-when-then-statment]
-      $.when.apply($, countryGridPromises).then(function(){
+      $.when.apply($, countryGridPromises)
+        // .then(function(){
+        //   console.log('taskGrids loaded');
+        // }).fail(function(){
+        //   console.log('taskGrids failed to load');
+        // })
+        .always(function(){
           console.log('taskGrids loaded');
           app.map.fire('taskGrids-loaded');
-      }).fail(function(){
-          console.log('taskGrids failed to load');
-      });
+        });
 
     },
 
