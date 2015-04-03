@@ -1,6 +1,7 @@
 ---
 layout: map
 banner: wri_logging-truck-cameroon.jpg
+title: home
 
 baseLayer: crowdcover.2f433a39
 center:
@@ -20,18 +21,27 @@ tm_projects:
     task_number: 956
     project_area: car_tm_area.geojson
 ---
+<div id="tutorial" class="keyline-bottom pas">
+
+  <div class="show-tutorial row">
+    <div class="large-12 columns caps">
+      <p class="text-center man" style="padding-bottom: 2px;">
+        <a href="{{site.baseurl}}/about/">Click Here to Learn More About the Project</a>
+      </p>
+      <p class="text-center man">Or<br />Scroll to Start Mapping</p>
+    </div>
+  </div>
+
+</div>
+
 {% include map-container.html %}
 
-<div class="row">
-  <div class="large-12 columns mtl">
-    <p class="text-center">The Logging Roads Initiative is a joint project of the World Resource Institute and CrowdCover that aims to analyze and make available geographic data on all logging roads in the Congo Basin region of Central Africa.  Using fifteen years of satellite imagery, the project will record the precise spread of logging roads over time.  All data will be added to the <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and licensed in the <a href="http://www.openstreetmap.org/copyright" target="_blank">public domain</a>.</p>
-    <p class="text-center">If you would like to contribute, please read the project guides on interpreting satellite imagery and using the editing tools.  To learn more about OpenStreetMap and open geographic data, see our About page.</p>
-    <h1>Click on a country below to start mapping</h1>
-  </div>
-</div>
 <div class="divider"></div>
 
 <div class="row">
+  <div class="large-12 columns">
+    <h1>Click on a country below to start mapping</h1>
+  </div>
   <div class="large-12 columns">
     {% for n in (0..2) %}
       {% include country.html country = n %}

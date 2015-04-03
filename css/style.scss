@@ -16,6 +16,7 @@ body {
 	font-family: 'Open Sans', sans-serif;
   background: $bgcolor;
   color: $text;
+
 }
 
 h1, h2, h3, h4 {
@@ -66,50 +67,33 @@ table {
   	font-weight: 200;
   }
 
-.keyline-all { border: 1px solid #EEE; }
-.keyline-left { border-left: 1px solid #EEE; }
-.keyline-right { border-right: 1px solid #EEE; }
-.keyline-top { border-top: 1px solid #EEE; }
-.keyline-bottom { border-bottom: 1px solid #EEE; }
+.keyline-all { border: 1px solid $med-gray; }
+.keyline-left { border-left: 1px solid $med-gray; }
+.keyline-right { border-right: 1px solid $med-gray; }
+.keyline-top { border-top: 1px solid $med-gray; }
+.keyline-bottom { border-bottom: 1px solid $med-gray; }
 
 .divider {
 	padding: 20px 0;
 }
 
+.caps { text-transform: uppercase; }
+
 
 .header {
 	width: 100%;
-	height: 300px;
+	min-height: 140px;
   background-repeat: no-repeat;
 	background-size: cover;
 	text-align: center;
   border-bottom: 4px solid #777;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   }
-  .header h3 {
-  	color: #fff;
-  	font-weight: 200;
-  	line-height: 1.7em;
-  	font-size: 1.7em;
-  	font-family: 'Open Sans', sans-serif;
-  	margin: auto;
-  	max-width: 640px;
-  	padding-top: 100px;
-  	padding-bottom: 58px;
-  }
-  .header h4 {
-  	color: #fff;
-  	font-weight: 200;
-  	line-height: 1.7em;
-  	font-size: 1.2em;
-  	font-family: 'Open Sans', sans-serif;
-  	margin: auto;
-  	max-width: 640px;
-		padding-top: 100px;
-		padding-bottom: 40px;
+  .header h1 {
+    color: $primary;
   }
   .header .logo {
-  	width: 40%;
+  	width: 60%;
   	float: left;
   	text-align: left;
     position: relative;
@@ -117,18 +101,12 @@ table {
   }
   .header .logo h1 {
     padding-left: 0.9375rem;
-  }
-  .header div.description {
-    text-align: left;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    font-weight: 200;
-    line-height: 1.7em;
-    font-size: 1.2em;
+    margin-bottom: 0;
   }
   .header span { color: #FFF; }
   .header a:hover span { color: #DDD; }
   .header .navigation {
-  	width: 60%;
+  	width: 40%;
   	float: right;
   	text-align: right;
   }
@@ -155,24 +133,31 @@ table {
 
 
 .menu {
-  width: 100%;
-  padding-top: 30px;
+  background: transparent;
+  padding-bottom: 0;
   }
-  .past-main {
+  .menu.fixed {
     background-color: rgba(50, 53, 56, 0.95);
-    color:#444;
     transition: background ease-in-out 0.2s;
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-    padding-top: 10px;
     border-bottom: 4px solid #777;
+    z-index: 9999;
   }
-  .past-main .logo {
-    top: -6px;
+
+#tutorial {
+  // background-color: $med-d-gray;
   }
-  .past-main .logo h1 {
-    font-size: 1.4em;
+  #tutorial .show-tutorial p { font-family: Raleway, sans-serif; }
+  #tutorial .section-container{
+    display: none;
+  }
+  #tutorial .section-container.active {
+    display: block;
+  }
+  #tutorial section {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
   }
 
 .footer {

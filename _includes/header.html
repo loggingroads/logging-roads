@@ -1,27 +1,39 @@
-  <div class="header" style="background-image: linear-gradient(rgba(145, 140, 130, 0.4), rgba(0, 0, 0, 0.8)), url('{{site.baseurl}}/img/{{page.banner}}')">
-    <div class="menu">
-      <div class="row">
-        <!-- <div class="logo"><a href="{{site.baseurl}}"><img src="{{site.baseurl}}/img/logo.png" /></a></div> -->
-        <div class="logo">
-          <h1>
-            {% if page.layout == 'country' %}
-              <a href="{{site.baseurl}}/"><span>Logging Roads</span> {{page.title}}</a>
-            {% else %}
-              <a href="{{site.baseurl}}/"><span>Logging</span> Roads</a>
-            {% endif %}
-          </h1>
-        </div>
-        <div class="navigation">
-          <ul>
-            <li><a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a></li>
-            <li><a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      {% if page.layout == 'main' or page.layout == 'map' %}
-        <div class="description small-12 medium-4 columns mvm">{{site.description_short}}</div>
+<div class="header" style="background-image: linear-gradient(rgba(65, 65, 62, 0.6), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
+
+  <div class="row header-body mbl">
+    <div class="large-6 large-centered columns">
+      {% if page.title == 'home' %}
+        <h1 class="text-centered mvl phl">Tracking<br>Logging Roads<br>in the<br>Congo Basin</h1>
+        <p class="text-centered">The Logging Roads Initiative is a joint project of the World Resource Institute and Moabi.  Our aim is to monitor geographic data on logging roads across the Congo Basin region of Central Africa. Using fifteen years of satellite imagery, the project will record the precise spread of logging roads over time.</p>
+        <p class="text-centered mbl">All data will be added to OpenStreetMap and licensed in the public domain.</p>
+      {% elsif page.title == 'about' %}
+        <h2 class="text-centered mvl">About</h2>
+        <p class="text-centered">{{site.description_short}}</p>
+      {% elsif page.title == 'guide' %}
+        <h2 class="text-centered mvl">Guide</h2>
+        <p class="text-centered">{{site.description_short}}</p>
       {% endif %}
     </div>
   </div>
+
+  <div class="menu" data-magellan-expedition="fixed">
+    <div class="row">
+      <div class="logo">
+        <h1>
+          {% if page.layout == 'country' %}
+            <a href="{{site.baseurl}}/"><span>Logging Roads</span> {{page.title}}</a>
+          {% else %}
+            <a href="{{site.baseurl}}/"><span>Logging</span> Roads</a>
+          {% endif %}
+        </h1>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a></li>
+          <li><a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
