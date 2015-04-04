@@ -28,9 +28,8 @@
       tutorialHead.animate({opacity: 0}, 400);
 
       // expand tutorialBody and fade in
-      tutorialBody.animate({height: '500px', opacity: 1}, 400, function(){
-        // slide in first tutorial section
-        $(this).find('section[data-index="1"]').animate({left: 0, opacity: 1, zIndex: 0}, 200)
+      tutorialBody.animate({height: '500px', opacity: 1}, 600, function(){
+        app.showTurorialSection(1, this);
       });
     },
 
@@ -58,8 +57,24 @@
       tutorialHead.one('click', app.showTurorial);
     },
 
+    showTurorialSection: function(idx, context){
+      var section = $(context).find('section[data-index="' + idx + '"]'),
+          title = section.find('.section-title'),
+          body = section.find('.section-body'),
+          image = section.find('.section-image');
+
+      section.css({zIndex: 0});
+      title.add(body).animate({left: 0, opacity: 1}, 100);
+    },
+
     hideTutorialSections: function(){
-      $('#tutorial section').css({left: -60, opacity: 0, zIndex: -1});
+      var sections = $('#tutorial section'),
+          title = sections.find('.section-title'),
+          body = sections.find('.section-body'),
+          image = sections.find('.section-image');
+
+      sections.css({zIndex: -1});
+      title.add(body).css({left: -30, opacity: 0});
     }
 
   };

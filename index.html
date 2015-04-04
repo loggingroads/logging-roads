@@ -37,13 +37,13 @@ tm_projects:
     {% for section in site.data.tutorial %}
       <section data-index="{{forloop.index}}">
         <div class="row">
-          <div class="large-12 columns">
+          <div class="section-title large-12 columns">
             <h2>{{section.title}}</h2>
           </div>
-          <div class="small-12 large-8 columns">
+          <div class="section-body small-12 large-8 columns">
             <p>{{section.body}}</p>
           </div>
-          <div class="small-12 large-4 columns pam" style="height: 100%; border: 1px solid #555;">
+          <div class="section-image small-12 large-4 columns pam" style="height: 100%; border: 1px solid #555;">
             <div class="text-center"><em><small>image here</small></em></div>
           </div>
         </div>
