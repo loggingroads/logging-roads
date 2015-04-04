@@ -153,25 +153,25 @@ table {
     background-color: #1F1D1F;
     cursor: pointer;
   }
-  #tutorial .show-tutorial h4 {
+  #tutorial .tutorial-head h4 {
     color: $primary;
   }
-  #tutorial .show-tutorial p {
+  #tutorial .tutorial-head p {
     font-family: Raleway, sans-serif;
     line-height: 1.2rem;
   }
-  #tutorial .section-container{
+  #tutorial .tutorial-body {
     position: relative;
     height: 0;
   }
-  #tutorial .close {
+  #tutorial .tutorial-body .close {
     position: absolute;
     top: 0;
     right: 10px;
     color: $med-gray;
     z-index: 1;
   }
-  #tutorial section {
+  #tutorial .tutorial-body section {
     position: absolute;
     top: 0;
     bottom: 0;
