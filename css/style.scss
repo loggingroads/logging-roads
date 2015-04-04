@@ -29,6 +29,8 @@ h1, h2, h3, h4 {
   h3 { font-size: 1.5em; }
   h4 { font-size: 1.3em; }
 
+small { font-size: 65%; }
+
 p {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 200;
@@ -86,7 +88,7 @@ table {
   background-repeat: no-repeat;
 	background-size: cover;
 	text-align: center;
-  border-bottom: 4px solid #777;
+  border-bottom: 1px solid $med-gray;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   }
   .header h1 {
@@ -144,20 +146,37 @@ table {
   }
 
 #tutorial {
-  // background-color: $med-d-gray;
+  transition: background ease-in-out 0.3s;
+  box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
   }
-  #tutorial .show-tutorial p { font-family: Raleway, sans-serif; }
+  #tutorial:hover:not(.active) {
+    background-color: #1F1D1F;
+    cursor: pointer;
+  }
+  #tutorial .show-tutorial h4 {
+    color: $primary;
+  }
+  #tutorial .show-tutorial p {
+    font-family: Raleway, sans-serif;
+    line-height: 1.2rem;
+  }
   #tutorial .section-container{
-    display: none;
+    position: relative;
+    height: 0;
   }
-  #tutorial .section-container.active {
-    display: block;
+  #tutorial .close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: $med-gray;
+    z-index: 1;
   }
   #tutorial section {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
+    color: $med-gray;
   }
 
 .footer {

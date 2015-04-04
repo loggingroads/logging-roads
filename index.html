@@ -25,11 +25,30 @@ tm_projects:
 
   <div class="show-tutorial row">
     <div class="large-12 columns caps">
-      <p class="text-center man" style="padding-bottom: 2px;">
-        <a href="{{site.baseurl}}/about/">Click Here to Learn More About the Project</a>
-      </p>
-      <p class="text-center man">Or<br />Scroll to Start Mapping</p>
+      <h4 class="text-center man" style="padding-bottom: 2px;">Click Here to Learn More About the Project</h4>
+      <p class="text-center man"><small>Or<br />Scroll to Start Mapping</small></p>
     </div>
+  </div>
+
+  <div class="section-container">
+
+    <a href="#" class="close"><small>close</small></a>
+
+    {% for section in site.data.tutorial %}
+        <section data-index="{{forloop.index}}">
+          <div class="row">
+            <div class="large-12 columns">
+              <h2>{{section.title}}</h2>
+            </div>
+            <div class="small-12 large-8 columns">
+              <p>{{section.body}}</p>
+            </div>
+            <div class="small-12 large-4 columns pam" style="height: 100%; border: 1px solid #555;">
+              <div class="text-center"><em><small>image here</small></em></div>
+            </div>
+          </div>
+        </section>
+    {% endfor %}
   </div>
 
 </div>
