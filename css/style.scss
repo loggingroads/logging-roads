@@ -164,19 +164,30 @@ table {
     position: relative;
     height: 0;
   }
-  #tutorial .tutorial-body .close {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    color: $med-gray;
-    z-index: 1;
-  }
   #tutorial .tutorial-body section {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
     color: $med-gray;
+  }
+  #tutorial .close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: $med-gray;
+    z-index: 1;
+  }
+  #tutorial .close:hover {
+    color: #444;
+  }
+  #tutorial .tutorial-nav {
+    position: absolute;
+    top: 0;
+    bottom: 60px;
+    left: 60px;
+    width: 8px;
+    background: #444;
   }
 
 .footer {
