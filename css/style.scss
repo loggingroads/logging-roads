@@ -85,8 +85,8 @@ table {
   // defaults to up
   height: 0;
   width: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
+  border-left: 26px solid transparent;
+  border-right: 26px solid transparent;
   border-bottom: 14px solid $med-d-gray;  /* or to make equal sides:; border-left-width + border-right-width * 0.866 */
   }
   .arrow.up {
@@ -211,7 +211,7 @@ table {
     padding: 10px;
   }
   #tutorial .close:hover {
-    color: #444;
+    color: $med-d-gray;
   }
   #tutorial .tutorial-nav {
     position: absolute;
@@ -227,6 +227,9 @@ table {
     margin-top: 2px;
     margin-bottom: 2px;
   }
+  #tutorial .tutorial-nav .box.active {
+    background: $dark-gray;
+  }
   #tutorial .advance-section {
     position: absolute;
     padding: 20px 50%;
@@ -234,7 +237,7 @@ table {
     cursor: pointer;
     &[data-dir="prev"] { top: -40px; }
     &[data-dir="next"] { bottom: -40px; }
-    &:hover .arrow { border-bottom-color: lighten($med-d-gray, 10%); }
+    &:hover .arrow { border-bottom-color: $dark-gray; }
   }
 
 .footer {

@@ -20,7 +20,7 @@
     sizeHeader: function(e){
       $('.header.header-home').height(function(){
         return $(window).height() - $('#tutorial').outerHeight();
-      })
+      });
     },
 
     showTurorial: function(e){
@@ -75,20 +75,19 @@
 
       // show .tutorial-head
       tutorialHead.animate({opacity: 1}, 400);
-
-      // re-bind click event handler on .tutorial-head
-      // tutorialHead.one('click', app.showTurorial);
     },
 
     showTurorialSection: function(idx, context){
       var section = $(context).find('section[data-index="' + idx + '"]'),
           title = section.find('.section-title'),
           body = section.find('.section-body'),
-          image = section.find('.section-image');
+          image = section.find('.section-image'),
+          navBox = $('#tutorial .tutorial-nav .box[data-index="' + idx + '"]');
 
       section.css({zIndex: 0}).addClass('active');
       image.css({zIndex: 0, opacity: 1});
       title.add(body).animate({bottom: 0, opacity: 1}, 400);
+      navBox.addClass('active');
     },
 
     hideTutorialSections: function(context){
@@ -100,6 +99,9 @@
       sections.css({zIndex: -1}).removeClass('active');
       image.css({zIndex: -1, opacity: 0});
       title.add(body).css({bottom: -60, opacity: 0});
+
+      // deactivate tutorial nav boxes
+      $(context).find('.tutorial-nav .box.active').removeClass('active');
     },
 
     advanceTutorialSections: function(e){
@@ -134,9 +136,17 @@
         newImage.css({zIndex: 0, opacity: 1});
         section.css({zIndex: -1}).removeClass('active');
         newSection.css({zIndex: 0}).addClass('active');
-        newTitle.add(newBody).animate({bottom: 0, opacity: 1}, sectionAnimationDuration);
+        newTitle.add(newBody).animate({bottom: 0, opacity: 1}, sectionAnimationDuration, function(){
+          app.advanceTutorialNav(sectionIdx, newSectionIdx);
+        });
       });
 
+    },
+
+    advanceTutorialNav: function(oldIdx, newIdx, context){
+      var context = context || $('#tutorial .tutorial-nav');
+      $(context).find('.box[data-index="' + oldIdx + '"]').removeClass('active');
+      $(context).find('.box[data-index="' + newIdx + '"]').addClass('active');
     }
 
   };

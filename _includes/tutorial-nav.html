@@ -1,7 +1,7 @@
 <div class="tutorial-nav">
   <!-- <div class="arrow up"></div> -->
   {% for idx in site.data.tutorial %}
-    <div class="box"></div>
+    <div class="box" data-index="{{forloop.index}}"></div>
   {% endfor %}
   <!-- <div class="arrow down"></div> -->
 </div>
