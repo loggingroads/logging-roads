@@ -81,6 +81,25 @@ table {
 
 .caps { text-transform: uppercase; }
 
+.arrow {
+  // defaults to up
+  height: 0;
+  width: 0;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 5px solid $med-d-gray;  /* or to make equal sides:; border-left-width + border-right-width * 0.866 */
+  }
+  .arrow.up {
+    margin-bottom: 2px;
+  }
+  .arrow.down {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    margin-top: 2px;
+  }
 
 .header {
 	width: 100%;
@@ -174,7 +193,7 @@ table {
   #tutorial .close {
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 20px;
     color: $med-gray;
     z-index: 1;
   }
@@ -183,11 +202,20 @@ table {
   }
   #tutorial .tutorial-nav {
     position: absolute;
-    top: 0;
-    bottom: 60px;
-    left: 60px;
-    width: 8px;
-    background: #444;
+    height: 300px;
+    top: 8px;
+    left: -12px;
+    width: 4px;
+  }
+  #tutorial .tutorial-nav .box {
+    background: $med-d-gray;
+    height: 22px;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  #tutorial .tutorial-nav .box.active {
+    background: lighten($med-d-gray, 10%);
   }
 
 .footer {

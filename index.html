@@ -32,8 +32,6 @@ tm_projects:
 
   <div class="tutorial-body">
 
-    <div class="tutorial-nav"></div>
-
     <a href="#" class="close"><small>+ close</small></a>
 
     {% for section in site.data.tutorial %}
@@ -43,9 +41,10 @@ tm_projects:
             <h2>{{section.title}}</h2>
           </div>
           <div class="section-body small-12 large-8 columns">
+            {% include tutorial-nav.html index=forloop.index %}
             <p>{{section.body}}</p>
           </div>
-          <div class="section-image small-12 large-4 columns pam" style="height: 100%; border: 1px solid #555; background-color: #222;">
+          <div class="section-image small-12 large-4 columns pam" style="height: 300px; border: 1px solid #555; background-color: #222;">
             <div class="text-center"><em><small>image number <strong>{{forloop.index}}</strong> here</small></em></div>
           </div>
         </div>

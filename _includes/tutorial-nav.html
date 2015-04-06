@@ -1,0 +1,7 @@
+<div class="tutorial-nav">
+  <div class="arrow up"></div>
+  {% for idx in site.data.tutorial %}
+    <div class="box {% if forloop.index == include.index %}active{% endif %}"></div>
+  {% endfor %}
+  <div class="arrow down"></div>
+</div>
