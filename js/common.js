@@ -86,7 +86,7 @@
 
       section.css({zIndex: 0}).addClass('active');
       image.css({zIndex: 0, opacity: 1});
-      title.add(body).animate({bottom: 0, opacity: 1}, 100);
+      title.add(body).animate({bottom: 0, opacity: 1}, 400);
     },
 
     hideTutorialSections: function(context){
@@ -97,7 +97,7 @@
 
       sections.css({zIndex: -1}).removeClass('active');
       image.css({zIndex: -1, opacity: 0});
-      title.add(body).css({bottom: -30, opacity: 0});
+      title.add(body).css({bottom: -60, opacity: 0});
     },
 
     advanceTutorialSections: function(e){
@@ -126,12 +126,12 @@
           newBody = newSection.find('.section-body'),
           newImage = newSection.find('.section-image');
 
-      section.css({zIndex: -1}).removeClass('active');
-      image.css({zIndex: -1, opacity: 0});
-      title.add(body).animate({bottom: 30 * animationDir, opacity: 0}, 100, function(){
-        newSection.css({zIndex: 0}).addClass('active');
+      title.add(body).animate({bottom: 60 * animationDir, opacity: 0}, 400, function(){
+        section.css({zIndex: -1}).removeClass('active');
+        image.css({zIndex: -1, opacity: 0});
         newImage.css({zIndex: 0, opacity: 1});
-        newTitle.add(newBody).animate({bottom: 0, opacity: 1}, 100);
+        newSection.css({zIndex: 0}).addClass('active');
+        newTitle.add(newBody).animate({bottom: 0, opacity: 1}, 400);
       });
 
     }
