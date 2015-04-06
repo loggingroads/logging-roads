@@ -8,9 +8,9 @@
       this.sizeHeader();
 
       // set tutorial sections initial hide state
-      this.hideTutorialSections($('#tutorial .tutorial-body')[0]);
+      this.hideTutorialSections($('#tutorial .tutorial-body'));
 
-      $('#tutorial .tutorial-head').one('click', this.showTurorial);
+      $('#tutorial .tutorial-head').on('click', this.showTurorial);
       $('#tutorial .close').on('click', this.hideTutorial);
       $('#tutorial .advance-section').on('click', this.advanceTutorialSections);
       $(window).on('resize', this.sizeHeader);
@@ -31,8 +31,10 @@
           tutorialBody = tutorialHead.siblings('.tutorial-body'),
           tutorialContainer = tutorialHead.parent('#tutorial'),
           tutorialSection = tutorialBody.find('section'),
-          slideAnimationDuration = 600;
+          slideAnimationDuration = 500;
 
+      // short circuit if #tutorial is already active
+      if(tutorialContainer.hasClass('active')){ return false; }
       tutorialContainer.addClass('active');
 
       // scroll to tutorial, leaving offset on top for magellan header
@@ -58,7 +60,7 @@
           tutorialContainer = $this.parents('#tutorial'),
           tutorialBody = $this.parents('.tutorial-body'),
           tutorialHead = tutorialBody.siblings('.tutorial-head'),
-          slideAnimationDuration = 600;
+          slideAnimationDuration = 500;
 
       tutorialContainer.removeClass('active');
 
@@ -75,7 +77,7 @@
       tutorialHead.animate({opacity: 1}, 400);
 
       // re-bind click event handler on .tutorial-head
-      tutorialHead.one('click', app.showTurorial);
+      // tutorialHead.one('click', app.showTurorial);
     },
 
     showTurorialSection: function(idx, context){
@@ -109,7 +111,8 @@
           sectionIdx = parseInt(section.attr('data-index')),
           title = section.find('.section-title'),
           body = section.find('.section-body'),
-          image = section.find('.section-image');
+          image = section.find('.section-image'),
+          sectionAnimationDuration = 400;
 
       if(dir === 'next' && sectionIdx !== sectionCount){
         var newSectionIdx = sectionIdx + 1,
@@ -126,12 +129,12 @@
           newBody = newSection.find('.section-body'),
           newImage = newSection.find('.section-image');
 
-      title.add(body).animate({bottom: 60 * animationDir, opacity: 0}, 400, function(){
-        section.css({zIndex: -1}).removeClass('active');
+      title.add(body).animate({bottom: 60 * animationDir, opacity: 0}, sectionAnimationDuration, function(){
         image.css({zIndex: -1, opacity: 0});
         newImage.css({zIndex: 0, opacity: 1});
+        section.css({zIndex: -1}).removeClass('active');
         newSection.css({zIndex: 0}).addClass('active');
-        newTitle.add(newBody).animate({bottom: 0, opacity: 1}, 400);
+        newTitle.add(newBody).animate({bottom: 0, opacity: 1}, sectionAnimationDuration);
       });
 
     }

@@ -180,6 +180,8 @@ table {
   }
   #tutorial:hover:not(.active) {
     background-color: #1F1D1F;
+  }
+  #tutorial:not(.active) .tutorial-head {
     cursor: pointer;
   }
   #tutorial .tutorial-head h4 {
@@ -191,7 +193,7 @@ table {
   }
   #tutorial .tutorial-body {
     position: relative;
-    height: 0;
+    opacity: 0;
   }
   #tutorial .tutorial-body section {
     position: absolute;
