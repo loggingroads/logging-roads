@@ -1,11 +1,11 @@
-<div class="header" style="background-image: linear-gradient(rgba(65, 65, 62, 0.6), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
+<div class="header {% if page.title == 'home' %}header-home{% endif %}" style="background-image: linear-gradient(rgba(65, 65, 62, 0.6), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
 
   <div class="row header-body mbl">
     <div class="large-6 large-centered columns">
       {% if page.title == 'home' %}
         <h1 class="text-centered mvl phl">Tracking<br>Logging Roads<br>in the<br>Congo Basin</h1>
         <p class="text-centered">The Logging Roads Initiative is a joint project of the World Resource Institute and Moabi.  Our aim is to monitor geographic data on logging roads across the Congo Basin region of Central Africa. Using fifteen years of satellite imagery, the project will record the precise spread of logging roads over time.</p>
-        <p class="text-centered mbl">All data will be added to OpenStreetMap and licensed in the public domain.</p>
+        <!-- <p class="text-centered mbl">All data will be added to OpenStreetMap and licensed in the public domain.</p> -->
       {% elsif page.title == 'about' %}
         <h2 class="text-centered mvl">About</h2>
         <p class="text-centered">{{site.description_short}}</p>

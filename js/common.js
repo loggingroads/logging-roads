@@ -4,6 +4,8 @@
 
   var app = {
     initCommon: function(){
+      // set header height
+      this.sizeHeader();
 
       // set tutorial sections initial hide state
       this.hideTutorialSections($('#tutorial .tutorial-body')[0]);
@@ -11,7 +13,14 @@
       $('#tutorial .tutorial-head').one('click', this.showTurorial);
       $('#tutorial .close').on('click', this.hideTutorial);
       $('#tutorial .advance-section').on('click', this.advanceTutorialSections);
+      $(window).on('resize', this.sizeHeader);
 
+    },
+
+    sizeHeader: function(e){
+      $('.header.header-home').height(function(){
+        return $(window).height() - $('#tutorial').outerHeight();
+      })
     },
 
     showTurorial: function(e){
@@ -21,17 +30,24 @@
       var tutorialHead = $(this),
           tutorialBody = tutorialHead.siblings('.tutorial-body'),
           tutorialContainer = tutorialHead.parent('#tutorial'),
-          tutorialSection = tutorialBody.find('section');
+          tutorialSection = tutorialBody.find('section'),
+          slideAnimationDuration = 600;
 
       tutorialContainer.addClass('active');
+
+      // scroll to tutorial, leaving offset on top for magellan header
+      $('html, body').animate({
+        scrollTop: tutorialContainer.offset().top - $('.menu').outerHeight()
+      }, slideAnimationDuration);
+
+      // expand tutorialBody and fade in
+      tutorialBody.animate({height: '500px', opacity: 1}, slideAnimationDuration, function(){
+        app.showTurorialSection(1, this);
+      });
 
       // hide tutorialHead
       tutorialHead.animate({opacity: 0}, 400);
 
-      // expand tutorialBody and fade in
-      tutorialBody.animate({height: '500px', opacity: 1}, 600, function(){
-        app.showTurorialSection(1, this);
-      });
     },
 
     hideTutorial: function(e){
@@ -41,18 +57,22 @@
       var $this = $(this),
           tutorialContainer = $this.parents('#tutorial'),
           tutorialBody = $this.parents('.tutorial-body'),
-          tutorialHead = tutorialBody.siblings('.tutorial-head');
+          tutorialHead = tutorialBody.siblings('.tutorial-head'),
+          slideAnimationDuration = 600;
 
       tutorialContainer.removeClass('active');
 
-      // show .tutorial-head
-      tutorialHead.animate({opacity: 1}, 400);
+      // scroll to top
+      $('html, body').animate({ scrollTop: 0 }, slideAnimationDuration);
 
       // vertically collapse tutorialBody and fade out
-      tutorialBody.animate({height: 0, opacity: 0}, 400);
+      tutorialBody.animate({height: 0, opacity: 0}, slideAnimationDuration, function(){
+        // return all tutorial sections to initial hide states
+        app.hideTutorialSections(tutorialBody);
+      });
 
-      // return all tutorial sections to initial hide states
-      app.hideTutorialSections(tutorialBody);
+      // show .tutorial-head
+      tutorialHead.animate({opacity: 1}, 400);
 
       // re-bind click event handler on .tutorial-head
       tutorialHead.one('click', app.showTurorial);
