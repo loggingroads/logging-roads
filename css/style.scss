@@ -202,10 +202,11 @@ table {
   }
   #tutorial .close {
     position: absolute;
-    top: 0;
-    right: 20px;
+    top: -36px;
+    right: -10px;
     color: $med-gray;
     z-index: 1;
+    padding: 10px;
   }
   #tutorial .close:hover {
     color: #444;
@@ -213,7 +214,7 @@ table {
   #tutorial .tutorial-nav {
     position: absolute;
     height: 300px;
-    top: 8px;
+    top: 46px;
     left: -12px;
     width: 4px;
   }
@@ -224,15 +225,13 @@ table {
     margin-top: 2px;
     margin-bottom: 2px;
   }
-  #tutorial .tutorial-nav .box.active {
-    background: lighten($med-d-gray, 10%);
-  }
   #tutorial .advance-section {
+    position: absolute;
+    padding: 20px 50%;
+    z-index: 1;
     cursor: pointer;
-    .arrow {
-      margin: 0 auto;
-      padding: 10px 0;
-    }
+    &[data-dir="prev"] { top: -40px; }
+    &[data-dir="next"] { bottom: -40px; }
     &:hover .arrow { border-bottom-color: lighten($med-d-gray, 10%); }
   }
 
