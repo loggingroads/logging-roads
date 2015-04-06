@@ -85,12 +85,12 @@ table {
   // defaults to up
   height: 0;
   width: 0;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  border-bottom: 5px solid $med-d-gray;  /* or to make equal sides:; border-left-width + border-right-width * 0.866 */
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 14px solid $med-d-gray;  /* or to make equal sides:; border-left-width + border-right-width * 0.866 */
   }
   .arrow.up {
-    margin-bottom: 2px;
+    // margin-bottom: 2px;
   }
   .arrow.down {
     -webkit-transform: rotate(180deg);
@@ -98,7 +98,7 @@ table {
     -o-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
-    margin-top: 2px;
+    // margin-top: 2px;
   }
 
 .header {
@@ -160,11 +160,12 @@ table {
   .menu.fixed {
     background-color: rgba(50, 53, 56, 0.95);
     transition: background ease-in-out 0.2s;
-    border-bottom: 4px solid #777;
+    border-bottom: 1px solid #777;
     z-index: 9999;
   }
 
 #tutorial {
+  background: $bgcolor;
   transition: background ease-in-out 0.3s;
   box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
   }
@@ -216,6 +217,14 @@ table {
   }
   #tutorial .tutorial-nav .box.active {
     background: lighten($med-d-gray, 10%);
+  }
+  #tutorial .advance-section {
+    cursor: pointer;
+    .arrow {
+      margin: 0 auto;
+      padding: 10px 0;
+    }
+    &:hover .arrow { border-bottom-color: lighten($med-d-gray, 10%); }
   }
 
 .footer {

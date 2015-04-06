@@ -36,6 +36,10 @@ tm_projects:
 
     {% for section in site.data.tutorial %}
       <section data-index="{{forloop.index}}">
+          <div class="large-12 advance-section" data-dir="prev">
+            <div class="arrow up" {% if forloop.first %}style="opacity: 0;"{% endif %}></div>
+          </div>
+
         <div class="row">
           <div class="section-title large-12 columns">
             <h2>{{section.title}}</h2>
@@ -48,6 +52,10 @@ tm_projects:
             <div class="text-center"><em><small>image number <strong>{{forloop.index}}</strong> here</small></em></div>
           </div>
         </div>
+
+          <div class="large-12 advance-section" data-dir="next">
+            <div class="arrow down" {% if forloop.last %}style="opacity: 0;"{% endif %}></div>
+          </div>
       </section>
     {% endfor %}
   </div>

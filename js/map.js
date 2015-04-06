@@ -62,7 +62,7 @@
         $this.removeClass('has-full-screen');
         $this.html('<em>enlarge map</em>');
       }else{
-        app.setMapContainerHeight(window.innerHeight);
+        app.setMapContainerHeight(window.innerHeight - $('.menu.fixed').outerHeight());
         $this.addClass('has-full-screen');
         $this.html('<em>shrink map</em>');
       }

@@ -10,6 +10,7 @@
 
       $('#tutorial .tutorial-head').one('click', this.showTurorial);
       $('#tutorial .close').on('click', this.hideTutorial);
+      $('#tutorial .advance-section').on('click', this.advanceTutorialSections);
 
     },
 
@@ -79,8 +80,10 @@
       title.add(body).css({bottom: -30, opacity: 0});
     },
 
-    advanceTutorialSections: function(dir, context){
-      var sections = $(context).find('section'),
+    advanceTutorialSections: function(e){
+      var $this = $(this),
+          dir = $this.attr('data-dir'),
+          sections = $this.parents('.tutorial-body').find('section'),
           sectionCount = sections.length,
           section = sections.filter('.active'),
           sectionIdx = parseInt(section.attr('data-index')),
