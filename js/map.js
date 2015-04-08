@@ -146,7 +146,7 @@
         };
 
         // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '/tasks.json')
-        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osmtm_tasks_' + task_number + '.geojson')
+        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + task_number + '.geojson')
           .on('ready', function(){
             this.setFilter(function(feature){
               // filter out all removed cells
