@@ -39,8 +39,16 @@ p {
   p .loud { color: $primary; }
 
 a { color: $primary; }
-a:hover, a:focus { color: darken($primary, 12%); }
-a.disabled { pointer-events: none; }
+  a:hover, a:focus { color: darken($primary, 12%); }
+  a.disabled { pointer-events: none; }
+  a.close {
+    color: $med-gray;
+    z-index: 1;
+    padding: 10px;
+  }
+  a.close:hover {
+    color: $med-d-gray;
+  }
 
 button {
 	background: $primary;
@@ -206,12 +214,6 @@ table {
     position: absolute;
     top: -36px;
     right: -10px;
-    color: $med-gray;
-    z-index: 1;
-    padding: 10px;
-  }
-  #tutorial .close:hover {
-    color: $med-d-gray;
   }
   #tutorial .tutorial-nav {
     position: absolute;

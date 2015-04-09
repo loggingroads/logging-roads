@@ -42,6 +42,13 @@
       $('.toggle-full-screen').on('click', this.toggleFullScreen);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
+      $('#map-sidebar .close').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        app.hideTooltip();
+        $('#map-tooltip').removeClass('keep-open');
+        app.resetMapView();
+      })
 
       // load project area(s) and task grid(s)
       // this.loadTMProjectAreas();
@@ -132,16 +139,25 @@
 
           layer.on('mouseover', function(e){
             this.bringToFront();
-            map_tooltip.html(popupContent);
+            if(! map_tooltip.hasClass('keep-open')){
+              app.showTooltip(popupContent);
+            }
           });
 
           layer.on('mouseout', function(e){
-            map_tooltip.html('');
+            if(! map_tooltip.hasClass('keep-open')){
+              app.hideTooltip();
+            }
           });
 
           layer.on('click', function(e){
-            // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
-            window.open('http://tasks.hotosm.org/project/' + task_number + '#task/' + layer.feature['id']);
+            app.showTooltip(popupContent);
+            map_tooltip.addClass('keep-open');
+
+            app.map.fitBounds(this.getBounds(), {
+              animate: true,
+              padding: [20,20]
+            })
           });
         };
 
@@ -176,6 +192,23 @@
           app.map.fire('taskGrids-loaded');
         });
 
+    },
+
+    showTooltip: function(content){
+      $('#map-tooltip').html(content);
+    },
+
+    hideTooltip: function(){
+      $('#map-tooltip').html('');
+    },
+
+    navigateToTM: function(project_number, task_number){
+      // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
+      window.open('http://tasks.hotosm.org/project/' + project_number + '#task/' + task_number);
+    },
+
+    resetMapView: function(){
+      app.map.setView(pageConfig.center, pageConfig.zoom,{animate: true});
     },
 
     setVectorStrokeWidth: function(){

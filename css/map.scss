@@ -23,14 +23,17 @@ css for map elements
     right: 0;
     height: 100%;
     background: rgba(25, 25, 25, 0.9);
-    font-family: 'PT Mono', monospace !important;
-    text-transform: uppercase;
-    letter-spacing: 3px;
     border-left: 2px solid $med-gray;
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 6px;
+    }
   }
   #map-tooltip {
+    font-family: 'PT Mono', monospace;
+    letter-spacing: 2px;
     margin-top: 30%;
-    // padding-top: 16px;
     h2{
       font-family: inherit;
       font-size: 1.6rem;
@@ -64,11 +67,14 @@ css for map elements
     }
   }
   #map-legend {
+    font-family: 'PT Mono', monospace;
+    letter-spacing: 4px;
     position: absolute;
     bottom: 20px;
     margin-right: 14px;
     h4 {
       font-family: inherit;
+      line-height: 1.4rem;
       font-size: 0.9rem;
       text-align: center;
       margin-bottom: 12px;
@@ -82,14 +88,14 @@ css for map elements
     }
     li {
       font-size: 0.7rem;
-      line-height: 20px;
+      line-height: 1.5rem;
       clear: both;
     }
     li span{
-      width: 16px;
-      height: 16px;
-      margin-right: 6px;
-      border: 1px solid $border;
+      width: 32px;
+      height: 20px;
+      margin-right: 14px;
+      border: 1px solid #444;
       display: block;
       float: left;
     }
@@ -174,7 +180,7 @@ path.project-grid {
   }
   path.project-grid.state-invalidated {
     fill: $invalidated_state;
-    fill-opacity: 0.6;
+    fill-opacity: 0.4;
   }
   path.project-grid.state-done {
     fill: $done_state;
@@ -182,7 +188,7 @@ path.project-grid {
   }
   path.project-grid.state-validated {
     fill: $validated_state;
-    fill-opacity: 0.8;
+    fill-opacity: 0.6;
   }
   path.project-grid.state-removed {
     stroke-opacity: 0;
@@ -190,6 +196,7 @@ path.project-grid {
   }
   path.project-grid:hover {
     stroke: $primary;
-    // fill: $primary;
-    // fill-opacity: 0.8;
-}
+  }
+  path.project-grid:active {
+    stroke: darken($primary, 15%);
+  }
