@@ -135,7 +135,10 @@
               cell_state = 'removed'; break;
           }
 
-          layer.setStyle({ className: 'project-grid state-' + cell_state + ' ' + locked_state });
+          layer.setStyle({ 
+            className: ['project-grid', cell_state, locked_state].join(' '), 
+            color: '#999' 
+          });
 
           layer.on('mouseover', function(e){
             this.bringToFront();
@@ -148,9 +151,15 @@
             if(! map_tooltip.hasClass('keep-open')){
               app.hideTooltip();
             }
+            if(this.feature.id !== parseInt(map_tooltip.find('.task-id').text())){
+              this.bringToBack();
+            }
           });
 
           layer.on('click', function(e){
+            app.resetGridStrokeColor();
+            layer.setStyle({ color: '#F8842E' });  // set equal to scss $primary variable
+            this.bringToFront();
             app.showTooltip(popupContent);
             map_tooltip.addClass('keep-open');
 
@@ -200,6 +209,14 @@
 
     hideTooltip: function(){
       $('#map-tooltip').html('');
+    },
+
+    resetGridStrokeColor: function(){
+      $.each(app.projectGrids, function(key, idx){
+        app.projectGrids[key].eachLayer(function(layer){
+          layer.setStyle({ color: '#999' });
+        });
+      });
     },
 
     navigateToTM: function(project_number, task_number){

@@ -169,28 +169,28 @@ path.project-area {
 
 path.project-grid {
   // stroke-width set programaticly by setVectorStrokeWidth() in map.js
-  stroke: #999;
+  // stroke: #999;
   stroke-opacity: 1;
   fill-opacity: 0.05;
   stroke-linejoin: miter;
   //clip-path: inset(10px 20px 5px 10px);
   }
-  path.project-grid.state-ready {
+  path.project-grid.ready {
     fill: $ready_state;
   }
-  path.project-grid.state-invalidated {
+  path.project-grid.invalidated {
     fill: $invalidated_state;
     fill-opacity: 0.4;
   }
-  path.project-grid.state-done {
+  path.project-grid.done {
     fill: $done_state;
     fill-opacity: 0.4;
   }
-  path.project-grid.state-validated {
+  path.project-grid.validated {
     fill: $validated_state;
     fill-opacity: 0.6;
   }
-  path.project-grid.state-removed {
+  path.project-grid.removed {
     stroke-opacity: 0;
     fill-opacity: 0;
   }
