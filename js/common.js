@@ -43,6 +43,7 @@
       }, slideAnimationDuration);
 
       // expand tutorialBody and fade in
+      tutorialBody.css({display: 'block'});
       tutorialBody.animate({height: '500px', opacity: 1}, slideAnimationDuration, function(){
         app.showTurorialSection(1, this);
       });
@@ -69,6 +70,7 @@
 
       // vertically collapse tutorialBody and fade out
       tutorialBody.animate({height: 0, opacity: 0}, slideAnimationDuration, function(){
+        tutorialBody.css({display: 'none'});
         // return all tutorial sections to initial hide states
         app.hideTutorialSections(tutorialBody);
       });
