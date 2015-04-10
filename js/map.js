@@ -5,6 +5,7 @@
   $.extend(app, {
     projectAreas: {},
     projectGrids: {},
+    tooltipOpen: false,
     initMap: function(){
       // set up map
       L.mapbox.accessToken = 'pk.eyJ1IjoiY3Jvd2Rjb3ZlciIsImEiOiI3akYtNERRIn0.uwBAdtR6Zk60Bp3vTKj-kg';
@@ -115,61 +116,6 @@
         var countryGridPromise = $.Deferred(),
             task_number = projectObj['task_number'];
 
-        var onEachProjectGridCell = function(layer){
-          // function called on each project grid cell, defined here for organization
-          var map_tooltip = $('#map-tooltip'),
-              cell_state = '',
-              locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked',
-              popupContent = {% include project-grid-popup.js %};
-
-          switch(layer.feature.properties['state']){
-            case 0:
-              cell_state = 'ready'; break;
-            case 1:
-              cell_state = 'invalidated'; break;
-            case 2:
-              cell_state = 'done'; break;
-            case 3:
-              cell_state = 'validated'; break;
-            case -1:
-              cell_state = 'removed'; break;
-          }
-
-          layer.setStyle({ 
-            className: ['project-grid', cell_state, locked_state].join(' '), 
-            color: '#999' 
-          });
-
-          layer.on('mouseover', function(e){
-            this.bringToFront();
-            if(! map_tooltip.hasClass('keep-open')){
-              app.showTooltip(popupContent);
-            }
-          });
-
-          layer.on('mouseout', function(e){
-            if(! map_tooltip.hasClass('keep-open')){
-              app.hideTooltip();
-            }
-            if(this.feature.id !== parseInt(map_tooltip.find('.task-id').text())){
-              this.bringToBack();
-            }
-          });
-
-          layer.on('click', function(e){
-            app.resetGridStrokeColor();
-            layer.setStyle({ color: '#F8842E' });  // set equal to scss $primary variable
-            this.bringToFront();
-            app.showTooltip(popupContent);
-            map_tooltip.addClass('keep-open');
-
-            app.map.fitBounds(this.getBounds(), {
-              animate: true,
-              padding: [20,20]
-            })
-          });
-        };
-
         // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '/tasks.json')
         app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + task_number + '.geojson')
           .on('ready', function(){
@@ -177,10 +123,9 @@
               // filter out all removed cells
               return feature.properties['state'] !== -1;
             })
-            .eachLayer(onEachProjectGridCell)
+            .eachLayer(app.onEachProjectGridCell)
             .addTo(app.map);
 
-            console.log('task grid loaded: ' + projectKey);
             app.map.fire('taskGrid-loaded');
             countryGridPromise.resolve();
 
@@ -201,6 +146,60 @@
           app.map.fire('taskGrids-loaded');
         });
 
+    },
+
+    onEachProjectGridCell: function(layer){
+      // function called on each project grid cell, defined here for organization
+      var cell_state = '',
+          locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked',
+          popupContent = {% include project-grid-popup.js %};
+
+      switch(layer.feature.properties['state']){
+        case 0:
+          cell_state = 'ready'; break;
+        case 1:
+          cell_state = 'invalidated'; break;
+        case 2:
+          cell_state = 'done'; break;
+        case 3:
+          cell_state = 'validated'; break;
+        case -1:
+          cell_state = 'removed'; break;
+      }
+
+      layer.setStyle({ 
+        className: ['project-grid', cell_state, locked_state].join(' '), 
+        color: '#999' 
+      });
+
+      layer.on('mouseover', function(e){
+        this.bringToFront();
+        if(! app.tooltipOpen ){
+          app.showTooltip(popupContent);
+        }
+      });
+
+      layer.on('mouseout', function(e){
+        if(! app.tooltipOpen ){
+          app.hideTooltip();
+        }
+        if(this.feature.id !== app.tooltipOpen){
+          this.bringToBack();
+        }
+      });
+
+      layer.on('click', function(e){
+        app.resetGridStrokeColor();
+        layer.setStyle({ color: '#F8842E' });  // match color to $primary variable
+        this.bringToFront();
+        app.showTooltip(popupContent);
+        app.tooltipOpen = layer.feature['id'];
+
+        app.map.fitBounds(this.getBounds(), {
+          animate: true,
+          padding: [20,20]
+        })
+      });
     },
 
     showTooltip: function(content){
