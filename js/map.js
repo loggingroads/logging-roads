@@ -40,7 +40,7 @@
 
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
-      $('.toggle-full-screen').on('click', this.toggleFullScreen);
+      // $('.toggle-full-screen').on('click', this.toggleFullScreen);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
       $('#map-sidebar .close').on('click', function(e){
@@ -60,21 +60,21 @@
 
     },
 
-    toggleFullScreen: function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var $this = $(this);
+    // toggleFullScreen: function(e){
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   var $this = $(this);
 
-      if($this.hasClass('has-full-screen')){
-        app.setMapContainerHeight(520);
-        $this.removeClass('has-full-screen');
-        $this.html('<em>enlarge map</em>');
-      }else{
-        app.setMapContainerHeight(window.innerHeight - $('.menu.fixed').outerHeight());
-        $this.addClass('has-full-screen');
-        $this.html('<em>shrink map</em>');
-      }
-    },
+    //   if($this.hasClass('has-full-screen')){
+    //     app.setMapContainerHeight(520);
+    //     $this.removeClass('has-full-screen');
+    //     $this.html('<em>enlarge map</em>');
+    //   }else{
+    //     app.setMapContainerHeight(window.innerHeight - $('.menu.fixed').outerHeight());
+    //     $this.addClass('has-full-screen');
+    //     $this.html('<em>shrink map</em>');
+    //   }
+    // },
 
     loadTMProjectAreas: function(){
       // load area geojsons for all projects in pageConfig.tm_projects
