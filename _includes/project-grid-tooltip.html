@@ -1,0 +1,24 @@
+{% comment %}
+  tooltip templating for grid vectors based on UTFgrid template
+  https://github.com/mapbox/utfgrid-spec/blob/master/1.2/interaction.md#mustache
+  wrap template in liquid { % raw % } tags so Jekyll leaves it alone
+{% endcomment %}
+
+{% raw %}
+  {{#__teaser__}}
+    <h2>Task Number: <strong class="task-id">{{id}}</strong></h2>
+    <ul>
+      <li>Task Status > <strong> {{properties.state}} </strong></li>
+      <li>Task State > <strong> {{properties.locked}} </strong></li>
+    </ul>
+    <p><small>Click to start mapping with the Tasking Manager</small></p>
+  {{/__teaser__}}
+  {{#__full__}}
+    <h2>Task Number: <strong class="task-id">{{id}}</strong></h2>
+    <ul>
+      <li>Task Status > <strong> {{properties.state}} </strong></li>
+      <li>Task State > <strong> {{properties.locked}} </strong></li>
+    </ul>
+    <div class="text-center"><a href="http://tasks.hotosm.org/project/{{project_id}}#task/{{id}}">Start Mapping</a></div>
+  {{/__full__}}
+{% endraw %}

@@ -5,11 +5,12 @@
   $.extend(app, {
     projectAreas: {},
     projectGrids: {},
-    tooltipOpen: false,
+    tooltipIsOpen: false,
     initMap: function(){
       // set up map
       L.mapbox.accessToken = 'pk.eyJ1IjoiY3Jvd2Rjb3ZlciIsImEiOiI3akYtNERRIn0.uwBAdtR6Zk60Bp3vTKj-kg';
       this.map = L.mapbox.map('map', pageConfig.baseLayer, {
+      // this.map = L.mapbox.map('map', undefined, {
         center: pageConfig.center,
         zoom: pageConfig.zoom,
         minZoom: 4,
@@ -47,9 +48,11 @@
         e.preventDefault();
         e.stopPropagation();
         app.hideTooltip();
-        $('#map-tooltip').removeClass('keep-open');
+        app.tooltipIsOpen = false;
         app.resetMapView();
-      })
+      });
+
+      app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
 
       // load project area(s) and task grid(s)
       // this.loadTMProjectAreas();
@@ -59,22 +62,6 @@
       // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
 
     },
-
-    // toggleFullScreen: function(e){
-    //   e.preventDefault();
-    //   e.stopPropagation();
-    //   var $this = $(this);
-
-    //   if($this.hasClass('has-full-screen')){
-    //     app.setMapContainerHeight(520);
-    //     $this.removeClass('has-full-screen');
-    //     $this.html('<em>enlarge map</em>');
-    //   }else{
-    //     app.setMapContainerHeight(window.innerHeight - $('.menu.fixed').outerHeight());
-    //     $this.addClass('has-full-screen');
-    //     $this.html('<em>shrink map</em>');
-    //   }
-    // },
 
     loadTMProjectAreas: function(){
       // load area geojsons for all projects in pageConfig.tm_projects
@@ -114,16 +101,18 @@
       // and fire 'projectGrids-loaded' event when all have resolved
       var countryGridPromises = $.map(pageConfig.tm_projects, function(projectObj, projectKey){
         var countryGridPromise = $.Deferred(),
-            task_number = projectObj['task_number'];
+            project_id = projectObj['project_id'];
 
         // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '/tasks.json')
-        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + task_number + '.geojson')
+        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + project_id + '.geojson')
           .on('ready', function(){
             this.setFilter(function(feature){
               // filter out all removed cells
               return feature.properties['state'] !== -1;
             })
-            .eachLayer(app.onEachProjectGridCell)
+            .eachLayer(function(layer){
+              app.onEachProjectGridCell(layer, project_id);
+            })
             .addTo(app.map);
 
             app.map.fire('taskGrid-loaded');
@@ -142,58 +131,61 @@
         //   console.log('taskGrids failed to load');
         // })
         .always(function(){
-          console.log('taskGrids loaded');
           app.map.fire('taskGrids-loaded');
         });
 
     },
 
-    onEachProjectGridCell: function(layer){
+    onEachProjectGridCell: function(layer, project_id){
       // function called on each project grid cell, defined here for organization
-      var cell_state = '',
-          locked_state = layer.feature.properties['locked'] ? 'locked' : 'unlocked',
-          popupContent = {% include project-grid-popup.js %};
+      // tranform each layers' properties into more recognizable terms
+      var gridStrokeColor = '#999',
+          gridStrokeClickColor = '#F8842E',
+          feature = layer.feature;
 
-      switch(layer.feature.properties['state']){
+      feature.properties['locked'] = feature.properties['locked'] ? 'locked' : 'unlocked';
+      feature['project_id'] = project_id;
+
+      switch(feature.properties['state']){
         case 0:
-          cell_state = 'ready'; break;
+          feature.properties['state'] = 'ready'; break;
         case 1:
-          cell_state = 'invalidated'; break;
+          feature.properties['state'] = 'invalidated'; break;
         case 2:
-          cell_state = 'done'; break;
+          feature.properties['state'] = 'done'; break;
         case 3:
-          cell_state = 'validated'; break;
+          feature.properties['state'] = 'validated'; break;
         case -1:
-          cell_state = 'removed'; break;
+          feature.properties['state'] = 'removed'; break;
       }
 
       layer.setStyle({ 
-        className: ['project-grid', cell_state, locked_state].join(' '), 
-        color: '#999' 
+        className: ['project-grid', feature.properties['state'], feature.properties['locked']].join(' '), 
+        color: gridStrokeColor
       });
 
       layer.on('mouseover', function(e){
         this.bringToFront();
-        if(! app.tooltipOpen ){
-          app.showTooltip(popupContent);
+        if(! app.tooltipIsOpen ){
+          app.tooltipHover(feature);
         }
       });
 
       layer.on('mouseout', function(e){
-        if(! app.tooltipOpen ){
+        if(! app.tooltipIsOpen ){
           app.hideTooltip();
         }
-        if(this.feature.id !== app.tooltipOpen){
+        if(this.feature.id !== app.tooltipIsOpen){
           this.bringToBack();
         }
       });
 
       layer.on('click', function(e){
-        app.resetGridStrokeColor();
-        layer.setStyle({ color: '#F8842E' });  // match color to $primary variable
+        app.setGridStrokeColor(gridStrokeColor);
+        layer.setStyle({ color: gridStrokeClickColor });  // match color to $primary variable
         this.bringToFront();
-        app.showTooltip(popupContent);
-        app.tooltipOpen = layer.feature['id'];
+        app.tooltipClick(feature);
+        app.tooltipIsOpen = layer.feature['id'];
 
         app.map.fitBounds(this.getBounds(), {
           animate: true,
@@ -202,25 +194,30 @@
       });
     },
 
-    showTooltip: function(content){
-      $('#map-tooltip').html(content);
+    tooltipHover: function(feature){
+      // $('#map-tooltip').html(content);
+      var tooltipContainer = $('#map-tooltip');
+      var tooltipCompiled = app.tooltipTemplate({__teaser__ : feature });
+      tooltipContainer.html( tooltipCompiled );
+    },
+
+    tooltipClick: function(feature){
+      // $('#map-tooltip').html(content);
+      var tooltipContainer = $('#map-tooltip');
+      var tooltipCompiled = app.tooltipTemplate({__full__ : feature });
+      tooltipContainer.html( tooltipCompiled);
     },
 
     hideTooltip: function(){
       $('#map-tooltip').html('');
     },
 
-    resetGridStrokeColor: function(){
+    setGridStrokeColor: function(color){
       $.each(app.projectGrids, function(key, idx){
         app.projectGrids[key].eachLayer(function(layer){
-          layer.setStyle({ color: '#999' });
+          layer.setStyle({ color: color });
         });
       });
-    },
-
-    navigateToTM: function(project_number, task_number){
-      // navigate to tasking manager.  url template: http://tasks.hotosm.org/project/{project_id}#task/{task_number}
-      window.open('http://tasks.hotosm.org/project/' + project_number + '#task/' + task_number);
     },
 
     resetMapView: function(){
@@ -229,16 +226,6 @@
 
     setVectorStrokeWidth: function(){
       var zoomLevel = app.map.getZoom();
-      // $('.leaflet-objects-pane path.project-area').css('stroke-width', function(){
-      //   if(zoomLevel <= 6){
-      //     return 0.4;
-      //   }else if(zoomLevel <= 8){
-      //     return 1;
-      //   }else{
-      //     return 2;
-      //   }
-      // });
-
       $('.leaflet-objects-pane path.project-grid').css('stroke-width', function(){
         if(zoomLevel <= 6){
           return 0.5;

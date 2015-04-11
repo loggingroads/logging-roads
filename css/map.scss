@@ -188,6 +188,7 @@ path.project-grid {
     fill-opacity: 0.4;
   }
   path.project-grid.validated {
+    // fill: url({{site.baseurl}}/img/stripe_med_gray_#999999/16_16_1.png);
     fill: $validated_state;
     fill-opacity: 0.6;
   }
