@@ -31,13 +31,16 @@
   </script>
   <script src="{{site.baseurl}}/js/vendor/jquery.js"></script>
   <script src="{{site.baseurl}}/js/vendor/handlebars-v3.0.1.js"></script>
+  <script src="{{site.baseurl}}/js/vendor/d3/d3.min.js"></script>
   <script src="{{site.baseurl}}/js/common.js"></script>
   <script src="{{site.baseurl}}/js/map.js"></script>
+  <script src="{{site.baseurl}}/js/leaderboard.js"></script>
   <script src="{{site.baseurl}}/js/foundation.min.js"></script>
   <script>
     $(document).foundation();
     app.initCommon();
     app.initMap();
+    app.initLeaderboard();
   </script>
   <script>
     {% include google-analytics.js %}
