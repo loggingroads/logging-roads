@@ -221,6 +221,22 @@ section.tutorial {
   }
 }
 
+#leaderboard li {
+  list-style: none;
+  color: #CCC;
+  padding-top: 6px;
+  border-bottom: 1px solid #222;
+  &.head-row {
+    color: #999;
+    margin-bottom: 6px;
+    border-bottom: 1px solid $med-d-gray;
+    }
+  a:active {
+    color: $secondary;
+  }
+  }
+
+
 .footer {
   background: $med-d-gray;
   border-top: 4px solid #777;
