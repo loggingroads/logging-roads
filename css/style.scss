@@ -3,6 +3,9 @@
 @import 'palette';
 @import 'padding-margin';
 
+$arrow-width: 26px;
+$arrow-height: 14px;
+
 ::selection {
 	color: #FFF;
 	background-color: rgba(120, 120, 120, 0.6) !important;
@@ -39,7 +42,7 @@ p {
   p .loud { color: $primary; }
 
 a { color: $primary; }
-  a:hover, a:focus { color: darken($primary, 12%); }
+  a:hover, a:focus { color: $primary-dark; }
   a.disabled { pointer-events: none; }
   a.close {
     color: $med-gray;
@@ -60,7 +63,7 @@ button {
   transition: none;
   }
   button:hover {
-    background: darken($primary, 10%);
+    background: $primary-dark;
   }
 
 table {
@@ -93,9 +96,9 @@ table {
   // defaults to up
   height: 0;
   width: 0;
-  border-left: 26px solid transparent;
-  border-right: 26px solid transparent;
-  border-bottom: 14px solid $med-d-gray;  /* or to make equal sides:; border-left-width + border-right-width * 0.866 */
+  border-left: $arrow-width solid transparent;
+  border-right: $arrow-width solid transparent;
+  border-bottom: $arrow-height solid $med-d-gray;  /* or to make equal sides:; border-left-width + border-right-width * 0.866 */
   }
   .arrow.up {
     // margin-bottom: 2px;
@@ -109,7 +112,7 @@ table {
     // margin-top: 2px;
   }
 
-.header {
+header {
 	width: 100%;
 	min-height: 140px;
   background-repeat: no-repeat;
@@ -118,130 +121,156 @@ table {
   border-bottom: 1px solid $med-gray;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   overflow: hidden;
-  }
-  .header.header-home{
+  .header-home{
     position: relative;
     min-height: 540px;
   }
-  .header.header-home .menu:not(.fixed) {
-    position: absolute;
-    bottom: 0;
-  }
-  .header h1 {
+  // .header-home .menu:not(.fixed) {
+  //   position: absolute;
+  //   bottom: 0;
+  // }
+  h1 {
     color: $primary;
   }
-  .header .logo {
+  .logo {
   	width: 60%;
   	float: left;
   	text-align: left;
     position: relative;
     top: -12px;
   }
-  .header .logo h1 {
+  .logo h1 {
     padding-left: 0.9375rem;
     margin-bottom: 0;
   }
-  .header span { color: #FFF; }
-  .header a:hover span { color: #DDD; }
-  .header .navigation {
-  	width: 40%;
-  	float: right;
-  	text-align: right;
-  }
-  .header .navigation ul {
-  	list-style-type: none;
-    margin-bottom: 0;
-  }
-  .header .navigation ul li {
-  	display: inline-block;
-  	font-weight: 200;
-  	color: #fff;
-  	margin-right: 20px;
-  }
-  .header .navigation a.active {
-    color: $primary;
-  }
-  .header .navigation a:hover{
-    color: darken($primary, 10%);
-  }
-  .header .navigation a,
-  .header .navigation a:active {
-  	color: #fff;
-  }
-
-
-.menu {
-  background: transparent;
-  padding-bottom: 0;
-  }
-  .menu.fixed {
-    background-color: rgba(50, 53, 56, 0.95);
-    transition: background ease-in-out 0.2s;
-    border-bottom: 1px solid #777;
-    z-index: 9999;
-  }
-
-#tutorial {
-  background-color: $bgcolor;
-  transition: background ease-in-out 0.3s;
-  box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
-  }
-  #tutorial:hover:not(.active) {
-    background-color: #1F1D1F;
-  }
-  #tutorial:not(.active) .tutorial-head {
+  span { color: #FFF; }
+  a:hover span { color: #DDD; }
+  // header .navigation {
+  // 	width: 40%;
+  // 	float: right;
+  // 	text-align: right;
+  // }
+  // header .navigation ul {
+  // 	list-style-type: none;
+  //   margin-bottom: 0;
+  // }
+  // header .navigation ul li {
+  // 	display: inline-block;
+  // 	font-weight: 200;
+  // 	color: #fff;
+  // 	margin-right: 20px;
+  // }
+  // header .navigation a.active {
+  //   color: $primary;
+  // }
+  // header .navigation a:hover{
+  //   color: $primary-dark;
+  // }
+  // header .navigation a,
+  // header .navigation a:active {
+  // 	color: #fff;
+  // }
+  nav {
+    box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
+    background-color: $bgcolor;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     cursor: pointer;
+    &:hover {
+      background-color: $bgcolor-hover
+    }
+    h4 {
+      color: $primary;
+      font-size: 1rem;
+    }
   }
-  #tutorial .tutorial-head h4 {
-    color: $primary;
-  }
-  #tutorial .tutorial-head p {
+  nav p {
     font-family: Raleway, sans-serif;
     line-height: 1.2rem;
+    color: $text;
   }
-  #tutorial .tutorial-body {
-    position: relative;
-    opacity: 0;
+}
+
+// .menu {
+//   background: transparent;
+//   padding-bottom: 0;
+//   }
+//   .menu.fixed {
+//     background-color: rgba(50, 53, 56, 0.95);
+//     transition: background ease-in-out 0.2s;
+//     border-bottom: 1px solid #777;
+//     z-index: 9999;
+//   }
+
+// #tutorial {
+//   background-color: $bgcolor;
+//   transition: background ease-in-out 0.3s;
+//   box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
+//   }
+//   :hover:not(.active) {
+//     background-color: #1F1D1F;
+//   }
+//   :not(.active) .tutorial-head {
+//     cursor: pointer;
+//   }
+  //  .tutorial-head h4 {
+  //   color: $primary;
+  // }
+  //  .tutorial-head p {
+  //   font-family: Raleway, sans-serif;
+  //   line-height: 1.2rem;
+  // }
+section.tutorial {
+  position: relative;
+  margin-bottom: 0 !important; // remove
+  &:not(.active){
     display: none;
   }
-  #tutorial .tutorial-body section {
+  div.tutorial-container {
+    position: relative;
+  }
+  div.tutorial-page {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
     color: $med-gray;
+    margin: 4rem 0;
   }
-  #tutorial .close {
-    position: absolute;
-    top: -36px;
-    right: -10px;
-  }
-  #tutorial .tutorial-nav {
+   .tutorial-nav {
     position: absolute;
     height: 300px;
-    top: 46px;
+    top: 110px;
     left: -12px;
     width: 4px;
   }
-  #tutorial .tutorial-nav .box {
+   .tutorial-nav .box {
     background: $med-d-gray;
     height: 22px;
     width: 100%;
     margin-top: 2px;
     margin-bottom: 2px;
   }
-  #tutorial .tutorial-nav .box.active {
+   .tutorial-nav .box.active {
     background: $dark-gray;
   }
-  #tutorial .advance-section {
+   .advance-section {
     position: absolute;
-    padding: 20px 50%;
+    padding: 30px 0;
     z-index: 1;
     cursor: pointer;
-    &[data-dir="prev"] { top: -40px; }
-    &[data-dir="next"] { bottom: -40px; }
+    width: 100%;
+    &[data-dir="prev"] { top: 0px; }
+    &[data-dir="next"] { bottom: 0px; }
     &:hover .arrow { border-bottom-color: $dark-gray; }
   }
+  .advance-section .arrow {
+    margin: 0 50%;
+    position: relative;
+    left: -$arrow-width;
+  }
+}
 
 .footer {
   background: $med-d-gray;

@@ -1,7 +1,9 @@
 $bgcolor: #171617;
+$bgcolor-hover: lighten($bgcolor, 2%);
 $text: #F1F1F1;
 
 $primary: #F8842E;
+$primary-dark: darken($primary, 12%);
 
 $med-gray: #777777;
 $med-d-gray: #323538;
