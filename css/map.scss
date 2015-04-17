@@ -37,6 +37,12 @@ css for map elements
     font-family: 'PT Mono', monospace;
     letter-spacing: 1px;
     margin-top: 48px;
+    transition: opacity 0.1s;
+    opacity: 0;
+    &.hover,
+    &.clicked{
+      opacity: 1;
+    }
     h4{
       font-family: inherit;
       // font-size: 1.6rem;
@@ -96,7 +102,6 @@ css for map elements
       border-bottom: 1px solid $med-d-gray;
       border-left: 1px solid $med-d-gray;
       float: left !important;
-      cursor: pointer;
     }
     li.active{
       background-color: $med-d-gray;

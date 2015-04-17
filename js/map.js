@@ -73,7 +73,9 @@
         e.stopPropagation();
         app.hideTooltip();
         app.tooltipIsOpen = false;
+        $('#map-sidebar #map-tooltip').removeClass('clicked');
         app.resetMapView();
+        app.setGridStrokeColor('#999')
       });
 
       app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
@@ -165,7 +167,8 @@
       // tranform each layers' properties into more recognizable terms
       var gridStrokeColor = '#999',
           gridStrokeClickColor = '#F8842E',
-          feature = layer.feature;
+          feature = layer.feature,
+          tooltip = $('#map-sidebar #map-tooltip');
 
       feature.properties['locked'] = feature.properties['locked'] ? 'locked' : 'unlocked';
       feature['project_id'] = project_id;
@@ -192,19 +195,23 @@
         this.bringToFront();
         if(! app.tooltipIsOpen ){
           app.tooltipHover(feature);
+          tooltip.addClass('hover');
         }
       });
 
       layer.on('mouseout', function(e){
         if(! app.tooltipIsOpen ){
+          tooltip.removeClass('clicked');
           app.hideTooltip();
         }
         if(this.feature.id !== app.tooltipIsOpen){
           this.bringToBack();
         }
+        tooltip.removeClass('hover');
       });
 
       layer.on('click', function(e){
+        tooltip.addClass('clicked');
         app.setGridStrokeColor(gridStrokeColor);
         layer.setStyle({ color: gridStrokeClickColor });  // match color to $primary variable
         this.bringToFront();
