@@ -48,6 +48,23 @@
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
       // $('.toggle-full-screen').on('click', this.toggleFullScreen);
+      $('#map-legend .satellite-controller a').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        var $this = $(this),
+            listItem = $this.parent('li')
+            listItemSiblings = listItem.siblings('li'),
+            layerId = listItem.data('id');
+
+        if(layerId === 'terrain'){
+          app.removeSatLayer();
+        }else{
+          app.addSatLayer(layerId);
+          listItemSiblings.filter('.active').removeClass('active');
+          listItem.addClass('active');
+        }
+      });
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
       $('#map-sidebar .close').on('click', function(e){
@@ -219,12 +236,15 @@
     },
 
     addSatLayer: function(id){
-      app.removeSatLayer();
-
       // if layer hasn't yet been created, create and add to app.satLayers[id]
       if(! app.satLayers[id]){
         app.satLayers[id] = L.tileLayer(app.satelliteUrlTemplate.replace('{year}', id));
       }
+
+      // short circuit if map already has layer
+      if(app.map.hasLayer(app.satLayers[id])) return false;
+
+      app.removeSatLayer();
       app.satLayers[id].setZIndex(1).addTo(app.map);
 
     },

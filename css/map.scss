@@ -85,16 +85,23 @@ css for map elements
       border-bottom: 1px solid $med-d-gray;
       border-left: 1px solid $med-d-gray;
       float: left !important;
+      cursor: pointer;
+    }
+    li.active{
+      background: $med-d-gray;
     }
     li:nth-of-type(4n+5){
       border-right: 1px solid $med-d-gray;
     }
-    li[data-year="terrain"]{
+    li[data-id="terrain"]{
       border-right: 1px solid $med-d-gray;
       background: $med-d-gray;
     }
     li:hover{
       background: $med-d-gray;
+    }
+    li:active{
+      background: transparent;
     }
     li a{
       color: $med-l-gray;
