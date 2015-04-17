@@ -18,7 +18,8 @@
         zoom: pageConfig.zoom,
         minZoom: 4,
         maxZoom: 18,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        attributionControl: false
       });
 
       // add logging roads layer
