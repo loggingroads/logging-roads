@@ -5,18 +5,24 @@
   $.extend(app, {
     projectAreas: {},
     projectGrids: {},
+    satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
+    satLayers: {},
     tooltipIsOpen: false,
     initMap: function(){
       // set up map
       L.mapbox.accessToken = 'pk.eyJ1IjoiY3Jvd2Rjb3ZlciIsImEiOiI3akYtNERRIn0.uwBAdtR6Zk60Bp3vTKj-kg';
       this.map = L.mapbox.map('map', pageConfig.baseLayer, {
       // this.map = L.mapbox.map('map', undefined, {
+        // layer: this.projectBase['dark'],
         center: pageConfig.center,
         zoom: pageConfig.zoom,
         minZoom: 4,
         maxZoom: 18,
         scrollWheelZoom: false
       });
+
+      // add logging roads layer
+      L.mapbox.tileLayer('crowdcover.e8c210c5').setZIndex(2).addTo(this.map);
 
       // build leaflet share and scale controls
       var shareControl = L.control({position: 'topleft'});
@@ -210,6 +216,26 @@
 
     hideTooltip: function(){
       $('#map-tooltip').html('');
+    },
+
+    addSatLayer: function(id){
+      app.removeSatLayer();
+
+      // if layer hasn't yet been created, create and add to app.satLayers[id]
+      if(! app.satLayers[id]){
+        app.satLayers[id] = L.tileLayer(app.satelliteUrlTemplate.replace('{year}', id));
+      }
+      app.satLayers[id].setZIndex(1).addTo(app.map);
+
+    },
+
+    removeSatLayer: function(){
+      for(var layerId in app.satLayers){
+        var layer = app.satLayers[layerId];
+        if(app.map.hasLayer(layer)){
+          app.map.removeLayer(layer)
+        }
+      }
     },
 
     setGridStrokeColor: function(color){
