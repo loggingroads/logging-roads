@@ -61,9 +61,9 @@
           app.removeSatLayer();
         }else{
           app.addSatLayer(layerId);
-          listItemSiblings.filter('.active').removeClass('active');
-          listItem.addClass('active');
         }
+        listItemSiblings.filter('.active').removeClass('active');
+        listItem.addClass('active');
       });
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);

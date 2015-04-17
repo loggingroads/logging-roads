@@ -35,7 +35,7 @@ css for map elements
 
   #map-tooltip {
     font-family: 'PT Mono', monospace;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     margin-top: 30%;
     h2{
       font-family: inherit;
@@ -88,32 +88,36 @@ css for map elements
       cursor: pointer;
     }
     li.active{
-      background: $med-d-gray;
+      background-color: $med-d-gray;
+    }
+    li.disabled {
+      background-color: $med-d-gray;
+      opacity: 0.4;
     }
     li:nth-of-type(4n+5){
       border-right: 1px solid $med-d-gray;
     }
-    li[data-id="terrain"]{
+    li[data-id="terrain"].active{
       border-right: 1px solid $med-d-gray;
-      background: $med-d-gray;
+      background-color: $med-d-gray;
     }
-    li:hover{
-      background: $med-d-gray;
-    }
-    li:active{
-      background: transparent;
-    }
-    li a{
+    li a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
       color: $med-l-gray;
     }
-    li:hover a{
-      color: $text;
+    li a:hover{
+      background-color: $med-d-gray;
+    }
+    li a:active{
+      background-color: transparent;
     }
   }
 
   #map-legend {
     font-family: 'PT Mono', monospace;
-    letter-spacing: 4px;
+    letter-spacing: 1px;
     position: absolute;
     bottom: 20px;
     margin-right: 14px;
