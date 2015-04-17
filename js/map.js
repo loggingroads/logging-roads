@@ -103,7 +103,7 @@
         var countryGridPromise = $.Deferred(),
             project_id = projectObj['project_id'];
 
-        // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '/tasks.json')
+        // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + project_id + '/tasks.json')
         app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + project_id + '.geojson')
           .on('ready', function(){
             this.setFilter(function(feature){
