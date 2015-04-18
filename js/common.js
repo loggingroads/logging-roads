@@ -46,7 +46,7 @@
       $('html, body').animate({ scrollTop: tutorial.offset().top }, app.ANIMATION.scroll);
 
       tutorial.animate({height: app.WINDOW.height, opacity: 1}, app.ANIMATION.scroll, function(){
-        app.showTutorialSection(1);
+        app.showTutorialPage(1);
       })
 
     },
@@ -62,7 +62,7 @@
       });
     },
 
-    showTutorialSection: function(idx){
+    showTutorialPage: function(idx){
       var page = $('section.tutorial .tutorial-page[data-index="' + idx + '"]'),
           title = page.find('.section-title'),
           body = page.find('.section-body'),

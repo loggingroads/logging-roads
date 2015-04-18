@@ -8,7 +8,24 @@
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
     satLayers: {},
     tooltipIsOpen: false,
+
     initMap: function(){
+      this.buildMap();
+      $('#map-legend .satellite-controller a').on('click', this.switchSatLayer);
+      $('.fb-share').on('click', this.fbShareDialogue);
+      $('.twitter-share').on('click', this.twitterShareDialogue);
+      $('#map-sidebar .close').on('click', this.closeTooltip);
+
+      app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
+
+      // load project area(s)
+      this.loadTMProjectGrid();
+      this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
+      // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
+
+    },
+
+    buildMap: function(){
       // set up map
       L.mapbox.accessToken = 'pk.eyJ1IjoiY3Jvd2Rjb3ZlciIsImEiOiI3akYtNERRIn0.uwBAdtR6Zk60Bp3vTKj-kg';
       this.map = L.mapbox.map('map', pageConfig.baseLayer, {
@@ -48,78 +65,6 @@
 
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
-      // $('.toggle-full-screen').on('click', this.toggleFullScreen);
-      $('#map-legend .satellite-controller a').on('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        var $this = $(this),
-            listItem = $this.parent('li')
-            listItemSiblings = listItem.siblings('li'),
-            layerId = listItem.data('id');
-
-        if(layerId === 'terrain'){
-          app.removeSatLayer();
-        }else{
-          app.addSatLayer(layerId);
-        }
-        listItemSiblings.filter('.active').removeClass('active');
-        listItem.addClass('active');
-      });
-      $('.fb-share').on('click', this.fbShareDialogue);
-      $('.twitter-share').on('click', this.twitterShareDialogue);
-      $('#map-sidebar .close').on('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        app.hideTooltip();
-        app.tooltipIsOpen = false;
-        $('#map-sidebar #map-tooltip').removeClass('clicked');
-        app.resetMapView();
-        app.setGridStrokeColor('#999')
-      });
-
-      app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
-
-      // load project area(s) and task grid(s)
-      // this.loadTMProjectAreas();
-      // this.map.on('projectAreas-loaded', this.loadTMProjectGrid);
-      this.loadTMProjectGrid();
-      this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
-      // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
-
-    },
-
-    loadTMProjectAreas: function(){
-      // load area geojsons for all projects in pageConfig.tm_projects
-      // and fire 'projectAreas-loaded' event when all have resolved
-        // NOT CURRENTLY IMPLEMENTED (as project areas are now baked into the tile layers themselves)
-      var countryProjectPromises = $.map(pageConfig.tm_projects, function(projectObj, projectKey){
-        var countryProjectPromise = $.Deferred();
-
-        // L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + pageConfig.project_areas + '.json')
-        app.projectAreas[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/' + projectObj['project_area'])
-          .on('ready', function(){
-            this.setStyle({ className: 'project-area'})
-                .addTo(app.map);
-
-            console.log('project area loaded: ' + projectKey);
-            countryProjectPromise.resolve();
-            app.map.fire('projectArea-loaded');
-          });
-
-        return countryProjectPromise;
-      });
-
-      $.when.apply($, countryProjectPromises)
-        // .then(function(){
-        //   console.log('project areas loaded');
-        // }).fail(function(){
-        //   console.log('project areas failed to load');
-        // })
-        .always(function(){
-          app.map.fire('projectAreas-loaded');
-        });
-
     },
 
     loadTMProjectGrid: function(){
@@ -194,7 +139,7 @@
       layer.on('mouseover', function(e){
         this.bringToFront();
         if(! app.tooltipIsOpen ){
-          app.tooltipHover(feature);
+          app.addTooltipContent({__teaser__ : feature});
           tooltip.addClass('hover');
         }
       });
@@ -202,7 +147,7 @@
       layer.on('mouseout', function(e){
         if(! app.tooltipIsOpen ){
           tooltip.removeClass('clicked');
-          app.hideTooltip();
+          app.removeTooltipContent();
         }
         if(this.feature.id !== app.tooltipIsOpen){
           this.bringToBack();
@@ -215,7 +160,7 @@
         app.setGridStrokeColor(gridStrokeColor);
         layer.setStyle({ color: gridStrokeClickColor });  // match color to $primary variable
         this.bringToFront();
-        app.tooltipClick(feature);
+        app.addTooltipContent({__full__ : feature});
         app.tooltipIsOpen = layer.feature['id'];
 
         app.map.fitBounds(this.getBounds(), {
@@ -225,22 +170,42 @@
       });
     },
 
-    tooltipHover: function(feature){
-      // $('#map-tooltip').html(content);
+    closeTooltip: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      app.removeTooltipContent();
+      app.tooltipIsOpen = false;
+      $('#map-sidebar #map-tooltip').removeClass('clicked');
+      app.resetMapView();
+      app.setGridStrokeColor('#999')
+    },
+
+    addTooltipContent: function(content){
       var tooltipContainer = $('#map-tooltip');
-      var tooltipCompiled = app.tooltipTemplate({__teaser__ : feature });
+      var tooltipCompiled = app.tooltipTemplate(content);
       tooltipContainer.html( tooltipCompiled );
     },
 
-    tooltipClick: function(feature){
-      // $('#map-tooltip').html(content);
-      var tooltipContainer = $('#map-tooltip');
-      var tooltipCompiled = app.tooltipTemplate({__full__ : feature });
-      tooltipContainer.html( tooltipCompiled);
+    removeTooltipContent: function(){
+      $('#map-tooltip').html('');
     },
 
-    hideTooltip: function(){
-      $('#map-tooltip').html('');
+    switchSatLayer: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
+      var $this = $(this),
+          listItem = $this.parent('li')
+          listItemSiblings = listItem.siblings('li'),
+          layerId = listItem.data('id');
+
+      if(layerId === 'terrain'){
+        app.removeSatLayer();
+      }else{
+        app.addSatLayer(layerId);
+      }
+      listItemSiblings.filter('.active').removeClass('active');
+      listItem.addClass('active');
     },
 
     addSatLayer: function(id){
