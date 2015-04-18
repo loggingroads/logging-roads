@@ -23,21 +23,20 @@ css for map elements
 
 
 #map-sidebar {
+  font-family: 'PT Mono', monospace;
   position: absolute;
   right: 0;
   height: 100%;
   background: rgba(25, 25, 25, 0.9);
   border-left: 2px solid $med-gray;
-  .close {
-    position: absolute;
-    right: 10px;
-    top: 6px;
+  h4 {
+    font-family: inherit;
   }
 }
 
 
 #map-tooltip {
-  font-family: 'PT Mono', monospace;
+  position: relative;
   letter-spacing: 1px;
   margin-top: 48px;
   transition: opacity 0.1s;
@@ -47,8 +46,6 @@ css for map elements
     opacity: 1;
   }
   h4{
-    font-family: inherit;
-    // font-size: 1.6rem;
     text-align: center;
     color: $text;
     margin-bottom: 24px;
@@ -79,43 +76,42 @@ css for map elements
     font-size: 64%;
   }
   a.start-mapping {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    background-color: #333;
+    background-color: #3A3A3A;
+    padding: 8px;
+    border-right: 1px solid $bgcolor;
+  }
+  a.close {
+    background-color: #3A3A3A;
+    color: $med-gray;
     padding: 8px;
   }
-  a.start-mapping:hover{
-    background-color: #3A3A3A;
+  a.start-mapping:hover {
+    background-color: #333;
+  }
+  a.close:hover {
+    background-color: #333;
+    color: #555;
   }
 }
 
 
 #map-legend {
-  font-family: 'PT Mono', monospace;
   letter-spacing: 1px;
   position: absolute;
   bottom: 4px;
   margin-right: 14px;
-  h4 {
-    font-family: inherit;
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 12px;
-  }
   .cell-state {
     border-top: 1px solid #777;
     border-bottom: 1px solid #777;
   }
   .cell-state ul {
-    padding: 6px 6px 2px;
+    padding: 14px 6px 12px;
     list-style: none;
     margin: 0;
   }
   .cell-state li {
     font-size: 0.7rem;
-    line-height: 1.5rem;
-    clear: both;
+    padding-bottom: 4px;
   }
   .cell-state li span {
     width: 32px;
@@ -145,8 +141,7 @@ css for map elements
 
 
 .satellite-controller {
-  font-family: 'PT Mono', monospace;
-  padding: 8px 6px;
+  padding: 14px 6px;
   border-top: 1px solid $border;
   ul {
     margin: 0;

@@ -7,11 +7,7 @@
 {% raw %}
   {{#__teaser__}}
     <h4>Task Number: <strong class="task-id">{{id}}</strong></h4>
-<!--     <ul>
-      <li>Task Status > <strong> {{properties.state}} </strong></li>
-      <li>Task State > <strong> {{properties.locked}} </strong></li>
-    </ul>
-    <p><small>Click to start mapping with the Tasking Manager</small></p> -->
+    <p><small>Click to Open Task</small></p>
   {{/__teaser__}}
   {{#__full__}}
     <h4>Task Number: <strong class="task-id">{{id}}</strong></h4>
@@ -19,6 +15,10 @@
       <li>Task Status <strong> {{properties.state}} </strong></li>
       <li>Task State  <strong> {{properties.locked}} </strong></li>
     </ul>
-    <a class="start-mapping" href="http://tasks.hotosm.org/project/{{project_id}}#task/{{id}}" target="_blank">Start Mapping</a>
+
+    <div>
+      <a class="large-10 columns text-center start-mapping" href="http://tasks.hotosm.org/project/{{project_id}}#task/{{id}}" target="_blank">Start Mapping</a>
+      <a class="large-2 columns text-center close" href="#">X</a>
+    </div>
   {{/__full__}}
 {% endraw %}

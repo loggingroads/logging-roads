@@ -14,7 +14,7 @@
       $('#map-legend .satellite-controller a').on('click', this.switchSatLayer);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
-      $('#map-sidebar .close').on('click', this.closeTooltip);
+      $('#map-tooltip').on('click', 'a.close', this.closeTooltip);
 
       app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
 

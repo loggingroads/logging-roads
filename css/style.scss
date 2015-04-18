@@ -44,14 +44,6 @@ p {
 a { color: $primary; }
   a:hover, a:focus { color: $primary-dark; }
   a.disabled { pointer-events: none; }
-  a.close {
-    color: $med-gray;
-    z-index: 1;
-    padding: 10px;
-  }
-  a.close:hover {
-    color: $med-d-gray;
-  }
 
 button {
 	background: $primary;
