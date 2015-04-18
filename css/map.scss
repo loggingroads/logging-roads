@@ -95,12 +95,11 @@ css for map elements
   font-family: 'PT Mono', monospace;
   letter-spacing: 1px;
   position: absolute;
-  bottom: 20px;
+  bottom: 4px;
   margin-right: 14px;
   h4 {
     font-family: inherit;
-    line-height: 1.4rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-align: center;
     margin-bottom: 12px;
   }
@@ -130,25 +129,18 @@ css for map elements
   span.invalidated { background-color: $invalidated_state; }
   span.done { background-color: $done_state; }
   span.validated { background-color: $validated_state; }
-}
-.map-gradient {
-  position: absolute;
-  width: 100%;
-  height: 20px;
-  z-index: 1;
-}
-.map-gradient.gradient-top {
-  top: 0;
-  background: linear-gradient($bgcolor 0%, transparent 100%);
-}
-.map-gradient.gradient-bottom {
-  bottom: 0;
-  background: linear-gradient(transparent 0%, $bgcolor 100%);
-}
-#map .leaflet-control-container .leaflet-control-attribution {
-  background: transparent;
-  color: #555;
-  z-index: 1;
+  .source {
+    font-size: 0.7rem;
+    padding: 8px 6px;
+    color: $med-gray;
+  }
+  .source a {
+    color: $med-gray;
+    text-decoration: underline;
+  }
+  .source a:hover {
+    color: $med-d-gray;
+  }
 }
 
 
@@ -194,6 +186,22 @@ css for map elements
   li a:active{
     background-color: transparent;
   }
+}
+
+
+.map-gradient {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  z-index: 1;
+}
+.map-gradient.gradient-top {
+  top: 0;
+  background: linear-gradient($bgcolor 0%, transparent 100%);
+}
+.map-gradient.gradient-bottom {
+  bottom: 0;
+  background: linear-gradient(transparent 0%, $bgcolor 100%);
 }
 
 

@@ -61,7 +61,7 @@
       }
       shareControl.addTo(this.map);
 
-      L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map)
+      L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map);
 
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
