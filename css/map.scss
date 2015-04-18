@@ -12,184 +12,190 @@ css for map elements
   margin-bottom: 60px;
   }
 
-  #map {
-    position:absolute;
-    top:0;
-    bottom:0;
-    width:100%;
-    background: $bgcolor;
-  }
 
-  #map-sidebar {
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100%;
+  background: $bgcolor;
+}
+
+
+#map-sidebar {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  background: rgba(25, 25, 25, 0.9);
+  border-left: 2px solid $med-gray;
+  .close {
     position: absolute;
-    right: 0;
-    height: 100%;
-    background: rgba(25, 25, 25, 0.9);
-    border-left: 2px solid $med-gray;
-    .close {
-      position: absolute;
-      right: 10px;
-      top: 6px;
-    }
+    right: 10px;
+    top: 6px;
   }
+}
 
-  #map-tooltip {
-    font-family: 'PT Mono', monospace;
-    letter-spacing: 1px;
-    margin-top: 48px;
-    transition: opacity 0.1s;
-    opacity: 0;
-    &.hover,
-    &.clicked{
-      opacity: 1;
-    }
-    h4{
-      font-family: inherit;
-      // font-size: 1.6rem;
-      text-align: center;
-      color: $text;
-      margin-bottom: 24px;
-    }
-    strong {
-      color: $primary;
-      text-transform: lowercase;
-    }
-    ul {
-      list-style: none;
-      margin: 0 0 16px;
-    }
-    ul strong { float: right; }
-    li {
-      border-bottom: 1px solid $border;
-      margin-bottom: 8px;
-      font-size: 0.8rem;
-      padding: 0 6px;
-    }
-    p {
-      font-family: inherit;
-      text-align: center;
-      line-height: 1rem;
-    }
-    small {
-      text-align: center;
-      color: #AAA;
-      font-size: 64%;
-    }
-    a.start-mapping {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      background-color: #333;
-      padding: 8px;
-    }
-    a.start-mapping:hover{
-      background-color: #3A3A3A;
-    }
-  }
 
-  .satellite-controller {
-    font-family: 'PT Mono', monospace;
-    padding: 8px 6px;
-    border-top: 1px solid $border;
-    ul {
-      margin: 0;
-    }
-    li {
-      font-size: 0.8rem;
-      text-align: center;
-      list-style: none;
-      padding: 1px;
-      border-bottom: 1px solid $med-d-gray;
-      border-left: 1px solid $med-d-gray;
-      float: left !important;
-    }
-    li.active{
-      background-color: $med-d-gray;
-    }
-    li.disabled {
-      background-color: $med-d-gray;
-      opacity: 0.4;
-    }
-    li:nth-of-type(4n+5){
-      border-right: 1px solid $med-d-gray;
-    }
-    li[data-id="terrain"].active{
-      border-right: 1px solid $med-d-gray;
-      background-color: $med-d-gray;
-    }
-    li a {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      color: $med-l-gray;
-    }
-    li a:hover{
-      background-color: $med-d-gray;
-    }
-    li a:active{
-      background-color: transparent;
-    }
+#map-tooltip {
+  font-family: 'PT Mono', monospace;
+  letter-spacing: 1px;
+  margin-top: 48px;
+  transition: opacity 0.1s;
+  opacity: 0;
+  &.hover,
+  &.clicked{
+    opacity: 1;
   }
-
-  #map-legend {
-    font-family: 'PT Mono', monospace;
-    letter-spacing: 1px;
-    position: absolute;
-    bottom: 20px;
-    margin-right: 14px;
-    h4 {
-      font-family: inherit;
-      line-height: 1.4rem;
-      font-size: 0.9rem;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .cell-state {
-      border-top: 1px solid #777;
-      border-bottom: 1px solid #777;
-    }
-    .cell-state ul {
-      padding: 6px 6px 2px;
-      list-style: none;
-      margin: 0;
-    }
-    .cell-state li {
-      font-size: 0.7rem;
-      line-height: 1.5rem;
-      clear: both;
-    }
-    .cell-state li span {
-      width: 32px;
-      height: 20px;
-      margin-right: 14px;
-      border: 1px solid #444;
-      display: block;
-      float: left;
-    }
-    span.ready { background-color: $ready_state; }
-    span.invalidated { background-color: $invalidated_state; }
-    span.done { background-color: $done_state; }
-    span.validated { background-color: $validated_state; }
+  h4{
+    font-family: inherit;
+    // font-size: 1.6rem;
+    text-align: center;
+    color: $text;
+    margin-bottom: 24px;
   }
-  .map-gradient {
-    position: absolute;
+  strong {
+    color: $primary;
+    text-transform: lowercase;
+  }
+  ul {
+    list-style: none;
+    margin: 0 0 16px;
+  }
+  ul strong { float: right; }
+  li {
+    border-bottom: 1px solid $border;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    padding: 0 6px;
+  }
+  p {
+    font-family: inherit;
+    text-align: center;
+    line-height: 1rem;
+  }
+  small {
+    text-align: center;
+    color: #AAA;
+    font-size: 64%;
+  }
+  a.start-mapping {
+    display: inline-block;
     width: 100%;
+    text-align: center;
+    background-color: #333;
+    padding: 8px;
+  }
+  a.start-mapping:hover{
+    background-color: #3A3A3A;
+  }
+}
+
+
+#map-legend {
+  font-family: 'PT Mono', monospace;
+  letter-spacing: 1px;
+  position: absolute;
+  bottom: 20px;
+  margin-right: 14px;
+  h4 {
+    font-family: inherit;
+    line-height: 1.4rem;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .cell-state {
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+  }
+  .cell-state ul {
+    padding: 6px 6px 2px;
+    list-style: none;
+    margin: 0;
+  }
+  .cell-state li {
+    font-size: 0.7rem;
+    line-height: 1.5rem;
+    clear: both;
+  }
+  .cell-state li span {
+    width: 32px;
     height: 20px;
-    z-index: 1;
+    margin-right: 14px;
+    border: 1px solid #444;
+    display: block;
+    float: left;
   }
-  .map-gradient.gradient-top {
-    top: 0;
-    background: linear-gradient($bgcolor 0%, transparent 100%);
+  span.ready { background-color: $ready_state; }
+  span.invalidated { background-color: $invalidated_state; }
+  span.done { background-color: $done_state; }
+  span.validated { background-color: $validated_state; }
+}
+.map-gradient {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  z-index: 1;
+}
+.map-gradient.gradient-top {
+  top: 0;
+  background: linear-gradient($bgcolor 0%, transparent 100%);
+}
+.map-gradient.gradient-bottom {
+  bottom: 0;
+  background: linear-gradient(transparent 0%, $bgcolor 100%);
+}
+#map .leaflet-control-container .leaflet-control-attribution {
+  background: transparent;
+  color: #555;
+  z-index: 1;
+}
+
+
+.satellite-controller {
+  font-family: 'PT Mono', monospace;
+  padding: 8px 6px;
+  border-top: 1px solid $border;
+  ul {
+    margin: 0;
   }
-  .map-gradient.gradient-bottom {
-    bottom: 0;
-    background: linear-gradient(transparent 0%, $bgcolor 100%);
+  li {
+    font-size: 0.8rem;
+    text-align: center;
+    list-style: none;
+    padding: 1px;
+    border-bottom: 1px solid $med-d-gray;
+    border-left: 1px solid $med-d-gray;
+    float: left !important;
   }
-  #map .leaflet-control-container .leaflet-control-attribution {
-    background: transparent;
-    color: #555;
-    z-index: 1;
+  li.active{
+    background-color: $med-d-gray;
   }
+  li.disabled {
+    background-color: $med-d-gray;
+    opacity: 0.4;
+  }
+  li:nth-of-type(4n+5){
+    border-right: 1px solid $med-d-gray;
+  }
+  li[data-id="terrain"].active{
+    border-right: 1px solid $med-d-gray;
+    background-color: $med-d-gray;
+  }
+  li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: $med-l-gray;
+  }
+  li a:hover{
+    background-color: $med-d-gray;
+  }
+  li a:active{
+    background-color: transparent;
+  }
+}
+
 
 .leaflet-bottom .leaflet-control-scale.leaflet-control {
     position: absolute;
@@ -205,34 +211,12 @@ css for map elements
     border-top: 0;
   }
 
-.toggle-full-screen {
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-  background: transparent;
-  color: #666;
-  font-size: 0.8rem;
-  font-weight: 200;
-  padding-top: 10px;
-  cursor: pointer;
-  }
-  .toggle-full-screen:hover {
-    color: $primary;
-  }
 
 
 /*********************************************************
-css for geojson data (e.g. project areas and project grids)
+css for geojson data (e.g. project grids)
 geojson's classes are set in js/map.js w/ the L.path className option: https://www.mapbox.com/mapbox.js/api/v2.1.5/l-path/#path-options
 *********************************************************/
-path.project-area {
-  // stroke-width set programaticly by setVectorStrokeWidth() in map.js
-  stroke: #333;
-  stroke-opacity: 1;
-  fill: #F8842E;
-  // fill: url('/pattern/small.png');
-  fill-opacity: 0.4;
-}
 
 path.project-grid {
   // stroke-width set programaticly by setVectorStrokeWidth() in map.js
