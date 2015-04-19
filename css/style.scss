@@ -114,7 +114,7 @@ header {
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   overflow: hidden;
   .masthead,
-  .navigation {
+  nav {
     margin-top: 8px;
   }
   .masthead img {
@@ -136,51 +136,31 @@ header {
   p {
     color: $text;
   }
-  .navigation {
+  nav {
   	width: 40%;
   	float: right;
   	text-align: right;
   }
-  .navigation ul {
+  nav ul {
   	list-style-type: none;
     margin-bottom: 0;
   }
-  .navigation ul li {
+  nav ul li {
   	display: inline-block;
   	font-weight: 200;
   	color: #fff;
   	margin-right: 20px;
   }
-  .navigation a.active {
+  nav a.active {
     color: $primary;
   }
-  .navigation a:hover{
+  nav a:hover{
     color: $primary-dark;
   }
-  .navigation a,
-  .navigation a:active {
+  nav a,
+  nav a:active {
   	color: #fff;
   }
-  // nav {
-  //   box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
-  //   background-color: $bgcolor;
-  //   position: absolute;
-  //   bottom: 0;
-  //   width: 100%;
-  //   cursor: pointer;
-  //   &:hover {
-  //     background-color: $bgcolor-hover
-  //   }
-  //   h4 {
-  //     color: $primary;
-  //     font-size: 1rem;
-  //   }
-  // }
-  // nav p {
-  //   font-family: Raleway, sans-serif;
-  //   line-height: 1.2rem;
-  //   color: $text;
-  // }
 }
 
 // .menu {
