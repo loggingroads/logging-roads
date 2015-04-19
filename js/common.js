@@ -19,10 +19,15 @@
       // set tutorial sections initial hide state
       this.hideTutorialPages();
 
-      $('header nav').on('click', function(e){
+      $('header .view-tutorial').on('click', function(e){
         e.preventDefault();
         e.stopPropagation();
         app.showTutorial();
+      });
+      $('header .view-map').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('html, body').animate({ scrollTop: $('.map-container').offset().top }, app.ANIMATION.scroll);
       });
       $('section.tutorial .advance-section').on('click', this.advanceTutorialSections);
       $(window).on('resize', this.resizeWindow);

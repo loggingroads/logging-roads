@@ -45,17 +45,21 @@ a { color: $primary; }
   a:hover, a:focus { color: $primary-dark; }
   a.disabled { pointer-events: none; }
 
-button {
-	background: $primary;
+button,
+.button {
+	background: transparent;
 	font-family: 'Raleway', sans-serif;
-	padding: 20px 50px;
+	padding: 14px 6px;
 	font-size: 1.1em;
 	font-weight: 200;
 	outline: 0;
   transition: none;
   }
-  button:hover {
-    background: $primary-dark;
+  button:hover,
+  .button:hover,
+  button:focus,
+  .button:focus {
+    background: rgba(255,255,255,0.1);
   }
 
 table {
@@ -113,6 +117,9 @@ header {
   border-bottom: 1px solid $med-gray;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   overflow: hidden;
+  &.header-home {
+    min-height: 560px;
+  }
   .masthead,
   nav {
     margin-top: 8px;
@@ -120,18 +127,17 @@ header {
   .masthead img {
     height: 40px;
   }
-  .header-home {
-    position: relative;
-    min-height: 540px;
-  }
   .header-body {
     position: absolute;
     top: 20%;
+    li button {
+      border: 1px solid #CCC;
+      border-right: 0 !important;
+    }
   }
   h1 {
     font-size: 2.4rem;
     color: $text;
-    // border-bottom: 2px solid $primary-dark;
   }
   p {
     color: $text;
@@ -163,35 +169,7 @@ header {
   }
 }
 
-// .menu {
-//   background: transparent;
-//   padding-bottom: 0;
-//   }
-//   .menu.fixed {
-//     background-color: rgba(50, 53, 56, 0.95);
-//     transition: background ease-in-out 0.2s;
-//     border-bottom: 1px solid #777;
-//     z-index: 9999;
-//   }
 
-// #tutorial {
-//   background-color: $bgcolor;
-//   transition: background ease-in-out 0.3s;
-//   box-shadow: inset 0px 4px 0px rgba(171, 171, 171, 0.1);
-//   }
-//   :hover:not(.active) {
-//     background-color: #1F1D1F;
-//   }
-//   :not(.active) .tutorial-head {
-//     cursor: pointer;
-//   }
-  //  .tutorial-head h4 {
-  //   color: $primary;
-  // }
-  //  .tutorial-head p {
-  //   font-family: Raleway, sans-serif;
-  //   line-height: 1.2rem;
-  // }
 section.tutorial {
   position: relative;
   margin-bottom: 0 !important; // remove
