@@ -178,6 +178,7 @@
         app.showProjectGrid();
       }else{
         listItem.siblings('li.active').removeClass('active');
+        listItem.addClass('active');
         app.hideProjectGrid();
       }
     },
