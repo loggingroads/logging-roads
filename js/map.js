@@ -6,11 +6,13 @@
     projectGrids: {},
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
     satLayers: {},
+    roadReferenceLayer: null,
     tooltipIsOpen: false,
 
     initMap: function(){
       this.buildMap();
       $('#map-legend .satellite-controller a').on('click', this.switchSatLayer);
+      $('#map-legend .task-grid a').on('click', this.switchProjectGrid);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
       $('#map-tooltip').on('click', 'a.close', this.closeTooltip);
@@ -37,9 +39,6 @@
         scrollWheelZoom: false,
         attributionControl: false
       });
-
-      // add logging roads layer
-      L.mapbox.tileLayer('crowdcover.e8c210c5').setZIndex(2).addTo(this.map);
 
       // build leaflet share and scale controls
       var shareControl = L.control({position: 'topleft'});
@@ -168,6 +167,21 @@
       });
     },
 
+    switchProjectGrid: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var listItem = $(this).parent('li');
+      
+      if(listItem.hasClass('active')) return false;
+      if(listItem.data('id') === 'show'){
+        listItem.addClass('active');
+        app.showProjectGrid();
+      }else{
+        listItem.siblings('li.active').removeClass('active');
+        app.hideProjectGrid();
+      }
+    },
+
     showProjectGrid: function(){
       $('path.project-grid').css({display: 'block'}).animate({opacity: 1}, 200);
     },
@@ -209,8 +223,10 @@
 
       if(layerId === 'terrain'){
         app.removeSatLayer();
+        app.removeRoadReferenceLayer();
       }else{
         app.addSatLayer(layerId);
+        app.addRoadReferenceLayer();
       }
       listItemSiblings.filter('.active').removeClass('active');
       listItem.addClass('active');
@@ -236,6 +252,19 @@
         if(app.map.hasLayer(layer)){
           app.map.removeLayer(layer)
         }
+      }
+    },
+
+    addRoadReferenceLayer: function(){
+      if(! app.roadReferenceLayer ){
+        app.roadReferenceLayer = L.mapbox.tileLayer('crowdcover.e8c210c5').setZIndex(2);
+      }
+      app.roadReferenceLayer.addTo(app.map);
+    },
+
+    removeRoadReferenceLayer: function(){
+      if( app.roadReferenceLayer ){
+        app.map.removeLayer(app.roadReferenceLayer);
       }
     },
 
