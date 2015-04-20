@@ -174,11 +174,10 @@
       
       if(listItem.hasClass('active')) return false;
       if(listItem.data('id') === 'show'){
-        listItem.addClass('active');
+        listItem.addClass('active').siblings('li.active').removeClass('active');
         app.showProjectGrid();
       }else{
-        listItem.siblings('li.active').removeClass('active');
-        listItem.addClass('active');
+        listItem.addClass('active').siblings('li.active').removeClass('active');
         app.hideProjectGrid();
       }
     },
