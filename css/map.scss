@@ -39,7 +39,7 @@ css for map elements
   position: relative;
   letter-spacing: 1px;
   margin-top: 48px;
-  transition: opacity 0.1s;
+  transition: opacity 0.2s;
   opacity: 0;
   &.hover,
   &.clicked{
@@ -139,10 +139,9 @@ css for map elements
   }
 }
 
-
+.task-grid,
 .satellite-controller {
   padding: 14px 6px;
-  border-top: 1px solid $border;
   ul {
     margin: 0;
   }
@@ -162,13 +161,6 @@ css for map elements
     background-color: $med-d-gray;
     opacity: 0.4;
   }
-  li:nth-of-type(4n+5){
-    border-right: 1px solid $med-d-gray;
-  }
-  li[data-id="terrain"].active{
-    border-right: 1px solid $med-d-gray;
-    background-color: $med-d-gray;
-  }
   li a {
     display: inline-block;
     width: 100%;
@@ -183,11 +175,34 @@ css for map elements
   }
 }
 
+.task-grid {
+  border-top: 1px solid $border;
+  li {
+    border-top: 1px solid $med-d-gray;
+  }
+  li:last-child {
+    border-right: 1px solid $med-d-gray;
+  }
+  li a {
+    padding: 4px;
+  }
+}
+
+.satellite-controller {
+  li:nth-of-type(4n+5){
+    border-right: 1px solid $med-d-gray;
+  }
+  li[data-id="terrain"].active{
+    border-right: 1px solid $med-d-gray;
+    background-color: $med-d-gray;
+  }
+}
+
 
 .map-gradient {
   position: absolute;
   width: 100%;
-  height: 20px;
+  height: 14px;
   z-index: 1;
 }
 .map-gradient.gradient-top {
@@ -229,6 +244,7 @@ path.project-grid {
   fill-opacity: 0.05;
   stroke-linejoin: miter;
   //clip-path: inset(10px 20px 5px 10px);
+  // transition: all 0.3s;
   }
   path.project-grid.ready {
     fill: $ready_state;

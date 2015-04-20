@@ -3,7 +3,6 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
-    projectAreas: {},
     projectGrids: {},
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
     satLayers: {},
@@ -19,7 +18,7 @@
       app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
 
       // load project area(s)
-      this.loadTMProjectGrid();
+      this.loadProjectGrid();
       this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
       // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
 
@@ -67,7 +66,7 @@
       this.map.on('zoomend', this.setVectorStrokeWidth);
     },
 
-    loadTMProjectGrid: function(){
+    loadProjectGrid: function(){
       // load grid geojsons for all projects in pageConfig.tm_projects
       // and fire 'projectGrids-loaded' event when all have resolved
       var countryGridPromises = $.map(pageConfig.tm_projects, function(projectObj, projectKey){
@@ -78,7 +77,6 @@
         app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + project_id + '.geojson')
           .on('ready', function(){
             this.setFilter(function(feature){
-              // filter out all removed cells
               return feature.properties['state'] !== -1;
             })
             .eachLayer(function(layer){
@@ -167,6 +165,16 @@
           animate: true,
           padding: [20,20]
         })
+      });
+    },
+
+    showProjectGrid: function(){
+      $('path.project-grid').css({display: 'block'}).animate({opacity: 1}, 200);
+    },
+
+    hideProjectGrid: function(){
+      $('path.project-grid').animate({opacity: 0}, 200, function(){
+        $(this).css({display: 'none'});
       });
     },
 
