@@ -39,7 +39,8 @@
         minZoom: 4,
         maxZoom: 18,
         scrollWheelZoom: false,
-        attributionControl: false
+        attributionControl: false,
+        zoomAnimationThreshold: 6
       });
 
       // build leaflet share and scale controls
