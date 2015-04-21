@@ -69,16 +69,16 @@ css for map elements
     font-family: inherit;
     text-align: center;
     line-height: 1rem;
-  }
-  small {
     text-align: center;
     color: #AAA;
-    font-size: 64%;
+  }
+  p.locked {
+    color: $locked_state;
   }
   a.start-mapping {
     background-color: #3A3A3A;
     padding: 8px;
-    border-right: 1px solid $bgcolor;
+    border-right: 2px solid $bgcolor;
   }
   a.start-mapping.disabled {
     color: $text;
@@ -115,11 +115,11 @@ css for map elements
   }
   .cell-state li {
     font-size: 0.7rem;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
   }
   .cell-state li span {
-    width: 32px;
-    height: 20px;
+    width: 30px;
+    height: 18px;
     margin-right: 14px;
     border: 1px solid #444;
     display: block;
@@ -129,6 +129,10 @@ css for map elements
   span.invalidated { background-color: $invalidated_state; }
   span.done { background-color: $done_state; }
   span.validated { background-color: $validated_state; }
+  span.locked { 
+    background-color: rgba(200,200,200,0.05);
+    border-color: $locked-state !important;
+  }
   .source {
     font-size: 0.7rem;
     padding: 8px 6px;
@@ -266,13 +270,26 @@ path.project-grid {
     fill: $validated_state;
     fill-opacity: 0.6;
   }
+  path.project-grid.locked {
+    stroke: $locked_state;
+  }
+  path.project-grid.locked.ready {
+    fill-opacity: 0.1;
+  }
+  path.project-grid.locked.invalidated,
+  path.project-grid.locked.done, {
+    fill-opacity: 0.5;
+  }
+  path.project-grid.validated {
+    fill-opacity: 0.7;
+  }
   path.project-grid.removed {
     stroke-opacity: 0;
     fill-opacity: 0;
   }
   path.project-grid:hover {
-    stroke: $primary;
+    stroke: $primary-dark;
   }
   path.project-grid:active {
-    stroke: darken($primary, 15%);
+    stroke: darken($primary-dark, 15%);
   }

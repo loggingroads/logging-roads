@@ -24,6 +24,7 @@
         if(properties.locked === 'locked') {
           return options.fn(this);
         }
+        return options.inverse(this);
       });
 
       // load project area(s)
@@ -116,7 +117,7 @@
       // function called on each project grid cell, defined here for organization
       // tranform each layers' properties into more recognizable terms
       var gridStrokeColor = '#999',
-          gridStrokeClickColor = '#F8842E',
+          gridStrokeClickColor = '#E16408', // match color to $primary-dark variable
           feature = layer.feature,
           tooltip = $('#map-sidebar #map-tooltip');
 
@@ -156,7 +157,7 @@
           tooltip.removeClass('clicked');
           app.removeTooltipContent();
         }
-        if(this.feature.id !== app.tooltipIsOpen){
+        if(this.feature.id !== app.tooltipIsOpen && this.feature.properties.locked !== 'locked'){
           this.bringToBack();
         }
         tooltip.removeClass('hover');
@@ -165,7 +166,7 @@
       layer.on('click', function(e){
         tooltip.addClass('clicked');
         app.setGridStrokeColor(gridStrokeColor);
-        layer.setStyle({ color: gridStrokeClickColor });  // match color to $primary variable
+        layer.setStyle({ color: gridStrokeClickColor });
         this.bringToFront();
         app.addTooltipContent({__full__ : feature});
         app.tooltipIsOpen = layer.feature['id'];

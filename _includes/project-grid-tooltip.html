@@ -7,7 +7,11 @@
 {% raw %}
   {{#__teaser__}}
     <h4>Task Number: <strong class="task-id">{{id}}</strong></h4>
-    <p><small>Click to Open Task</small></p>
+    {{#isLocked properties}}
+      <p class="locked"><small>Task is Locked</small></p>
+    {{else}}
+      <p><small>Click to Open Task</small></p>
+    {{/isLocked}}
   {{/__teaser__}}
   {{#__full__}}
     <h4>Task Number: <strong class="task-id">{{id}}</strong></h4>
