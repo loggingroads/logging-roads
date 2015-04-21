@@ -1,6 +1,20 @@
-- title: slide 1
-  body: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex vel corporis, aut veniam, cum ut minima modi iste harum, sapiente fuga maiores commodi assumenda in omnis saepe molestias aspernatur similique!
-- title: slide 2
-  body: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, dicta.
-- title: slide 3
-  body: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem eligendi, quaerat in obcaecati odio ullam numquam nesciunt corporis tempora impedit fugit doloremque beatae nemo quos dolore dolor quis eius reiciendis animi aut! Quod, voluptatem error, asperiores nostrum quaerat est delectus.
+- body: 
+      |
+      Logging roads are a major indicator of deforestation in the Congo Basin. Until now, their reach has been difficult to visualize, obscuring the rapid rise in deforestation in the region. Often, these roads are discovered only after they have been abandoned, and the ecosystem they permeated irreparably damaged. 
+  img: '/img/cifor_wood_truck.jpg'
+- body: 
+      |
+      Together, the [World Resources Institute](http://wri.org) and [Moabi](http://rdc.moabi.org) have teamed up with [OpenStreetMap](http://osm.org)- the world’s largest collaborative mapping initiative - to track the spread of logging roads in the Congo Basin, and to better monitor the growth in deforestation.
+  img: '/img/road_growth_timelapse_800_4x.gif'
+- body: 
+      | 
+      But we can’t do it alone. We hope that the Logging Roads Initiative serves as a call to action for those passionate about preserving these diverse and important landscapes. By using crowdsourcing we can drastically improve the speed, accuracy, and scale of logging road maps.
+
+      Sounds good?  Let’s get started.
+  img: '/img/cifor_wood_market2.jpg'
+- body: 
+      | 
+      This site serves as a portal for editing already existing data within OpenStreetMap. If this is your first time using OpenStreetMap, don’t worry, it is made to be simple and friendly. [A detailed editing guide]() explains the editing process in more detail.
+
+      All that’s left now is to pick a task and start mapping!
+  img: '/img/cifor_wood_truck.jpg'

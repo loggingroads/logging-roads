@@ -3,6 +3,7 @@
 @import 'palette';
 @import 'padding-margin';
 
+$advance-section-height: 60px;
 $arrow-width: 26px;
 $arrow-height: 14px;
 
@@ -118,7 +119,7 @@ header {
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   overflow: hidden;
   &.header-home {
-    min-height: 560px;
+    min-height: 700px;
   }
   .masthead,
   nav {
@@ -178,7 +179,6 @@ header {
   }
 }
 
-
 section.tutorial {
   position: relative;
   margin-bottom: 0 !important; // remove
@@ -188,45 +188,61 @@ section.tutorial {
   div.tutorial-container {
     position: relative;
   }
-  div.tutorial-page {
+  .tutorial-page {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
-    color: $med-gray;
-    margin: 4rem 0;
+    padding: $advance-section-height 40px;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: all 0.3s;
   }
-   .tutorial-nav {
+  .tutorial-page.active{
+    opacity: 1;
+  }
+  .tutorial-page p {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .tutorial-nav {
     position: absolute;
     height: 300px;
     top: 110px;
-    left: -12px;
+    left: 20px;
     width: 4px;
+    z-index: 1;
   }
    .tutorial-nav .box {
-    background: $med-d-gray;
+    background: $med-gray;
     height: 22px;
     width: 100%;
     margin-top: 2px;
     margin-bottom: 2px;
   }
-   .tutorial-nav .box.active {
-    background: $dark-gray;
+  .tutorial-nav .box.active {
+    background: $med-l-gray;
   }
-   .advance-section {
+  .advance-section {
     position: absolute;
-    padding: 30px 0;
-    z-index: 1;
+    padding: ($advance-section-height / 2) - ($arrow-height / 2);
+    z-index: 2;
     cursor: pointer;
     width: 100%;
+    background: rgb(60,60,60);
+    background: rgba(0,0,0,0.3);
     &[data-dir="prev"] { top: 0px; }
     &[data-dir="next"] { bottom: 0px; }
-    &:hover .arrow { border-bottom-color: $dark-gray; }
   }
   .advance-section .arrow {
+    border-bottom-color: #999;
     margin: 0 50%;
     position: relative;
     left: -$arrow-width;
+  }
+  .advance-section:hover .arrow {
+    border-bottom-color: #CCC;
   }
 }
 

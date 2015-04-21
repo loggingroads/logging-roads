@@ -4,27 +4,17 @@
     <div class="arrow up"></div>
   </div>
 
-  <div class="row">
-    <div class="large-12 columns tutorial-container">
+  {% include tutorial-nav.html %}
 
-      {% include tutorial-nav.html %}
-      {% for section in site.data.tutorial %}
-        <div class="tutorial-page" data-index="{{forloop.index}}">
-
-            <div class="section-title large-12 columns">
-              <h2>{{section.title}}</h2>
-            </div>
-            <div class="section-body small-12 large-8 columns">
-              <p>{{section.body}}</p>
-            </div>
-            <div class="section-image small-12 large-4 columns pam" style="height: 300px; border: 1px solid #555; background-color: #222;">
-              <div class="text-center"><em><small>image number <strong>{{forloop.index}}</strong> here</small></em></div>
-            </div>
-        </div>
-      {% endfor %}
-
+  {% for section in site.data.tutorial %}
+    <div class="tutorial-page" 
+         data-index="{{forloop.index}}" 
+         style="background-image: linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9)), url('{{section.img}}')">
+      <div class="section-body small-12 large-8 columns">
+        <p>{{section.body | markdownify }}</p>
+      </div>
     </div>
-  </div>
+  {% endfor %}
 
   <div class="advance-section" data-dir="next">
     <div class="arrow down"></div>
