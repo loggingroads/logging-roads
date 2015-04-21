@@ -3,6 +3,8 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
+    //tmBaseUrl: 'http://45.55.129.242:6543/',
+    tmBaseUrl: 'http://tasks.hotosm.org/project/',
     projectGrids: {},
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
     satLayers: {},
@@ -72,8 +74,8 @@
         var countryGridPromise = $.Deferred(),
             project_id = projectObj['project_id'];
 
-        // app.projectGrids[projectKey] = L.mapbox.featureLayer('http://tasks.hotosm.org/project/' + project_id + '/tasks.json')
-        app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + project_id + '.geojson')
+        // app.projectGrids[projectKey] = L.mapbox.featureLayer('{{site.baseurl}}/data/osm_tm_tasks_' + project_id + '.geojson')
+        app.projectGrids[projectKey] = L.mapbox.featureLayer(app.tmBaseUrl + project_id + '/tasks.json')
           .on('ready', function(){
             this.setFilter(function(feature){
               return feature.properties['state'] !== -1;
