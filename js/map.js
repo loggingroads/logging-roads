@@ -20,6 +20,11 @@
       $('#map-tooltip').on('click', 'a.close', this.closeTooltip);
 
       app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
+      Handlebars.registerHelper('isLocked', function(properties, options) {
+        if(properties.locked === 'locked') {
+          return options.fn(this);
+        }
+      });
 
       // load project area(s)
       this.loadProjectGrid();
