@@ -3,8 +3,8 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
-    //tmBaseUrl: 'http://45.55.129.242:6543/',
-    tmBaseUrl: 'http://tasks.hotosm.org/project/',
+    tmBaseUrl: 'http://45.55.129.242:6543/project/',
+    // tmBaseUrl: 'http://tasks.hotosm.org/project/',
     projectGrids: {},
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
     satLayers: {},
