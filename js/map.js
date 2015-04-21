@@ -14,7 +14,7 @@
     initMap: function(){
       this.buildMap();
       $('#map-legend .satellite-controller a').on('click', this.switchSatLayer);
-      $('#map-legend .task-grid a').on('click', this.switchProjectGrid);
+      $('#map-legend .task-grid a').on('click', this.toggleProjectGrid);
       $('.fb-share').on('click', this.fbShareDialogue);
       $('.twitter-share').on('click', this.twitterShareDialogue);
       $('#map-tooltip').on('click', 'a.close', this.closeTooltip);
@@ -170,7 +170,7 @@
       });
     },
 
-    switchProjectGrid: function(e){
+    toggleProjectGrid: function(e){
       e.preventDefault();
       e.stopPropagation();
       var listItem = $(this).parent('li');
@@ -192,6 +192,14 @@
     hideProjectGrid: function(){
       $('path.project-grid').animate({opacity: 0}, 200, function(){
         $(this).css({display: 'none'});
+      });
+    },
+
+    getProjectGridTask: function(project_id, task_id){
+      // TODO: implement once the TM API supports this request: https://github.com/hotosm/osm-tasking-manager2/wiki/API#task-details
+      // use this to make sure users can't open a loced task
+      $.getJSON(app.tmBaseUrl + '/project/' + project_id + '/task/' + task_id + '.json', function(data){
+        console.log(data);
       });
     },
 
