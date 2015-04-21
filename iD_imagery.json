@@ -1,0 +1,7 @@
+[
+{
+     "name": "UMD Landsat 2000",
+     "type": "tms",
+     "url": "https://wri-tiles.s3.amazonaws.com/umd_landsat/2000/{z}/{y}/{x}.png"
+}
+]
