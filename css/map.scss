@@ -80,6 +80,7 @@ css for map elements
     padding: 8px;
     border-right: 1px solid $bgcolor;
   }
+  a.start-mapping.disabled {}
   a.close {
     background-color: #3A3A3A;
     color: $med-gray;

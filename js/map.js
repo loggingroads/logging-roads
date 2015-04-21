@@ -115,8 +115,10 @@
           feature = layer.feature,
           tooltip = $('#map-sidebar #map-tooltip');
 
+      // hack: store __is_locked for the sake of the handlebar template
       feature.properties['locked'] = feature.properties['locked'] ? 'locked' : 'unlocked';
       feature['project_id'] = project_id;
+      feature['tm_base_url'] = app.tmBaseUrl;
 
       switch(feature.properties['state']){
         case 0:
