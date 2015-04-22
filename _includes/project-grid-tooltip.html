@@ -20,9 +20,7 @@
       <li>Task State  <strong> {{properties.locked}} </strong></li>
     </ul>
 
-    <div>
-      <a class="medium-10 columns text-center start-mapping {{#isLocked properties}}disabled striped{{/isLocked}}" href="{{tm_base_url}}{{project_id}}#task/{{id}}" target="_blank">Start Mapping</a>
-      <a class="medium-2 columns text-center close" href="#">X</a>
-    </div>
+    <a class="medium-10 columns text-center start-mapping {{#isLocked properties}}disabled striped{{/isLocked}}" href="{{tm_base_url}}{{project_id}}#task/{{id}}" target="_blank">Start Mapping</a>
+    <a class="medium-2 columns text-center close" href="#">X</a>
   {{/__full__}}
 {% endraw %}

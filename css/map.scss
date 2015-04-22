@@ -6,7 +6,7 @@ css for map elements
 *********************************************************/
 .map-container {
   position: relative;
-  height: 520px;
+  min-height: 650px;
   width: 100%;
   /*transition: height 0.25s;*/
   margin-bottom: 60px;
@@ -38,7 +38,7 @@ css for map elements
 #map-tooltip {
   position: relative;
   letter-spacing: 1px;
-  margin-top: 48px;
+  margin-top: 20px;
   transition: opacity 0.2s;
   opacity: 0;
   &.hover,
@@ -134,7 +134,7 @@ css for map elements
     border-color: $locked-state !important;
   }
   .source {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     padding: 8px 6px;
     color: $med-gray;
   }
@@ -149,7 +149,9 @@ css for map elements
 
 .task-grid,
 .satellite-controller {
-  padding: 14px 6px;
+  padding-left:6px;
+  padding-right:6px;
+  padding-top:8px;
   ul {
     margin: 0;
   }
@@ -186,17 +188,18 @@ css for map elements
 .task-grid {
   border-top: 1px solid $border;
   li {
-    border-top: 1px solid $med-d-gray;
+    // border-top: 1px solid $med-d-gray;
   }
   li:last-child {
     border-right: 1px solid $med-d-gray;
   }
   li a {
-    padding: 4px;
+    padding: 2px 4px;
   }
 }
 
 .satellite-controller {
+  padding-bottom: 8px;
   li:nth-of-type(4n+5){
     border-right: 1px solid $med-d-gray;
   }
