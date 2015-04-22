@@ -7,11 +7,19 @@
   {% include tutorial-nav.html %}
 
   {% for section in site.data.tutorial %}
+  
+    {% capture img_gradient %}
+      {% if section.img_gradient =='dark' %}
+        linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9))
+      {% else %}
+        linear-gradient(rgba(65, 65, 62, 0.1), rgba(0, 0, 0, 0.3))
+      {% endif %}
+    {% endcapture %}
     <div class="tutorial-page" 
          data-index="{{forloop.index}}" 
-         style="background-image: linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9)), url('{{section.img}}')">
-      <div class="section-body small-12 large-8 columns">
-        <p>{{section.body | markdownify }}</p>
+         style="background-image: {{img_gradient}}, url('{{site.baseurl}}/img/{{section.img}}')">
+      <div class="section-body small-12 large-8 columns v-align">
+        {{section.body | markdownify }}
       </div>
     </div>
   {% endfor %}

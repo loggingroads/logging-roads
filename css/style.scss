@@ -46,6 +46,12 @@ a { color: $primary; }
   a:hover, a:focus { color: $primary-dark; }
   a.disabled { pointer-events: none; }
 
+.v-align {
+  postiion: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 button,
 .button {
 	background: transparent;
@@ -205,6 +211,7 @@ section.tutorial {
   }
   .tutorial-page p {
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    font-size: 1.3rem;
   }
   .tutorial-nav {
     position: absolute;
