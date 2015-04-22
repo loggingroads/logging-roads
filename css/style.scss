@@ -47,7 +47,7 @@ a { color: $primary; }
   a.disabled { pointer-events: none; }
 
 .v-align {
-  postiion: relative;
+  position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -214,9 +214,6 @@ section.tutorial {
     font-size: 1.3rem;
   }
   .tutorial-nav {
-    position: absolute;
-    height: 300px;
-    top: 110px;
     left: 20px;
     width: 4px;
     z-index: 1;
@@ -225,8 +222,7 @@ section.tutorial {
     background: $med-gray;
     height: 22px;
     width: 100%;
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin-top: 3px;
   }
   .tutorial-nav .box.active {
     background: $med-l-gray;
