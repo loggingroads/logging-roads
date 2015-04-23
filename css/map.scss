@@ -273,7 +273,8 @@ path.project-grid {
     fill: $validated_state;
     fill-opacity: 0.6;
   }
-  path.project-grid.locked {
+  path.project-grid.locked,
+  path.project-grid.locked:hover {
     stroke: $locked_state;
   }
   path.project-grid.locked.ready {
