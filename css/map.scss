@@ -112,13 +112,14 @@ css for map elements
     font-size: 0.6rem;
     color: $med-l-gray;
     text-align: justify;
+    margin-bottom: 16px;
   }
   p strong {
     font-weight: normal;
     color: $primary;
   }
   .cell-state ul {
-    padding: 14px 6px 12px;
+    padding: 0 6px;
     list-style: none;
     margin: 0;
   }
@@ -141,6 +142,9 @@ css for map elements
   span.locked { 
     background-color: rgba(200,200,200,0.05);
     border-color: $locked-state !important;
+  }
+  span.empty-cell {
+    background-color: #262626;
   }
   .source {
     font-size: 0.6rem;
