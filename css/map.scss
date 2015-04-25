@@ -66,7 +66,6 @@ css for map elements
     padding: 0 6px;
   }
   p {
-    font-family: inherit;
     text-align: center;
     line-height: 1rem;
     text-align: center;
@@ -105,8 +104,18 @@ css for map elements
   bottom: 4px;
   margin-right: 14px;
   h4 {
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
+    color: $primary;
+  }
+  p {
+    font-size: 0.6rem;
+    color: $med-l-gray;
+    text-align: justify;
+  }
+  p strong {
+    font-weight: normal;
+    color: $primary;
   }
   .cell-state ul {
     padding: 14px 6px 12px;
@@ -157,7 +166,7 @@ css for map elements
     margin: 0;
   }
   li {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     text-align: center;
     list-style: none;
     padding: 1px;
@@ -200,7 +209,9 @@ css for map elements
 
 .satellite-controller {
   padding-bottom: 8px;
-  li:nth-of-type(4n+5){
+  li:nth-of-type(1),
+  li:nth-of-type(2),
+  li:nth-of-type(4n+6){
     border-right: 1px solid $med-d-gray;
   }
   li[data-id="terrain"].active{
