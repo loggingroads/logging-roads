@@ -145,9 +145,13 @@ header {
   .header-body {
     position: absolute;
     top: 20%;
-    li button {
-      border: 1px solid #CCC;
-      border-right: 0 !important;
+    button {
+      border-color: #fff;
+      color: $med-l-gray;
+      margin: 0 !important;
+    }
+    button:hover {
+      color: #fff;
     }
   }
   h1 {
@@ -184,7 +188,7 @@ header {
   }
 }
 
-section.tutorial {
+#tutorial {
   position: relative;
   margin-bottom: 0 !important; // remove
   &:not(.active){

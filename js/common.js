@@ -18,18 +18,17 @@
 
       // set tutorial sections initial hide state
       this.hideTutorialPages();
-
-      $('header .view-tutorial').on('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        app.showTutorial();
+      $('button.scroll-to').on('click', function(e){
+        var destElementId = $(this).data('scroll'),
+            destElement = $('#' + destElementId);
+        $('html, body').animate({ scrollTop: destElement.offset().top }, app.ANIMATION.scroll);
       });
-      $('header .view-map').on('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        $('html, body').animate({ scrollTop: $('.map-container').offset().top }, app.ANIMATION.scroll);
-      });
-      $('section.tutorial .advance-section').on('click', this.advanceTutorialSections);
+      // $('header .view-tutorial').on('click', function(e){
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   app.showTutorial();
+      // });
+      $('#tutorial .advance-section').on('click', this.advanceTutorialSections);
       $(window).on('resize', this.resizeWindow);
 
     },
@@ -38,18 +37,18 @@
       app.WINDOW.height = $(window).height();
       app.WINDOW.width = $(window).width();
 
-      $('section').add('header.header-home').add('.tutorial .tutorial-page')
+      $('section').add('header.header-home').add('#tutorial .tutorial-page')
                   .css({ height: app.WINDOW.height });
     },
 
     showTutorial: function(){
-      var tutorial = $('section.tutorial'),
+      var tutorial = $('#tutorial'),
           tutorialContainer = tutorial.find('.tutorial-container');
 
       tutorial.addClass('active');
 
       // scroll to tutorial
-      $('html, body').animate({ scrollTop: tutorial.offset().top }, app.ANIMATION.scroll);
+      // $('html, body').animate({ scrollTop: tutorial.offset().top }, app.ANIMATION.scroll);
 
       tutorial.animate({height: app.WINDOW.height, opacity: 1}, app.ANIMATION.scroll, function(){
         app.showTutorialPage(1);
@@ -58,7 +57,7 @@
     },
 
     hideTutorial: function(){
-      var tutorial = $('section.tutorial'),
+      var tutorial = $('#tutorial'),
           tutorialContainer = tutorial.find('.tutorial-container');
 
       // vertically collapse tutorialBody and fade out
@@ -69,11 +68,11 @@
     },
 
     showTutorialPage: function(idx){
-      var page = $('section.tutorial .tutorial-page[data-index="' + idx + '"]'),
+      var page = $('#tutorial .tutorial-page[data-index="' + idx + '"]'),
           title = page.find('.section-title'),
           body = page.find('.section-body'),
           image = page.find('.section-image'),
-          navBox = $('section.tutorial .tutorial-nav .box[data-index="' + idx + '"]');
+          navBox = $('#tutorial .tutorial-nav .box[data-index="' + idx + '"]');
 
       page.css({zIndex: 0}).addClass('active');
       image.css({zIndex: 0, opacity: 1});
@@ -82,7 +81,7 @@
     },
 
     hideTutorialPages: function(){
-      var pages = $('section.tutorial .tutorial-page'),
+      var pages = $('#tutorial .tutorial-page'),
           title = pages.find('.section-title'),
           body = pages.find('.section-body'),
           image = pages.find('.section-image');
@@ -92,13 +91,13 @@
       title.add(body).css({bottom: -60, opacity: 0});
 
       // deactivate tutorial nav boxes
-      $('section.tutorial .tutorial-nav .box.active').removeClass('active');
+      $('#tutorial .tutorial-nav .box.active').removeClass('active');
     },
 
     advanceTutorialSections: function(e){
       var arrowContainer = $(this),
           dir = arrowContainer.attr('data-dir'),
-          tutorialPages = $('section.tutorial .tutorial-page'),
+          tutorialPages = $('#tutorial .tutorial-page'),
           pagesCount = tutorialPages.length,
           currentPage = tutorialPages.filter('.active'),
           currentPageIdx = parseInt(currentPage.attr('data-index')),
@@ -142,7 +141,7 @@
     },
 
     advanceTutorialNav: function(oldIdx, newIdx){
-      var nav = $('section.tutorial .tutorial-nav');
+      var nav = $('#tutorial .tutorial-nav');
       nav.find('.box[data-index="' + oldIdx + '"]').removeClass('active');
       nav.find('.box[data-index="' + newIdx + '"]').addClass('active');
     }
