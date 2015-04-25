@@ -32,23 +32,23 @@ tm_projects:
 
 {% include map-container.html %}
 
-<div class="divider"></div>
+{% include leaderboard.html %}
 
-{% comment %} {% include leaderboard.html %} {% endcomment %}
+<section>
+  <div class="row">
+    <div class="large-12 columns">
+      <h2 class="text-center mvl">Click on a country below to start mapping</h2>
+    </div>
+    <div class="large-12 columns">
+      {% for n in (0..2) %}
+        {% include country.html country = n %}
+      {% endfor %}
+    </div>
 
-<!-- <div class="row">
-  <div class="large-12 columns">
-    <h1>Click on a country below to start mapping</h1>
+    <div class="large-12 columns">
+      {% for n in (3..5) %}
+        {% include country.html country = n %}
+      {% endfor %}
+    </div>
   </div>
-  <div class="large-12 columns">
-    {% for n in (0..2) %}
-      {% include country.html country = n %}
-    {% endfor %}
-  </div>
-
-  <div class="large-12 columns">
-    {% for n in (3..5) %}
-      {% include country.html country = n %}
-    {% endfor %}
-  </div>
-</div> -->
+</section>
