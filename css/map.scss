@@ -39,7 +39,7 @@ css for map elements
   position: relative;
   letter-spacing: 1px;
   margin-top: 20px;
-  transition: opacity 0.2s;
+  transition: opacity 0.25s;
   opacity: 0;
   &.hover,
   &.clicked{
@@ -104,9 +104,9 @@ css for map elements
   position: absolute;
   bottom: 4px;
   margin-right: 14px;
-  .cell-state {
-    border-top: 1px solid #777;
-    border-bottom: 1px solid #777;
+  h4 {
+    font-size: 0.8rem;
+    text-align: center;
   }
   .cell-state ul {
     padding: 14px 6px 12px;
@@ -137,6 +137,7 @@ css for map elements
     font-size: 0.6rem;
     padding: 8px 6px;
     color: $med-gray;
+    border-top: 1px solid #777;
   }
   .source a {
     color: $med-gray;
@@ -186,9 +187,8 @@ css for map elements
 }
 
 .task-grid {
-  border-top: 1px solid $border;
   li {
-    // border-top: 1px solid $med-d-gray;
+    border-top: 1px solid $med-d-gray;
   }
   li:last-child {
     border-right: 1px solid $med-d-gray;
@@ -251,8 +251,8 @@ path.project-grid {
   // stroke-width set programaticly by setVectorStrokeWidth() in map.js
   // stroke color set by onEachProjectGridCell() in map.js
   // stroke: #999;
-  stroke-opacity: 1;
-  fill-opacity: 0.05;
+  stroke-opacity: 0;
+  fill-opacity: 0.1;
   stroke-linejoin: miter;
   //clip-path: inset(10px 20px 5px 10px);
   // transition: all 0.3s;
@@ -292,6 +292,7 @@ path.project-grid {
     fill-opacity: 0;
   }
   path.project-grid:hover {
+    stroke-opacity: 0.8;
     stroke: $primary-dark;
   }
   path.project-grid:active {

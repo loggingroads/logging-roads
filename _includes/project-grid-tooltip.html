@@ -2,9 +2,8 @@
   tooltip templating for grid vectors based on UTFgrid template
   https://github.com/mapbox/utfgrid-spec/blob/master/1.2/interaction.md#mustache
   wrap template in liquid { % raw % } tags so Jekyll leaves it alone
-{% endcomment %}
 
-{% raw %}
+  ## Example:
   {{#__teaser__}}
     <h4>Task Number: <strong class="task-id">{{id}}</strong></h4>
     {{#isLocked properties}}
@@ -23,4 +22,7 @@
     <a class="medium-10 columns text-center start-mapping {{#isLocked properties}}disabled striped{{/isLocked}}" href="{{tm_base_url}}{{project_id}}#task/{{id}}" target="_blank">Start Mapping</a>
     <a class="medium-2 columns text-center close" href="#">X</a>
   {{/__full__}}
-{% endraw %}
+
+{% endcomment %}
+
+{% raw %}{% endraw %}

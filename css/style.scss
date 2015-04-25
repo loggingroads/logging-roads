@@ -306,37 +306,13 @@ section.tutorial {
 
 
 
-.content {
-	padding-bottom: 60px;
-  }
-  .content h1 {
-  	text-align: center;
-  	color: $primary;
-    margin-bottom: 1.2rem;
-  }
-  .content button {
-  	padding: 15px 30px;
-  }
-  .content h2, .content h3 {
-  	color: $primary;
-  	margin-top: 0px;
-  }
-  .content h4 {
-  	color: #a4a4a4;
-  	font-size: 1.1em;
-  	margin-bottom: 0px;
-  }
-  .content section {
-    margin-bottom: 6rem;
-  }
-
-
-
 .country {
   height: 250px;
   }
   .country h4 {
     clear: both;
+    color: $med-gray;
+    font-size: 1.1rem;
   }
   .country a:hover .mg {
     color: $primary;
