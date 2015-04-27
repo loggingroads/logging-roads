@@ -50,6 +50,8 @@
       d3.event.preventDefault();
       d3.event.stopPropagation();
 
+      $('html, body').animate({ scrollTop: $('#map-container').offset().top }, app.ANIMATION.scroll);
+
       var userName = this.text;
 
       console.log('load geoJSON edits for user: ' + userName);
