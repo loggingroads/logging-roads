@@ -7,13 +7,10 @@ $advance-section-height: 60px;
 $arrow-width: 26px;
 $arrow-height: 14px;
 
+::-moz-selection,
 ::selection {
-	color: #FFF;
 	background-color: rgba(120, 120, 120, 0.6) !important;
-}
-::-moz-selection {
-	color: #FFF;
-	 background-color: rgba(120, 120, 120, 0.6) !important;
+  background-color: rgba(120, 120, 120, 0.6) !important;
 }
 
 body {
