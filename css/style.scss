@@ -30,6 +30,11 @@ h1, h2, h3, h4 {
   h3 { font-size: 1.5em; }
   h4 { font-size: 1.3em; }
 
+section h1,
+section h2 {
+  color: $primary;
+}
+
 small { font-size: 65%; }
 
 p {
