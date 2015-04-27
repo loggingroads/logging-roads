@@ -144,6 +144,20 @@ css for map elements
   span.empty-cell {
     background-color: #262626;
   }
+  .roads-legend ul {
+    margin: 0;
+  }
+  .roads-legend li {
+    padding: 0;
+    list-style: none;
+    font-size: 0.7rem;
+    text-align: center;
+    color: $med-l-gray;
+  }
+  .roads-legend div{
+    height: 8px;
+    margin-bottom: 4px;
+  }
   .source {
     font-size: 0.6rem;
     padding: 8px 6px;
@@ -272,7 +286,7 @@ path.project-grid {
   // transition: all 0.3s;
   }
   path.user-edits {
-    stroke: #7AE0FD;
+    stroke: $secondary;
     stroke-linecap: round;
     stroke-opacity: 1;
   }
