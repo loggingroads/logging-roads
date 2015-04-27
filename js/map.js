@@ -306,13 +306,23 @@
 
     setVectorStrokeWidth: function(){
       var zoomLevel = app.map.getZoom();
+      // $('.leaflet-objects-pane path.project-grid').css('stroke-width', function(){
+      //   if(zoomLevel <= 6){
+      //     return 0.5;
+      //   }else if(zoomLevel <= 8){
+      //     return 1.4;
+      //   }else{
+      //     return 2;
+      //   }
+      // });
+
       $('.leaflet-objects-pane path.project-grid').css('stroke-width', function(){
         if(zoomLevel <= 6){
-          return 0.5;
+          return 0.8;
         }else if(zoomLevel <= 8){
-          return 1.4;
-        }else{
           return 2;
+        }else{
+          return 3.4;
         }
       });
     },

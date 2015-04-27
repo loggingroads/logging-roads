@@ -3,6 +3,7 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
+    osmHistoryBaseURL: 'http://ec2-54-242-150-21.compute-1.amazonaws.com/logging/',
     initLeaderboard: function(){
       // see mapoff sample site: http://mapgive.state.gov/events/mapoff/results/
       // user_list.json
@@ -23,7 +24,7 @@
     loadContributors: function(){
       var maxContributorCount = 15;
 
-      $.getJSON('{{site.baseurl}}/data/user_list.json', function(data){
+      $.getJSON(app.osmHistoryBaseURL + 'user_list.json', function(data){
         var editorsContainer = $('#top-editors');
 
         // this can be removed if we know that the osm-history sends the data sorted
@@ -50,15 +51,18 @@
       e.preventDefault();
       e.stopPropagation();
 
+      var userName = this.text;
+
       $('html, body').animate({ scrollTop: $('#map-container').offset().top }, app.ANIMATION.scroll);
 
-      $.getJSON('{{site.baseurl}}/data/Agrigorian.json', function(data){
+      $.getJSON(app.osmHistoryBaseURL + 'user_list_with_geometry/' + userName + '.json', function(data){
 
         var geojson = L.mapbox.featureLayer(data).setStyle({
-          color: '#7AE0FD',
-          lineCap: 'round',
-          opacity: 0.4,
-          weight: 2
+          className: 'user-edits'
+          // color: '#7AE0FD',
+          // lineCap: 'round',
+          // opacity: 1,
+          // weight: 3
         });
         app.map.fitBounds(geojson.getBounds()).addLayer(geojson);
       });

@@ -265,49 +265,55 @@ path.project-grid {
   // stroke color set by onEachProjectGridCell() in map.js
   // stroke: #999;
   stroke-opacity: 0;
-  fill-opacity: 0.1;
+  fill-opacity: 0.08;
   stroke-linejoin: miter;
+  fill: #EDECE9;
   //clip-path: inset(10px 20px 5px 10px);
   // transition: all 0.3s;
   }
-  path.project-grid.ready {
-    fill: $ready_state;
+  path.user-edits {
+    stroke: #7AE0FD;
+    stroke-linecap: round;
+    stroke-opacity: 1;
   }
-  path.project-grid.invalidated {
-    fill: $invalidated_state;
-    fill-opacity: 0.4;
-  }
-  path.project-grid.done {
-    fill: $done_state;
-    fill-opacity: 0.4;
-  }
-  path.project-grid.validated {
-    // fill: url({{site.baseurl}}/img/stripe_med_gray_#999999/16_16_1.png);
-    fill: $validated_state;
-    fill-opacity: 0.6;
-  }
-  path.project-grid.locked,
-  path.project-grid.locked:hover {
-    stroke: $locked_state;
-  }
-  path.project-grid.locked.ready {
-    fill-opacity: 0.1;
-  }
-  path.project-grid.locked.invalidated,
-  path.project-grid.locked.done, {
-    fill-opacity: 0.5;
-  }
-  path.project-grid.validated {
-    fill-opacity: 0.7;
-  }
-  path.project-grid.removed {
-    stroke-opacity: 0;
-    fill-opacity: 0;
-  }
-  path.project-grid:hover {
-    stroke-opacity: 0.8;
-    stroke: $primary-dark;
-  }
-  path.project-grid:active {
-    stroke: darken($primary-dark, 15%);
-  }
+  // path.project-grid.ready {
+  //   fill: $ready_state;
+  // }
+  // path.project-grid.invalidated {
+  //   fill: $invalidated_state;
+  //   fill-opacity: 0.4;
+  // }
+  // path.project-grid.done {
+  //   fill: $done_state;
+  //   fill-opacity: 0.4;
+  // }
+  // path.project-grid.validated {
+  //   // fill: url({{site.baseurl}}/img/stripe_med_gray_#999999/16_16_1.png);
+  //   fill: $validated_state;
+  //   fill-opacity: 0.6;
+  // }
+  // path.project-grid.locked,
+  // path.project-grid.locked:hover {
+  //   stroke: $locked_state;
+  // }
+  // path.project-grid.locked.ready {
+  //   fill-opacity: 0.1;
+  // }
+  // path.project-grid.locked.invalidated,
+  // path.project-grid.locked.done, {
+  //   fill-opacity: 0.5;
+  // }
+  // path.project-grid.validated {
+  //   fill-opacity: 0.7;
+  // }
+  // path.project-grid.removed {
+  //   stroke-opacity: 0;
+  //   fill-opacity: 0;
+  // }
+  // path.project-grid:hover {
+  //   stroke-opacity: 0.8;
+  //   stroke: $primary-dark;
+  // }
+  // path.project-grid:active {
+  //   stroke: darken($primary-dark, 15%);
+  // }
