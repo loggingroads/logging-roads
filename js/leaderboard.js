@@ -23,40 +23,36 @@
     loadContributors: function(){
       var maxContributorCount = 15;
 
-      d3.json('{{site.baseurl}}/data/user_list.json', function(err, data){
-        if(err) return console.log(err);
-        
-        var editorsContainer = d3.select('#top-editors');
+      $.getJSON('{{site.baseurl}}/data/user_list.json', function(data){
+        var editorsContainer = $('#top-editors');
 
+        // this can be removed if we know that the osm-history sends the data sorted
         data = data.sort(function(a,b){
           return (b.nodes + b.ways) - (a.nodes + a.ways);
         }).slice(0,maxContributorCount);
 
         $.each(data, function(idx, editor){
-          var row = editorsContainer.append('li').attr('class', 'clearfix');
-          // row.append('span').attr('class', 'large-1 columns').text(idx);
-          row.append('span').attr('class', 'large-6 columns')
-            .append('a').text(editor.user).attr('href', '#')
-            .on('click', app.loadContributorGeoJSON);
-          row.append('span').text((editor.nodes + editor.ways)).attr('class', 'large-2 columns text-right');
-          row.append('span').text(editor.nodes).attr('class', 'large-2 columns text-right');
-          row.append('span').text(editor.ways).attr('class', 'large-2 columns text-right');
+          var row = $('<li class="clearfix">').appendTo( editorsContainer ),
+              userNameLink = $('<a href="#">')
+                               .text(editor.user)
+                               .on('click', app.loadContributorGeoJSON);
+              
+          row.append( $('<span class="large-6 columns">').html(userNameLink) );
+          row.append( $('<span class="large-2 columns text-right">').text(editor.nodes + editor.ways) );
+          row.append( $('<span class="large-2 columns text-right">').text(editor.nodes) );
+          row.append( $('<span class="large-2 columns text-right">').text(editor.ways) );
         });
-
       });
+
     },
 
-    loadContributorGeoJSON: function(d, i){
-      d3.event.preventDefault();
-      d3.event.stopPropagation();
+    loadContributorGeoJSON: function(e){
+      e.preventDefault();
+      e.stopPropagation();
 
       $('html, body').animate({ scrollTop: $('#map-container').offset().top }, app.ANIMATION.scroll);
 
-      var userName = this.text;
-
-      console.log('load geoJSON edits for user: ' + userName);
-      d3.json('{{site.baseurl}}/data/Agrigorian.json', function(err, data){
-        if(err) return console.log(err);
+      $.getJSON('{{site.baseurl}}/data/Agrigorian.json', function(data){
 
         var geojson = L.mapbox.featureLayer(data).setStyle({
           color: '#7AE0FD',
