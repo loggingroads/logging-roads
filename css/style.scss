@@ -255,20 +255,12 @@ header {
   }
 }
 
-#leaderboard li {
-  list-style: none;
-  color: #CCC;
-  padding-top: 6px;
-  border-bottom: 1px solid #222;
-  &.head-row {
-    color: #999;
-    margin-bottom: 6px;
-    border-bottom: 1px solid $med-d-gray;
-    }
-  a:active {
-    color: $secondary;
-  }
-  }
+
+#leaderboard,
+#countries {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
 
 
 #leaderboard li {
@@ -285,27 +277,6 @@ header {
     color: $secondary;
   }
 }
-
-
-.footer {
-  background: $med-d-gray;
-  border-top: 4px solid #777;
-  }
-  .footer ul {
-    list-style-type: none;
-    padding-top: 10px;
-    margin-left: 0;
-  }
-  .footer a {
-    font-size: 0.8em;
-    font-weight: 200;
-    color: #fff;
-    line-height: 2em;
-  }
-  .footer a:hover {
-    color: #ddd;
-  }
-
 
 
 .country {
@@ -332,6 +303,28 @@ header {
   .country .mg-fw:before {
     vertical-align: middle; /* vertically center mapglyph */
   }
+
+
+.footer {
+  background: $med-d-gray;
+  border-top: 4px solid #777;
+  }
+  .footer ul {
+    list-style-type: none;
+    padding-top: 10px;
+    margin-left: 0;
+  }
+  .footer a {
+    font-size: 0.8em;
+    font-weight: 200;
+    color: #fff;
+    line-height: 2em;
+  }
+  .footer a:hover {
+    color: #ddd;
+  }
+
+
 
 
 .error-404 p { color: #aaa; }

@@ -37,7 +37,7 @@
       app.WINDOW.height = $(window).height();
       app.WINDOW.width = $(window).width();
 
-      $('section').add('header.header-home').add('#tutorial .tutorial-page')
+      $('header.header-home').add('#tutorial .tutorial-page')
                   .css({ height: app.WINDOW.height });
     },
 
