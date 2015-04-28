@@ -132,21 +132,18 @@ header {
   nav {
     margin-top: 8px;
   }
-  .masthead img {
-    height: 40px;
-  }
-  .masthead a {
-    float: left;
+  .masthead {
+    position: relative;
   }
   .masthead:after {
+    position: absolute;
     content: 'beta';
-    font-size: 0.7rem;
-    float: left;
-    margin: 0 10px;
+    font-size: 0.8rem;
+    color: #DDD;
+    right: -18px;
+    top: 4px;
   }
   .header-body {
-    position: absolute;
-    top: 20%;
     button {
       border-color: #fff;
       color: $med-l-gray;
