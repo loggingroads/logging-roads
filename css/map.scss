@@ -144,13 +144,16 @@ css for map elements
   span.empty-cell {
     background-color: #262626;
   }
+  .roads-legend {
+    padding: 0 6px;
+  }
   .roads-legend ul {
     margin: 0;
   }
   .roads-legend li {
     padding: 0;
     list-style: none;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     text-align: center;
     color: $med-l-gray;
   }
@@ -279,7 +282,7 @@ path.project-grid {
   // stroke color set by onEachProjectGridCell() in map.js
   // stroke: #999;
   stroke-opacity: 0;
-  fill-opacity: 0.08;
+  fill-opacity: 0.05;
   stroke-linejoin: miter;
   fill: #EDECE9;
   //clip-path: inset(10px 20px 5px 10px);
