@@ -33,7 +33,11 @@ h1, h2, h3, h4 {
 section h1,
 section h2 {
   color: $primary;
-}
+  }
+  section p {
+    color: $med-l-gray;
+    font-size: 0.95rem;
+  }
 
 small { font-size: 65%; }
 
@@ -258,7 +262,7 @@ header {
 
 #leaderboard,
 #countries {
-  margin-top: 8rem;
+  margin-top: 3rem;
   margin-bottom: 8rem;
 }
 
