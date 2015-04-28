@@ -1,16 +1,16 @@
 <header class="header {% if page.title == 'home' %}header-home{% endif %}" style="background-image: linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
 
   <div class="row mbl">
-    <div class="small-10 large-8 columns masthead">
+    <div class="small-12 medium-8 columns masthead">
       <a href="{{site.baseurl}}/">
         <img src="{{site.baseurl}}/img/masthead.png">
       </a>
     </div>
 
-    <nav class="small-2 large-4 columns">
+    <nav class="small-12 medium-4 columns">
       <ul>
-        <li><a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a></li>
-        <li><a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a></li>
+        <li class="text-center"><a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a></li>
+        <li class="text-center"><a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a></li>
       </ul>
     </nav>
   </div>
@@ -23,9 +23,9 @@
           <p class="">The Logging Roads Initiative is a joint project of the <a href="http://wri.org/">World Resource Institute</a> and <a href="http://rdc.moabi.org">Moabi</a>.  Our aim is to monitor geographic data on logging roads across the Congo Basin. Using satellite imagery, the project will record the precise spread of logging roads over time.</p>
           <p class="">All data will be added to <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and licensed in the <a href="http://www.openstreetmap.org/copyright">public domain</a>.</p>
 
-          <button class="large-6 columns text-center keyline-top scroll-to" href="#" data-scroll="tutorial" onclick="app.showTutorial()">How it Works</button>
-          <button class="large-6 columns text-center keyline-top keyline-left scroll-to" href="#" data-scroll="map-container">Track Progress</button>
-          <button class="large-12 columns text-center keyline-top keyline-bottom scroll-to" href="#" data-scroll="countries">Start Mapping</button>
+          <button class="small-6 columns text-center keyline-top scroll-to" href="#" data-scroll="tutorial" onclick="app.showTutorial()">How it Works</button>
+          <button class="small-6 columns text-center keyline-top keyline-left scroll-to" href="#" data-scroll="map-container">Track Progress</button>
+          <button class="small-12 columns text-center keyline-top keyline-bottom scroll-to" href="#" data-scroll="countries">Start Mapping</button>
         </div>
       </div>
 
