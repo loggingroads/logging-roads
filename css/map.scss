@@ -105,6 +105,7 @@ css for map elements
     font-size: 1rem;
     text-align: center;
     color: $primary;
+    margin-bottom: 4px;
   }
   p {
     font-size: 0.6rem;
@@ -290,7 +291,8 @@ path.project-grid {
   }
   path.user-edits {
     stroke: $secondary;
-    stroke-linecap: round;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
     stroke-opacity: 1;
   }
   // path.project-grid.ready {

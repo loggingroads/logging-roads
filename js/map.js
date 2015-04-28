@@ -320,9 +320,9 @@
         if(zoomLevel <= 6){
           return 0.8;
         }else if(zoomLevel <= 8){
-          return 2;
+          return 1.6;
         }else{
-          return 3.4;
+          return 2.4;
         }
       });
     },
