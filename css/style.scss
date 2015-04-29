@@ -7,12 +7,6 @@ $advance-section-height: 60px;
 $arrow-width: 26px;
 $arrow-height: 14px;
 
-::-moz-selection,
-::selection {
-	background-color: rgba(120, 120, 120, 0.6) !important;
-  background-color: rgba(120, 120, 120, 0.6) !important;
-}
-
 body {
 	font-family: 'Open Sans', sans-serif;
   background: $bgcolor;
@@ -44,11 +38,16 @@ small { font-size: 65%; }
 p {
 	font-weight: 200;
 	line-height: 2em;
-  }
-  p .loud { color: $primary; }
+  &.loud,
+  .loud { color: $primary; }
+}
 
-a { color: $primary; }
-  a:hover, a:focus { color: $primary-dark; }
+a { 
+  color: $primary;
+  }
+  a:hover, a:focus {
+    color: $primary-dark;
+  }
   a.disabled { pointer-events: none; }
 
 .v-align {
@@ -163,6 +162,15 @@ header {
   }
   p {
     color: $text;
+    font-size: 1.1rem;
+    a { 
+      color: $med-l-gray;
+      border-bottom: 1px dotted $med-l-gray;
+    }
+    a:hover{
+      color: $primary-dark;
+      border-bottom: 1px dotted $primary-dark;
+    }
   }
   nav {
   	width: 40%;
