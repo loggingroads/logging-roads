@@ -354,7 +354,10 @@
       // }, 200);
     },
 
-    fbShareDialogue: function(){
+    fbShareDialogue: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
       // https://developers.facebook.com/docs/sharing/reference/share-dialog
       var url = 'https://www.facebook.com/sharer/sharer.php?u=';
       url += encodeURIComponent(location.href);
@@ -362,11 +365,14 @@
       window.open(url, 'fbshare', 'width=640,height=320');
     },
 
-    twitterShareDialogue: function(){
+    twitterShareDialogue: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
       var url = 'http://twitter.com/share?'
       url += 'text=@MoabiMaps @globalforests Mapping the spread of logging roads in the Congo Basin:';
       url += '&url=' + encodeURIComponent(location.href);
-      url += '&hashtags=LoggingRoads';
+      url += '&hashtags=CongoLoggingRoads';
       window.open(url, 'twittershare', 'width=640,height=320');
     },
 
