@@ -27,8 +27,8 @@
       });
 
       // load project area(s)
-      this.loadProjectGrid();
-      this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
+      // this.loadProjectGrid();
+      // this.map.on('taskGrids-loaded', this.setVectorStrokeWidth);
       // this.map.on('taskGrids-loaded', this.fitMapBoundsToVector);
 
     },
