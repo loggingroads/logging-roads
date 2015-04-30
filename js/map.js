@@ -374,7 +374,7 @@
       var url = 'http://twitter.com/share?'
       url += 'text=@MoabiMaps @globalforests Mapping the spread of logging roads in the Congo Basin:';
       url += '&url=' + encodeURIComponent(location.href);
-      url += '&hashtags=CongoLoggingRoads';
+      url += '&hashtags={{site.hashtag}}';
       window.open(url, 'twittershare', 'width=640,height=320');
     },
 
