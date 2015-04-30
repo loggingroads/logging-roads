@@ -9,6 +9,7 @@
     satLayers: {},
     roadReferenceLayer: null,
     tooltipIsOpen: false,
+    roadReferenceLayerId: 'crowdcover.e8c210c5',
 
     initMap: function(){
       this.buildMap();
@@ -69,7 +70,8 @@
 
       L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map);
 
-      L.control.fullscreen().addTo(this.map);
+
+      // add map layers
 
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
@@ -249,10 +251,8 @@
 
       if(layerId === 'terrain'){
         app.removeSatLayer();
-        app.removeRoadReferenceLayer();
       }else{
         app.addSatLayer(layerId);
-        app.addRoadReferenceLayer();
       }
       listItemSiblings.filter('.active').removeClass('active');
       listItem.addClass('active');
@@ -283,7 +283,7 @@
 
     addRoadReferenceLayer: function(){
       if(! app.roadReferenceLayer ){
-        app.roadReferenceLayer = L.mapbox.tileLayer('crowdcover.e8c210c5').setZIndex(2);
+        app.roadReferenceLayer = L.mapbox.tileLayer(app.roadReferenceLayerId).setZIndex(2);
       }
       app.roadReferenceLayer.addTo(app.map);
     },
