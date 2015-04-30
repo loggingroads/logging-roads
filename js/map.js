@@ -69,6 +69,8 @@
 
       L.control.scale({position: 'bottomleft', imperial: false }).addTo(this.map);
 
+      L.control.fullscreen().addTo(this.map);
+
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
     },
