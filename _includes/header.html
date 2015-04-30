@@ -21,7 +21,7 @@
         <div class="small-12 medium-7 columns header-body">
           <h2 class="mbs">Monitoring Logging Roads<br>in the Congo Basin</h2>
           <div class="mbl">
-            <p>The Logging Roads project is a joint initiative of the <a href="http://wri.org/">World Resource Institute</a> and <a href="http://rdc.moabi.org">CrowdCover</a> to monitor the spread of logging roads across the Congo Basin.  The project relies on open contributions from the crowd to interpret satellite imagery and track the growth of logging activity.</p>
+            <p>The Logging Roads project is a joint initiative of the <a href="http://wri.org/">World Resource Institute</a> and <a href="http://rdc.moabi.org">Moabi</a> to monitor the spread of logging roads across the Congo Basin.  The project relies on open contributions from the crowd to interpret satellite imagery and track the growth of logging activity.</p>
             <p>All data will be added to <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and licensed in the <a href="http://www.openstreetmap.org/copyright">public domain</a>.</p>
             <!-- <p>Interested?  Scroll down to learn more.</p> -->
           </div>
@@ -40,20 +40,11 @@
       </div>
     </div>
 
-  {% elsif page.title == 'about' %} 
+  {% elsif page.title == 'about' or page.title == 'guide' %} 
 
     <div class="row">
-      <div class="small-12 medium-7 large-5 columns">
-        <h2 class="mtm mbs">About</h2>
-        <p class="mbl">{{site.description_short}}</p>
-      </div>
-    </div>
-
-  {% elsif page.title == 'guide' %} 
-
-    <div class="row">
-      <div class="small-12 medium-7 large-5 columns">
-        <h2 class="mtm mbs">Guide</h2>
+      <div class="small-12 medium-7 large-5 columns mbl">
+        <h2 class="mtm mbs">{{page.title | capitalize}}</h2>
         <p class="mbl">{{site.description_short}}</p>
       </div>
     </div>

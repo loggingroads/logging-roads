@@ -23,23 +23,17 @@ h1, h2, h3, h4 {
   h2 { font-size: 1.8em; }
   h3 { font-size: 1.5em; }
   h4 { font-size: 1.3em; }
-
-section h1,
-section h2 {
-  color: $primary;
-  }
-  section p {
-    color: $med-l-gray;
-    font-size: 0.95rem;
-  }
+  h1, h2 { color: $primary; }
 
 small { font-size: 65%; }
 
 p {
+  color: $med-l-gray;
 	font-weight: 200;
 	line-height: 2em;
   &.loud,
   .loud { color: $primary; }
+  &.shrink { font-size: 0.9rem; }
 }
 
 a { 
@@ -156,8 +150,7 @@ header {
       color: #fff;
     }
   }
-  h1 {
-    font-size: 2.4rem;
+  h2 {
     color: $text;
   }
   p {
@@ -165,11 +158,11 @@ header {
     font-size: 1.1rem;
     a { 
       color: $med-l-gray;
-      border-bottom: 1px dotted $med-l-gray;
+      // border-bottom: 1px dotted $med-l-gray;
     }
     a:hover{
       color: $primary-dark;
-      border-bottom: 1px dotted $primary-dark;
+      // border-bottom: 1px dotted $primary-dark;
     }
   }
   nav {

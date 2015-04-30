@@ -11,7 +11,11 @@
 
   {% include header.html %}
 
-  {{content}}
+  <div class="row">
+    <div class="small-10 push-1 columns" style="margin-top: 6rem; margin-bottom: 6rem;">
+      {{content | markdownify}}
+    </div>
+  </div>
 
   {% include footer.html %}
 
