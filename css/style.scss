@@ -36,6 +36,11 @@ p {
   &.shrink { font-size: 0.9rem; }
 }
 
+hr {
+  border-color: $dark-gray;
+  margin: 3rem 1rem;
+}
+
 a { 
   color: $primary;
   }
