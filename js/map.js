@@ -18,13 +18,13 @@
       $('.twitter-share').on('click', this.twitterShareDialogue);
       $('#map-tooltip').on('click', 'a.close', this.closeTooltip);
 
-      app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
-      Handlebars.registerHelper('isLocked', function(properties, options) {
-        if(properties.locked === 'locked') {
-          return options.fn(this);
-        }
-        return options.inverse(this);
-      });
+      // app.tooltipTemplate = Handlebars.compile($('#tooltip-template').html());
+      // Handlebars.registerHelper('isLocked', function(properties, options) {
+      //   if(properties.locked === 'locked') {
+      //     return options.fn(this);
+      //   }
+      //   return options.inverse(this);
+      // });
 
       // load project area(s)
       // this.loadProjectGrid();
