@@ -333,6 +333,11 @@ header {
   .footer a:hover {
     color: #ddd;
   }
+  .footer .hashtag {
+    padding-bottom: 6px;
+    a { color: $primary; }
+    a:hover { color: $primary-dark; }
+  }
 
 
 
