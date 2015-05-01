@@ -72,6 +72,7 @@
 
 
       // add map layers
+      app.addRoadReferenceLayer();
 
       // add page event listeners
       this.map.on('zoomend', this.setVectorStrokeWidth);
