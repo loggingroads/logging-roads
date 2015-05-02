@@ -1,27 +1,23 @@
 - body: 
       |
-      Logging roads are a major indicator of deforestation in the Congo Basin. Until now, their reach has been difficult to visualize, obscuring the rapid rise in deforestation in the region. Often, these roads are discovered only after they have been abandoned, and the forest ecosystem irreparably damaged. 
+      Logging roads are a major indicator of deforestation in the Congo Basin . Until now, their reach has been difficult to visualize, obscuring the rapid rise in deforestation in the region. Often, these roads are discovered only after they have been abandoned.
 
-      Together, the [World Resources Institute](http://wri.org) and [Moabi](http://rdc.moabi.org) have teamed up with [OpenStreetMap](http://osm.org)- the world’s largest collaborative mapping initiative - to track the spread of logging roads in the Congo Basin, and to better monitor the deforestation.
+      Together, the [World Resources Institute](http://wri.org) and [Moabi](http://rdc.moabi.org) are analyzing over a decade of imagery to track rainforest logging road activity.
   img: Ouesso_2_timelapse.gif
   img_gradient: 'light'
 - body: 
       |
-      But we can’t do it alone. We hope that the Logging Roads Initiative serves as a call to action for those passionate about preserving these diverse and important landscapes. Through crowdsourcing we can drastically improve the speed, accuracy, and scale of logging road maps.
+      But we can’t do it alone.  The Logging Roads Initiative serves as a call to action for those passionate about preserving these diverse and important landscapes. Through crowdsourcing we can drastically improve the oversight of environmental activity.
 
       Sounds good?  Let’s get started.
   img: cifor_wood_market2.jpg
   img_gradient: 'dark'
 - body: 
-      | 
-      OpenStreetMap contains a large logging road dataset.  By comparing this data to over 15 years of satellite imagery, we can determine the start date of logging activities.  
+      |
+      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.
 
-      Use the site map to track the initiative's progress.  (img explaining site map)
+      To get started, click on a country at the bottom of the page.
+
 
   img: cifor_wood_market.jpg
-  img_gradient: 'dark'
-- body: 
-      | 
-      To contribute, click on a task grid cell and click **Start Mapping**.
-  img: wri_logging-truck-cameroon.jpg
   img_gradient: 'dark'
