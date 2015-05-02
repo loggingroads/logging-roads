@@ -3,7 +3,7 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
-    tmBaseUrl: 'http://45.55.129.242:6543/project/',
+    tmBaseUrl: 'http://tasks.loggingroads.org/project/',
     projectGrids: {},
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
     satLayers: {},
@@ -216,7 +216,7 @@
     getProjectGridTask: function(project_id, task_id){
       // TODO: implement once the TM API supports this request: https://github.com/hotosm/osm-tasking-manager2/wiki/API#task-details
       // use this to make sure users can't open a loced task
-      $.getJSON(app.tmBaseUrl + '/project/' + project_id + '/task/' + task_id + '.json', function(data){
+      $.getJSON(app.tmBaseUrl + project_id + '/task/' + task_id + '.json', function(data){
         console.log(data);
       });
     },
