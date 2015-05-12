@@ -5,6 +5,7 @@
       Together, the [World Resources Institute](http://wri.org) and [Moabi](http://rdc.moabi.org) are analyzing over a decade of imagery to track rainforest logging road activity.
   img: Ouesso_2_timelapse.gif
   img_gradient: 'light'
+
 - body: 
       |
       But we can’t do it alone.  The Logging Roads Initiative serves as a call to action for those passionate about preserving these diverse and important landscapes. Through crowdsourcing we can drastically improve the oversight of environmental activity.
@@ -12,6 +13,27 @@
       Sounds good?  Let’s get started.
   img: cifor_wood_market2.jpg
   img_gradient: 'dark'
+
+- body: 
+      |
+      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.
+
+      To get started, click on a country at the bottom of the page.
+
+
+  img: cifor_wood_market.jpg
+  img_gradient: 'dark'
+
+- body: 
+      |
+      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.
+
+      To get started, click on a country at the bottom of the page.
+
+
+  img: cifor_wood_market.jpg
+  img_gradient: 'dark'
+
 - body: 
       |
       All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.

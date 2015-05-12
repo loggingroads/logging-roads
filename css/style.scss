@@ -69,7 +69,7 @@ button,
   .button:hover,
   button:focus,
   .button:focus {
-    background: rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.25);
   }
 
 table {
@@ -148,11 +148,12 @@ header {
   .header-body {
     button {
       border-color: #fff;
-      color: $med-l-gray;
+      color: $primary;
       margin: 0 !important;
+      line-height: 2rem;
     }
     button:hover {
-      color: #fff;
+      color: $primary-dark;
     }
   }
   h2 {
@@ -198,70 +199,43 @@ header {
 }
 
 #tutorial {
-  position: relative;
-  margin-bottom: 0 !important; // remove
-  &:not(.active){
-    display: none;
-  }
-  div.tutorial-container {
-    position: relative;
-  }
   .tutorial-page {
-    position: absolute;
-    top: 0;
-    bottom: 0;
     width: 100%;
     padding: $advance-section-height 40px;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    opacity: 0;
     transition: all 0.3s;
   }
-  .tutorial-page.active{
-    opacity: 1;
-  }
   .tutorial-page p {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    // text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    color: $text;
     font-size: 1.3rem;
   }
   .tutorial-page p strong {
     font-weight: inherit;
     color: $primary;
   }
-  .tutorial-nav {
-    left: 20px;
-    width: 4px;
-    z-index: 1;
-  }
-   .tutorial-nav .box {
-    background: $med-gray;
-    height: 22px;
-    width: 100%;
-    margin-top: 3px;
-  }
-  .tutorial-nav .box.active {
-    background: $med-l-gray;
-  }
-  .advance-section {
-    position: absolute;
-    padding: ($advance-section-height / 2) - ($arrow-height / 2);
-    z-index: 2;
-    cursor: pointer;
-    width: 100%;
-    background: rgb(60,60,60);
-    background: rgba(0,0,0,0.3);
-    &[data-dir="prev"] { top: 0px; }
-    &[data-dir="next"] { bottom: 0px; }
-  }
-  .advance-section .arrow {
-    border-bottom-color: #999;
-    margin: 0 50%;
+  .tutorial-page .tutorial-body {
     position: relative;
-    left: -$arrow-width;
   }
-  .advance-section:hover .arrow {
-    border-bottom-color: #CCC;
+  .tutorial-page .tutorial-image {
+    height: 300px;
+  }
+  .tutorial-page[data-index="1"]{
+    background-color: mix($tutorial-bg1, $tutorial-bg2, 100%);
+  }
+  .tutorial-page[data-index="2"]{
+    background-color: mix($tutorial-bg1, $tutorial-bg2, 75%);
+  }
+  .tutorial-page[data-index="3"]{
+    background-color: mix($tutorial-bg1, $tutorial-bg2, 50%);
+  }
+  .tutorial-page[data-index="4"]{
+    background-color: mix($tutorial-bg1, $tutorial-bg2, 25%);
+  }
+  .tutorial-page[data-index="5"]{
+    background-color: mix($tutorial-bg1, $tutorial-bg2, 0%);
   }
 }
 

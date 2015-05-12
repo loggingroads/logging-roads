@@ -1,31 +1,15 @@
 <section id="tutorial">
 
-  <div class="advance-section" data-dir="prev">
-    <div class="arrow up"></div>
-  </div>
+  {% comment %} {% include tutorial-nav.html %}{% endcomment %}
 
-  {% include tutorial-nav.html %}
-
-  {% for section in site.data.tutorial %}
-  
-    {% capture img_gradient %}
-      {% if section.img_gradient =='dark' %}
-        linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9))
-      {% else %}
-        linear-gradient(rgba(65, 65, 62, 0.1), rgba(0, 0, 0, 0.3))
-      {% endif %}
-    {% endcapture %}
-    <div class="tutorial-page" 
-         data-index="{{forloop.index}}" 
-         style="background-image: {{img_gradient}}, url('{{site.baseurl}}/img/{{section.img}}')">
-      <div class="section-body small-12 large-8 large-offset-4 columns v-align">
-        {{section.body | markdownify }}
+  {% for page in site.data.tutorial %}
+    <div class="tutorial-page" data-index="{{forloop.index}}">
+      <div class="tutorial-body small-12 large-8 columns v-align">
+        {{page.body | markdownify }}
+      </div>
+      <div class="tutorial-image small-12 large-4 columns v-align" style="background-image: url('{{site.baseurl}}/img/{{page.img}}')">
       </div>
     </div>
   {% endfor %}
-
-  <div class="advance-section" data-dir="next">
-    <div class="arrow down"></div>
-  </div>
 
 </section>
