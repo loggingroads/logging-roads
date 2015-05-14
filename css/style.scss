@@ -27,9 +27,10 @@ h1, h2, h3, h4 {
 
 small { font-size: 65%; }
 
+strong { font-weight: 600; }
+
 p {
   color: $med-l-gray;
-	font-weight: 200;
 	line-height: 2em;
   &.loud,
   .loud { color: $primary; }
@@ -145,6 +146,7 @@ header {
     right: -18px;
     top: 4px;
   }
+  .loud { color: $primary; }
   .header-body {
     button {
       border-color: #fff;
@@ -206,6 +208,7 @@ header {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     transition: all 0.3s;
+    overflow: hidden;
   }
   .tutorial-page p {
     // text-shadow: 0 1px 2px rgba(0,0,0,0.5);
