@@ -4,10 +4,10 @@
 
   {% for page in site.data.tutorial %}
     <div class="tutorial-page" data-index="{{forloop.index}}">
-      <div class="tutorial-body small-12 large-8 columns v-align">
+      <div class="tutorial-body small-12 large-7 columns v-align">
         {{page.body | markdownify }}
       </div>
-      <div class="tutorial-image small-12 large-4 columns v-align" style="background-image: url('{{site.baseurl}}/img/{{page.img}}')">
+      <div class="tutorial-image small-12 large-5 columns v-align" style="background-image: url('{{site.baseurl}}/img/{{page.img}}')">
       </div>
     </div>
   {% endfor %}
