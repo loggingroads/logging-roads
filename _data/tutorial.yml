@@ -4,7 +4,6 @@
 
       Together, the [World Resources Institute](http://wri.org) and [Moabi](http://rdc.moabi.org) are analyzing over a decade of imagery to track rainforest logging road activity.
   img: Ouesso_2_timelapse.gif
-  img_gradient: 'light'
 
 - body: 
       |
@@ -12,34 +11,17 @@
 
       Sounds good?  Let’s get started.
   img: cifor_wood_market2.jpg
-  img_gradient: 'dark'
 
 - body: 
       |
-      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.
+      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.  Use the map further down the page to track the progress of the project.
 
-      To get started, click on a country at the bottom of the page.
-
-
-  img: cifor_wood_market.jpg
-  img_gradient: 'dark'
+  img:
 
 - body: 
       |
-      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.
-
-      To get started, click on a country at the bottom of the page.
+      To contribute, read the project editing [guide]({{site.baseurl}}/guide/), choose a country, and start mapping.
 
 
   img: cifor_wood_market.jpg
-  img_gradient: 'dark'
 
-- body: 
-      |
-      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.
-
-      To get started, click on a country at the bottom of the page.
-
-
-  img: cifor_wood_market.jpg
-  img_gradient: 'dark'
