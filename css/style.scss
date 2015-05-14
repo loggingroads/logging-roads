@@ -212,7 +212,7 @@ header {
   }
   .tutorial-page p {
     // text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    color: #222;
+    color: $text;
     font-size: 1.1rem;
   }
   .tutorial-page p strong {
@@ -221,6 +221,9 @@ header {
   }
   .tutorial-page .tutorial-body {
     position: relative;
+    background-color: $bgcolor;
+    background-color: rgba(0,0,0,0.3);
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.5);
   }
   .tutorial-page .tutorial-image {
     height: 300px;

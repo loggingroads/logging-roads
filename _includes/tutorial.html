@@ -3,13 +3,9 @@
   {% comment %} {% include tutorial-nav.html %}{% endcomment %}
 
   {% for page in site.data.tutorial %}
-    <div class="tutorial-page" data-index="{{forloop.index}}">
-      <div class="tutorial-body small-12 large-7 columns v-align">
+    <div class="tutorial-page" data-index="{{forloop.index}}" style="background-image: linear-gradient(rgba(20, 20, 20, 0.2), rgba(0, 0, 0, 0.4)),url('{{site.baseurl}}/img/{{page.img}}')">
+      <div class="tutorial-body small-12 large-7 columns v-align pal">
         {{page.body | markdownify }}
-      </div>
-      {% if page.img %}
-        <div class="tutorial-image small-12 large-5 columns v-align" style="background-image: url('{{site.baseurl}}/img/{{page.img}}')">
-      {% endif %}
       </div>
     </div>
   {% endfor %}

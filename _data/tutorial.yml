@@ -3,7 +3,7 @@
       Logging roads are a major indicator of deforestation in the Congo Basin . Until now, their reach has been difficult to visualize, obscuring the rapid rise in deforestation in the region. Often, these roads are discovered only after they have been abandoned.
 
       Together, the [World Resources Institute](http://wri.org) and [Moabi](http://rdc.moabi.org) are analyzing over a decade of imagery to track rainforest logging road activity.
-  img: Ouesso_2_timelapse.gif
+  img: Ouesso_2_timelapse-flipped.gif
 
 - body: 
       |
@@ -14,14 +14,17 @@
 
 - body: 
       |
-      All data is analyzed within OpenStreetMap - a global, fully-open geographic database built by contributions from the crowd.  Use the map further down the page to track the progress of the project.
+      All data is edited within [OpenStreetMap](http://www.openstreetmap.org/) - a global, open geographic database built entirely by contributions from the crowd.
 
-  img:
+      Use the map further down the page to track the progress of the project.
+
+  img: project_map.png
 
 - body: 
       |
       To contribute, read the project editing [guide]({{site.baseurl}}/guide/), choose a country, and start mapping.
 
+      All data is freely available for [download](https://github.com/crowdcover/logging-roads-datamunge/blob/master/data/drc_car_cog_cmr_logging_roads.geojson).
 
-  img: cifor_wood_market.jpg
+  img: cifor_wood_market-flipped.jpg
 
