@@ -59,6 +59,7 @@ a {
 button,
 .button {
 	background: transparent;
+  color: $primary;
 	font-family: 'Raleway', sans-serif;
 	padding: 14px 6px;
 	font-size: 1.1em;
@@ -71,6 +72,7 @@ button,
   button:focus,
   .button:focus {
     background: rgba(0,0,0,0.25);
+    color: $primary-dark;
   }
 
 table {

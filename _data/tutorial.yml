@@ -24,7 +24,7 @@
       |
       To contribute, read the project editing [guide]({{site.baseurl}}/guide/), choose a country, and start mapping.
 
-      All data is freely available for [download](https://github.com/crowdcover/logging-roads-datamunge/blob/master/data/drc_car_cog_cmr_logging_roads.geojson).
+      All data is freely available for <a href="http://loggingroads.org/roads.geojson" download="logging_roads.geojson">download</a>.
 
   img: cifor_wood_market-flipped.jpg
 
