@@ -349,7 +349,7 @@ header {
   background-image: url('{{site.baseurl}}/img/dot-matrix.png');
 }
 
-   #screen1{
+#screen1{
     width:225px;
     position: relative;
     opacity: 1;
@@ -358,13 +358,14 @@ header {
     transition: 0.5s ease;
     -webkit-transition: 0.5s ease;
     -moz-transition: 0.5s ease;
-    
 }
+
 #screen1:hover{
     width: 300px;
     opacity: 1;
     -webkit-opacity: 1;
     -moz-opacity: 1;
+}
    
 .social2{
     top:100px;
