@@ -37,6 +37,11 @@ p {
   &.shrink { font-size: 0.9rem; }
 }
 
+li { 
+  color: $med-l-gray;
+  line-height: 2em;
+}
+
 hr {
   border-color: $dark-gray;
   margin: 3rem 1rem;
@@ -247,6 +252,20 @@ header {
   }
 }
 
+#guide {
+  img {
+    float: right;
+    margin: 0px 0px 15px 15px;
+    width:40%;
+    transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+  }
+  img:hover {
+    width: 100%;
+  }
+}
+
 
 #leaderboard,
 #countries {
@@ -348,30 +367,4 @@ header {
   width: 100%;
   background-image: url('{{site.baseurl}}/img/dot-matrix.png');
 }
-
-/* this creates the effect of blowing up an image when the mouse hovers over it */
-
-#screen1{
-    width:275px;
-    float: right; 
-    margin: 0px 0px 15px 15px;
-    position: relative;
-    opacity: 1;
-    -webkit-opacity: 1;
-    -moz-opacity: 1;
-    transition: 0.5s ease;
-    -webkit-transition: 0.5s ease;
-    -moz-transition: 0.5s ease;
-}
-
-#screen1:hover{
-    width: 575px;
-    opacity: 1;
-    -webkit-opacity: 1;
-    -moz-opacity: 1;
-}
-   
-.social2{
-    top:0px;
-    left:0px;
-}    
+  
