@@ -35,7 +35,7 @@
         // construct panel tab buttons
         var editorsContainer = $('#top-editors'),
             panelContainer = $('<div class="tabs-content">'),
-            rowsPerPanel = 5,
+            rowsPerPanel = 10,
             panelCount = Math.ceil(data.length / rowsPerPanel);
 
         var editorsPanelTabs = $('<ul class="tabs small-12 small-centered medium-4 columns small-block-grid-' + panelCount + ' text-center" data-tab>');
@@ -48,8 +48,8 @@
           editorsPanelTabs.append( tabButton );
         }
 
-        editorsPanelTabs.appendTo(editorsContainer);
         panelContainer.appendTo(editorsContainer);
+        editorsPanelTabs.appendTo(editorsContainer);
 
         // holy lord this is messy
         $.each(data, function(idx, editor){
