@@ -22,29 +22,66 @@
     },
 
     loadContributors: function(){
-      var maxContributorCount = 15;
-
       $.getJSON(app.osmHistoryBaseURL + 'user_list.json', function(data){
-        var editorsContainer = $('#top-editors');
-
         // this can be removed if we know that the osm-history sends the data sorted
         data = data.sort(function(a,b){
           return (b.nodes + b.ways) - (a.nodes + a.ways);
-        }).slice(0,maxContributorCount);
+        })
 
+        // limit the length of the leaderboard?
+        // data.slice(0,15);
+
+
+        // construct panel tab buttons
+        var editorsContainer = $('#top-editors'),
+            panelContainer = $('<div class="tabs-content">'),
+            rowsPerPanel = 5,
+            panelCount = Math.ceil(data.length / rowsPerPanel);
+
+        var editorsPanelTabs = $('<ul class="tabs small-12 small-centered medium-4 columns small-block-grid-' + panelCount + ' text-center" data-tab>');
+        for(var panelIdx = 1; panelIdx <= panelCount; panelIdx++){
+          var tabButton = $('<li class="tab-title">'),
+              tabButtonLink = $('<a href="#panel' + panelIdx + '">' + panelIdx + '</a>');
+
+          if(panelIdx === 1) tabButton.addClass('active');
+          tabButton.append( tabButtonLink );
+          editorsPanelTabs.append( tabButton );
+        }
+
+        editorsPanelTabs.appendTo(editorsContainer);
+        panelContainer.appendTo(editorsContainer);
+
+        // holy lord this is messy
         $.each(data, function(idx, editor){
-          var row = $('<li class="clearfix">').appendTo( editorsContainer ),
-              userNameLink = $('<a href="#">')
-                               .text(editor.user)
-                               .on('click', app.loadContributorGeoJSON);
-              
-          row.append( $('<span class="large-6 columns">').html(userNameLink) );
-          row.append( $('<span class="large-2 columns text-right">').text(editor.nodes + editor.ways) );
-          row.append( $('<span class="large-2 columns text-right">').text(editor.nodes) );
-          row.append( $('<span class="large-2 columns text-right">').text(editor.ways) );
+          var panelNumber = Math.ceil(idx / rowsPerPanel);
+          if(idx % rowsPerPanel === 0){
+            // construct panels
+            var panel = $('<div class="content" id="panel' + (panelNumber + 1) + '">');
+            if(idx === 0) panel.addClass('active');
+            app.addRowTo(panel, editor);
+            panel.appendTo( panelContainer );
+          }else{
+            // append to existing panel
+            app.addRowTo( $('div#panel' + panelNumber), editor );
+          }
         });
+
+        // silly to have to call this again, but must run at the end of the getJSON call
+        $(document).foundation();
       });
 
+    },
+
+    addRowTo: function(panel, editor){
+      var row = $('<li class="top-editor clearfix">').appendTo( panel ),
+          userNameLink = $('<a href="#">')
+                           .text(editor.user)
+                           .on('click', app.loadContributorGeoJSON);
+          
+      row.append( $('<span class="large-6 columns">').html(userNameLink) );
+      row.append( $('<span class="large-2 columns text-right">').text(editor.nodes + editor.ways) );
+      row.append( $('<span class="large-2 columns text-right">').text(editor.nodes) );
+      row.append( $('<span class="large-2 columns text-right">').text(editor.ways) );
     },
 
     loadContributorGeoJSON: function(e){
