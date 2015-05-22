@@ -31,30 +31,12 @@
         </div>
       </div>
 
-  {% elsif page.layout == 'country' %}
-
-    <div class="row">
-      <div class="small-12 medium-7 large-5 columns">
-        <h2 class="mtm mbs">{{page.title}}</h2>
-        <p class="mbl">{{site.description_short}}</p>
-      </div>
-    </div>
-
-  {% elsif page.title == 'about' or page.title == 'guide' %} 
+  {% else %} 
 
     <div class="row">
       <div class="small-12 medium-7 large-5 columns mbl">
-        <h2 class="mtm mbs">{{page.title | capitalize}}</h2>
-        <p class="mbl">{{site.description_short}}</p>
-      </div>
-    </div>
-
-  {% else %} {% comment %}---Default---{% endcomment %}
-
-    <div class="row">
-      <div class="small-12 medium-7 large-5 columns">
-        <h1 class="mtm mbs">Tracking Logging Roads<br>in the Congo Basin</h1>
-        <p class="mbl">{{site.description_short}}</p>
+        <!-- <h2 class="mtm mbs">{{page.title | capitalize}}</h2> -->
+        <h4 class="mvl">{{site.description_short}}</h4>
       </div>
     </div>
 

@@ -9,9 +9,9 @@ url: "http://crowdcover.github.io/logging-roads" # the base hostname & protocol 
 hashtag: OSMLoggingRoads
 github_username:  CrowdCover
 
-collections:
-  countries:
-    output: true
+# collections:
+#   countries:
+#     output: true
 
 # Build settings
 markdown: kramdown
