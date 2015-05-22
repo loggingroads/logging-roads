@@ -156,7 +156,7 @@ header {
   .loud { color: $primary; }
   .header-body {
     button {
-      border-color: #fff;
+      border-color: $med-gray;
       color: $primary;
       margin: 0 !important;
       line-height: 2rem;
@@ -181,29 +181,40 @@ header {
     }
   }
   nav {
-  	width: 40%;
-  	float: right;
-  	text-align: right;
+    position: fixed;
+    top: 12px;
+    z-index: 2;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
   }
   nav ul {
+    border-radius: 2px;
   	list-style-type: none;
-    margin-bottom: 0;
   }
   nav ul li {
   	display: inline-block;
   	font-weight: 200;
-  	color: #fff;
-  	margin-right: 20px;
+  }
+  nav ul a {
+    background-color: $med-d-gray;
+    background-color: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border: 1px solid $med-gray;
+    border-left: 0;
+  }
+  nav ul li:last-child a {
+    border-right: 0;
   }
   nav a.active {
     color: $primary;
   }
   nav a:hover{
     color: $primary;
+    background-color: rgba(0,0,0,0.3);
   }
-  nav a,
-  nav a:active {
-  	color: #fff;
+  nav ul a,
+  nav a:active  {
+    color: $text;
   }
 }
 
