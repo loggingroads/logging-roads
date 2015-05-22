@@ -55,9 +55,12 @@ tm_projects:
         <li class="country ptm {% if forloop.rindex <= 3 %}last-row {% endif %}
                                {% if col == 3 or forloop.last %}last-col{% endif %}">
           <a href="http://tasks.loggingroads.org/project/{{country.tm_project_id}}"
-             class="clearfix {% if country.tm_project_id == null %}disabled{% endif %}" target="_blank">
+             class="clearfix {% unless country.tm_project_id %}disabled{% endunless %}" target="_blank">
             <div class="large-12 columns mg mg-fw mg-6x {{country.map_glyph}}"></div>
-            <h4 class="text-center pam">{{country.name}}</h4>
+            <h4 class="text-center ptm phm mvn">{{country.name}}</h4>
+            {% unless country.tm_project_id %}
+              <h4 class="text-center mvn"><em>coming soon...</em></h4>
+            {% endunless %}
           </a>
         </li>
       {% endfor %}
