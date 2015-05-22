@@ -30,7 +30,7 @@ strong { font-weight: 600; }
 
 p {
   color: $med-l-gray;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 	line-height: 2em;
   &.shrink { font-size: 0.9rem; }
 }
@@ -422,7 +422,23 @@ header {
   background-image: url('{{site.baseurl}}/img/dot-matrix.png');
 }
 
+@media only screen and (max-width:900px) {
+  html {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width:770px) {
+  html {
+    font-size: 0.8rem;
+  }
+}
+
 @media only screen and (max-width:640px) {
+  html {
+    font-size: 0.7rem;
+  }
+
   #countries .country.last-col,
   #countries .country.last-row {
     border: 0;
