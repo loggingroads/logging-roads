@@ -208,16 +208,28 @@ header {
   nav ul li:last-child a {
     border-right: 0;
   }
-  nav a.active {
+  nav a.active,
+  .small-nav a.active {
     color: $primary;
   }
-  nav a:hover{
+  nav a:hover {
     color: $primary;
     background-color: rgba(0,0,0,0.3);
   }
+  .small-nav a:hover {
+    color: $primary;
+  }
   nav ul a,
-  nav a:active  {
+  nav a:active,
+  .small-nav a,
+  .small-nav a:active  {
     color: $text;
+  }
+  .small-nav {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
   }
 }
 

@@ -1,6 +1,6 @@
 <header class="header {% if page.title == 'home' %}header-home{% endif %} clearfix" style="background-image: linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
   
-  <nav>
+  <nav class="hide-for-small-only">
     <div class="row">
       <div class="small-12 columns">
         <ul class="right">
@@ -20,6 +20,16 @@
       <a href="{{site.baseurl}}/">
         <img src="{{site.baseurl}}/img/masthead.png">
       </a>
+    </div>
+    <div class="small-12 columns show-for-small-only">
+      <ul class="inline-list small-nav">
+        <li class="text-center">
+          <a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a>
+        </li><!-- 
+     --><li class="text-center">
+          <a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a>
+        </li>
+      </ul>
     </div>
   </div>
 
