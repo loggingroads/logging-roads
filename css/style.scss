@@ -32,9 +32,12 @@ p {
   color: $med-l-gray;
   font-size: 1.2rem;
 	line-height: 2em;
-  &.loud,
-  .loud { color: $primary; }
   &.shrink { font-size: 0.9rem; }
+}
+
+.loud {
+  color: $primary;
+  font-weight: bold;
 }
 
 li { 
@@ -144,8 +147,9 @@ header {
   }
   .masthead {
     position: relative;
+    z-index: 3;
   }
-  .masthead:after {
+  .masthead a:after {
     position: absolute;
     content: 'beta';
     font-size: 0.8rem;
@@ -153,7 +157,6 @@ header {
     right: -18px;
     top: 4px;
   }
-  .loud { color: $primary; }
   .header-body {
     button {
       border-color: $med-gray;
