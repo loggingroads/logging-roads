@@ -312,8 +312,8 @@ header {
 #countries {
   .country {
     height: 250px;
-    border-right: 1px solid $med-gray;
-    border-bottom: 1px solid $med-gray;
+    border-right: 1px solid $med-d-gray;
+    border-bottom: 1px solid $med-d-gray;
   }
   .country.last-col {
     border-right: 0;
@@ -394,5 +394,16 @@ header {
   bottom: 0;
   width: 100%;
   background-image: url('{{site.baseurl}}/img/dot-matrix.png');
+}
+
+@media only screen and (max-width:640px) {
+  #countries .country.last-col,
+  #countries .country.last-row {
+    border: 0;
+    border-bottom: 1px solid $med-d-gray;
+  }
+  #countries .country.last-row:last-child {
+    border: 0;
+  }
 }
   
