@@ -431,5 +431,9 @@ header {
   #countries .country.last-row:last-child {
     border: 0;
   }
+
+  .masthead a:after {
+    display: none;
+  }
 }
   
