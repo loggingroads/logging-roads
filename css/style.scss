@@ -309,8 +309,17 @@ header {
 }
 
 
-.country {
-  height: 250px;
+#countries {
+  .country {
+    height: 250px;
+    border-right: 1px solid $med-gray;
+    border-bottom: 1px solid $med-gray;
+  }
+  .country.last-col {
+    border-right: 0;
+  }
+  .country.last-row {
+    border-bottom: 0;
   }
   .country h4 {
     clear: both;
@@ -333,7 +342,7 @@ header {
   .country .mg-fw:before {
     vertical-align: middle; /* vertically center mapglyph */
   }
-
+}
 
 .footer {
   background: $med-d-gray;

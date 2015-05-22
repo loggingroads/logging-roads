@@ -1,0 +1,26 @@
+- name: Cameroon
+  map_glyph: map-cm
+  tm_project_id:
+
+- name: Central African Republic
+  map_glyph: map-cf
+  tm_project_id: 3
+
+- name: Democratic Republic of the Congo
+  map_glyph: map-cd  # maps icon to mapglyphs font.  see /fonts/mapglyphs/mapglyphs.css
+  tm_project_id: 2
+
+- name: Equatorial Guinea
+  map_glyph: map-gq
+  tm_project_id:
+
+- name: Gabon
+  map_glyph: map-ga
+  tm_project_id: 
+
+- name: Republic of Congo
+  map_glyph: map-cg
+  tm_project_id: 4
+
+
+
