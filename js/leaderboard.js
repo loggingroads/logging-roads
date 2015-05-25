@@ -4,6 +4,7 @@
   // extend app w/ map module
   $.extend(app, {
     osmHistoryBaseURL: 'http://ec2-54-242-150-21.compute-1.amazonaws.com/logging/',
+    blacklist: ['JamesLC'],
     initLeaderboard: function(){
       // see mapoff sample site: http://mapgive.state.gov/events/mapoff/results/
       // user_list.json
@@ -23,10 +24,14 @@
 
     loadContributors: function(){
       $.getJSON(app.osmHistoryBaseURL + 'user_list.json', function(data){
-        // this can be removed if we know that the osm-history sends the data sorted
-        data = data.sort(function(a,b){
+        // sort by number of edits and filter out blacklisted users
+        data = data.filter(function(editor){
+          return app.blacklist.indexOf(editor.user) === -1;
+        }).sort(function(a,b){
           return (b.nodes + b.ways) - (a.nodes + a.ways);
-        })
+        });
+
+
 
         // limit the length of the leaderboard?
         // data.slice(0,15);
