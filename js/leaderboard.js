@@ -78,10 +78,10 @@
                            .text(editor.user)
                            .on('click', app.loadContributorGeoJSON);
           
-      row.append( $('<span class="large-6 columns">').html(userNameLink) );
-      row.append( $('<span class="large-2 columns text-right">').text(editor.nodes + editor.ways) );
-      row.append( $('<span class="large-2 columns text-right">').text(editor.nodes) );
-      row.append( $('<span class="large-2 columns text-right">').text(editor.ways) );
+      row.append( $('<span class="small-6 columns">').html(userNameLink) );
+      row.append( $('<span class="small-2 columns text-right">').text(editor.nodes + editor.ways) );
+      row.append( $('<span class="small-2 columns text-right">').text(editor.nodes) );
+      row.append( $('<span class="small-2 columns text-right">').text(editor.ways) );
     },
 
     loadContributorGeoJSON: function(e){
