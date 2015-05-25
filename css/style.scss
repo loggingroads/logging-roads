@@ -373,6 +373,18 @@ header {
   background: $med-d-gray;
   border-top: 4px solid #777;
   }
+  .footer .logos {
+    text-align: center;
+    padding-bottom: 12px;
+  }
+  .footer .logos h4 {
+    color: $med-l-gray;
+  }
+  .logos a {
+    width: 160px;
+    display: inline-block;
+    padding: 12px;
+  }
   .footer ul {
     list-style-type: none;
     padding-top: 10px;
