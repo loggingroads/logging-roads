@@ -302,21 +302,30 @@ header {
 #leaderboard {
   li.tab-title {
     padding: 0;
+    display: inline;
+    float: none;
     a {
       background: transparent;
       color: $med-d-gray;
+      padding: 12px;
+      display: inline;
     }
     a:hover {
       color: $secondary;
     }
     &.active a,
     a:active {
-      color: $secondary-dark;
+      color: $primary;
     }
+  }
+  .tabs-content .content {
+    padding: 0;
+  }
+  ul {
+    margin: 0;
   }
   li.head-row {
     color: #999;
-    margin-bottom: 6px;
     border-bottom: 1px solid $med-d-gray;
   }
   li.top-editor {

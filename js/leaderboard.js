@@ -38,7 +38,7 @@
             rowsPerPanel = 10,
             panelCount = Math.ceil(data.length / rowsPerPanel);
 
-        var editorsPanelTabs = $('<ul class="tabs small-12 small-centered medium-4 columns small-block-grid-' + panelCount + ' text-center" data-tab>');
+        var editorsPanelTabs = $('<ul class="tabs text-center" data-tab>');
         for(var panelIdx = 1; panelIdx <= panelCount; panelIdx++){
           var tabButton = $('<li class="tab-title">'),
               tabButtonLink = $('<a href="#panel' + panelIdx + '">' + panelIdx + '</a>');
