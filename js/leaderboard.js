@@ -58,11 +58,11 @@
             // construct panels
             var panel = $('<div class="content" id="panel' + (panelNumber + 1) + '">');
             if(idx === 0) panel.addClass('active');
-            app.addRowTo(panel, editor);
+            app.addRowTo(panel, editor, idx + 1 );
             panel.appendTo( panelContainer );
           }else{
             // append to existing panel
-            app.addRowTo( $('div#panel' + panelNumber), editor );
+            app.addRowTo( $('div#panel' + panelNumber), editor, idx + 1 );
           }
         });
 
@@ -72,13 +72,14 @@
 
     },
 
-    addRowTo: function(panel, editor){
+    addRowTo: function(panel, editor, rank){
       var row = $('<li class="top-editor clearfix">').appendTo( panel ),
           userNameLink = $('<a href="#">')
                            .text(editor.user)
                            .on('click', app.loadContributorGeoJSON);
-          
-      row.append( $('<span class="small-6 columns">').html(userNameLink) );
+      
+      row.append( $('<span class="small-1 columns text-center">').text(rank) );    
+      row.append( $('<span class="small-5 columns">').html(userNameLink) );
       row.append( $('<span class="small-2 columns text-right">').text(editor.nodes + editor.ways) );
       row.append( $('<span class="small-2 columns text-right">').text(editor.nodes) );
       row.append( $('<span class="small-2 columns text-right">').text(editor.ways) );
