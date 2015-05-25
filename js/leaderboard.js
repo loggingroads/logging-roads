@@ -5,6 +5,8 @@
   $.extend(app, {
     osmHistoryBaseURL: 'http://ec2-54-242-150-21.compute-1.amazonaws.com/logging/',
     blacklist: ['JamesLC'],
+    contributorGeoJSONLayer: null,
+    loadingContributorGeoJSON: false,
     initLeaderboard: function(){
       // see mapoff sample site: http://mapgive.state.gov/events/mapoff/results/
       // user_list.json
@@ -94,11 +96,23 @@
       e.preventDefault();
       e.stopPropagation();
 
-      var userName = this.text;
+      // prevent repeat click when loading geojson
+      if(app.loadingContributorGeoJSON) return false;
+      app.loadingContributorGeoJSON = true;
+
+      var $this = $(this);
+
+      // remove existing geojson layer, if any
+      if(app.contributorGeoJSONLayer){
+        app.map.removeLayer(app.contributorGeoJSONLayer);
+        $('li.top-editor a.active').removeClass('active');
+      }
+
+      $this.addClass('active');
 
       $('html, body').animate({ scrollTop: $('#map-container').offset().top }, app.ANIMATION.scroll);
 
-      $.getJSON(app.osmHistoryBaseURL + 'user_list_with_geometry/' + userName + '.json', function(data){
+      $.getJSON(app.osmHistoryBaseURL + 'user_list_with_geometry/' + this.text + '.json', function(data){
 
         var geojson = L.mapbox.featureLayer(data).setStyle({
           className: 'user-edits'
@@ -108,6 +122,9 @@
           // weight: 3
         });
         app.map.fitBounds(geojson.getBounds()).addLayer(geojson);
+        app.contributorGeoJSONLayer = geojson;
+
+        app.loadingContributorGeoJSON = false;
       });
     }
 

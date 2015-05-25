@@ -333,6 +333,7 @@ header {
     color: #CCC;
     padding-top: 6px;
     border-bottom: 1px solid #222;
+    a.active,
     a:hover {
       color: $secondary;
     }
