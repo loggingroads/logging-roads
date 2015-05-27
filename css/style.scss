@@ -24,7 +24,7 @@ h1, h2, h3, h4 {
   h4 { font-size: 1.3em; }
   h1, h2 { color: $primary; }
 
-small { font-size: 80%; }
+small { font-size: 70%; }
 
 strong { font-weight: 600; }
 
@@ -391,28 +391,25 @@ header {
     color: $med-l-gray;
   }
   .logos a {
-    width: 160px;
+    // width: 160px;
     display: inline-block;
     padding: 12px;
   }
-  .footer ul {
-    list-style-type: none;
-    padding-top: 10px;
-    margin-left: 0;
+  .logos a img {
+    height: 40px;
   }
-  .footer a {
+  .footer ul li {
+    display: inline-block;
+    float: none;
+  }
+  .footer ul a {
     font-size: 0.8em;
     font-weight: 200;
     color: #fff;
     line-height: 2em;
   }
-  .footer a:hover {
+  .footer ul a:hover {
     color: #ddd;
-  }
-  .footer .hashtag {
-    padding-bottom: 6px;
-    a { color: $primary; }
-    a:hover { color: $primary-dark; }
   }
 
 
