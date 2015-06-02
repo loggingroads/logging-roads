@@ -22,7 +22,7 @@
 
 - body: 
       |
-      To contribute, read the project editing [guide]({{site.baseurl}}/guide/), choose a country, and start mapping.
+      To contribute, read the project editing [guide](http://loggingroads.org/guide/), choose a country, and start mapping.
 
       All data is freely available for <a href="http://loggingroads.org/roads.geojson" download="logging_roads.geojson">download</a>.
 
