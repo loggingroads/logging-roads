@@ -35,9 +35,16 @@ p {
   &.shrink { font-size: 0.9rem; }
 }
 
-video {
-  margin: 2rem 0.4rem;
-}
+// video {
+//   margin: 2rem 0.4rem;
+// }
+.video {
+  margin: 4rem 0;
+  }
+  .video iframe {
+    max-width: 100%;
+  }
+
 
 .loud {
   color: $primary;
