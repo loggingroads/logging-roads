@@ -35,6 +35,10 @@ p {
   &.shrink { font-size: 0.9rem; }
 }
 
+video {
+  margin: 2rem 0.4rem;
+}
+
 .loud {
   color: $primary;
   font-weight: bold;
