@@ -6,6 +6,7 @@
     tmBaseUrl: 'http://tasks.loggingroads.org/project/',
     projectGrids: {},
     satelliteUrlTemplate: 'https://wri-tiles.s3.amazonaws.com/umd_landsat/{year}/{z}/{y}/{x}.png',
+    satelliteUrlTemplate2014: 'https://storage.googleapis.com/earthenginepartners-hansen/tiles/gfc2015/last_457/{z}/{x}/{y}.jpg',
     satLayers: {},
     roadReferenceLayer: null,
     tooltipIsOpen: false,
@@ -143,8 +144,8 @@
           feature.properties['state'] = 'removed'; break;
       }
 
-      layer.setStyle({ 
-        className: ['project-grid', feature.properties['state'], feature.properties['locked']].join(' '), 
+      layer.setStyle({
+        className: ['project-grid', feature.properties['state'], feature.properties['locked']].join(' '),
         color: gridStrokeColor
       });
 
@@ -192,7 +193,7 @@
       e.preventDefault();
       e.stopPropagation();
       var listItem = $(this).parent('li');
-      
+
       if(listItem.hasClass('active')) return false;
       if(listItem.data('id') === 'show'){
         listItem.addClass('active').siblings('li.active').removeClass('active');
@@ -262,7 +263,12 @@
     addSatLayer: function(id){
       // if layer hasn't yet been created, create and add to app.satLayers[id]
       if(! app.satLayers[id]){
-        app.satLayers[id] = L.tileLayer(app.satelliteUrlTemplate.replace('{year}', id));
+        if(id == '2014'){
+          app.satLayers[id] = L.tileLayer(app.satelliteUrlTemplate2014);
+        }else {
+          app.satLayers[id] = L.tileLayer(app.satelliteUrlTemplate.replace('{year}', id));
+        }
+
       }
 
       // short circuit if map already has layer
