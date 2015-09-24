@@ -398,8 +398,9 @@ header {
     text-align: center;
     padding-bottom: 12px;
   }
-  .footer .logos h4 {
-    color: $med-l-gray;
+  .footer .logos h4 small {
+    color: $primary;
+		font-weight: bold;
   }
   .logos a {
     // width: 160px;
@@ -409,6 +410,12 @@ header {
   .logos a img {
     height: 40px;
   }
+
+	.logo-column {
+		background-color: #eeeeee;
+		height: 300px;
+	}
+
   .footer ul li {
     display: inline-block;
     float: none;
