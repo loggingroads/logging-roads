@@ -1,10 +1,10 @@
 <header class="header {% if page.title == 'home' %}header-home{% endif %} clearfix" style="background-image: linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
-  
+
   <nav class="hide-for-small-only">
     <ul class="">
       <li class="text-center">
         <a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a>
-      </li><!-- 
+      </li><!--
    --><li class="text-center">
         <a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a>
       </li>
@@ -12,16 +12,21 @@
   </nav>
 
   <div class="row mbl masthead">
-    <div class="small-12 medium-8 columns">
+    <div class="small-12 medium-6 columns text-center">
       <a href="{{site.baseurl}}/">
-        <img src="{{site.baseurl}}/img/masthead.png">
+        <!--<img style="" width=400 height=66 src="{{site.baseurl}}/img/loggingroads.png">-->
+        <b id="logo-text">LOGGING ROADS</b>
       </a>
+    </div>
+    <div class="logos small-12 medium-6 columns">
+        <img style="" width=90 height=90 src="{{site.baseurl}}/img/moabi.png">
+        <img style="margin-left: 8px;"width=90 height=90 src="{{site.baseurl}}/img/gfw.png">
     </div>
     <div class="small-12 columns show-for-small-only">
       <ul class="inline-list small-nav">
         <li class="text-center">
           <a href="{{site.baseurl}}/about/" class="{% if page.title == 'about' %}active{% endif %}">About</a>
-        </li><!-- 
+        </li><!--
      --><li class="text-center">
           <a href="{{site.baseurl}}/guide/" class="{% if page.title == 'guide' %}active{% endif %}">Guide</a>
         </li>
@@ -34,7 +39,7 @@
       <div class="row">
         <div class="small-12 medium-7 columns header-body">
           <h2 class="mbm">Monitoring Logging in the Congo Basin</h2>
-          <p>The Logging Roads project is a joint initiative of the <a href="http://wri.org/">World Resource Institute</a> and <a href="http://rdc.moabi.org">Moabi</a> to monitor the spread of logging roads across the Congo Basin.  The project relies on open contributions from the crowd to interpret satellite imagery and track the growth of logging activity.</p>
+          <p>The Logging Roads project is a joint initiative of <a href="http://www.globalforestwatch.org/">Global Forest Watch</a> and <a href="http://www.moabi.org">Moabi</a> to monitor the spread of logging roads across the Congo Basin.  The project relies on open contributions from the crowd to interpret satellite imagery and track the growth of logging activity.</p>
           <p class="loud">Anyone, anywhere, can help contribute.</p>
           <p class="">All data will be added to <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and licensed under the <a href="http://www.openstreetmap.org/copyright">creative commons</a>.</p>
 
@@ -45,7 +50,7 @@
         </div>
       </div>
 
-  {% else %} 
+  {% else %}
 
     <div class="row">
       <!-- <div class="small-12 medium-7 large-5 columns mbl"> -->
@@ -55,5 +60,8 @@
     </div>
 
   {% endif %}
+
+  <div class="image-attribution"><span>{{page.banner-attribution}}</span></div>
+
 
 </header>

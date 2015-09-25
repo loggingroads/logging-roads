@@ -35,6 +35,11 @@ p {
   &.shrink { font-size: 0.9rem; }
 }
 
+#logo-text {
+	color: $logo;
+	font-size: 3.3rem;
+}
+
 // video {
 //   margin: 2rem 0.4rem;
 // }
@@ -51,7 +56,7 @@ p {
   font-weight: bold;
 }
 
-li { 
+li {
   color: $med-l-gray;
   line-height: 2em;
 }
@@ -61,7 +66,7 @@ hr {
   margin: 3rem 1rem;
 }
 
-a { 
+a {
   color: $primary;
   }
   a:hover, a:focus {
@@ -183,8 +188,8 @@ header {
   }
   p {
     color: $text;
-    font-size: 1.1rem;
-    a { 
+    font-size: 1.3rem;
+    a {
       // color: $med-l-gray;
       // border-bottom: 1px dotted $med-l-gray;
     }
@@ -252,11 +257,12 @@ header {
     background-repeat: no-repeat;
     transition: all 0.3s;
     overflow: hidden;
+		position: relative;
   }
   .tutorial-page p {
     // text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     color: $text;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
   .tutorial-page p strong {
     font-weight: inherit;
@@ -265,7 +271,7 @@ header {
   .tutorial-page .tutorial-body {
     position: relative;
     background-color: $bgcolor;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.4);
     box-shadow: 0 0 0 2px rgba(0,0,0,0.5);
   }
   .tutorial-page .tutorial-image {
@@ -287,6 +293,18 @@ header {
     background-color: mix($tutorial-bg1, $tutorial-bg2, 0%);
   }
 }
+
+.image-attribution {
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+}
+
+.image-attribution span {
+	font-family: 'Raleway', sans-serif;
+	font-size: 0.8rem;
+}
+
 
 #guide {
   img {
@@ -470,6 +488,12 @@ header {
   }
 }
 
+@media only screen and (max-width:641px) {
+	.logos {
+		text-align: center;
+	}
+}
+
 @media only screen and (max-width:640px) {
   html {
     font-size: 0.7rem;
@@ -487,5 +511,6 @@ header {
   .masthead a:after {
     display: none;
   }
+
+
 }
-  
