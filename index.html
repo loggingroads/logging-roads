@@ -1,5 +1,5 @@
 ---
-layout: map
+layout: home
 banner: cifor_wood_truck.jpg
 banner-attribution:
                   |
@@ -22,75 +22,62 @@ tm_projects:
     project_id: 4
 ---
 
+
 {% include tutorial.html %}
 
-{% include map-container.html %}
+
+<section id="results" class="row clearfix">
+  <h2 class="text-center">Progress</h2>
+  <div class="small-4 columns">
+    <div id="total-roads" class="text-center">
+      <h3>Roads</h3>
+    </div>
+  </div>
+  <div class="small-4 columns">
+    <div id="total-startdate" class="text-center">
+      <h3>Tagged with Date</h3>
+    </div>
+  </div>
+  <div class="small-4 columns">
+    <div id="total-changes" class="text-center">
+      <h3>User Changes</h3>
+    </div>
+  </div>
+  <div class="small-12 large-7 columns text-center pam">
+      <a href="http://map.loggingroads.org" target="_blank" class="button large round map-btn">View Map</a>
+  </div>
+</section>
+
+
 
 <section id="leaderboard" class="row clearfix">
   <h2 class="text-center">Leaderboard</h2>
-  <p class="text-center shrink mbl">List of top contributors, ranked by number of edits.<br>Click on a User Name to view their edits.</p>
+  <p class="text-center shrink mbl">List of top contributors, ranked by number of changes.</p>
   <div class="large-12 columns">
     <div id="top-editors">
       <ul>
         <li class="head-row clearfix">
           <span class="small-1 columns text-center">Rank</span>
-          <span class="small-5 columns">User Name</span>
-          <span class="small-2 columns text-right">Total Edits</span>
-          <span class="small-2 columns text-right">Node Edits</span>
-          <span class="small-2 columns text-right">Way Edits</span>
+          <span class="small-3 columns">User Name</span>
+          <span class="small-3 columns text-right">Changes</span>
+          <span class="small-5 columns text-right">Tags/Keywords</span>
+        <!--  <span class="small-3 columns text-right">Change Sets</span>-->
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<section id="countries">
+<section id="getstarted">
   <div class="row">
 
     <div class="large-12 columns mbl">
       <h2 class="text-center">Start Mapping</h2>
-      <p class="text-center shrink">To contribute, click on a country below and choose a single grid task from the Tasking Manager.  Editing is handled by the Humanitarian OpenStreetMap Team's Tasking Manager.</p>
+      <p class="text-center shrink"></p>
       <p class="text-center shrink">For more detailed instructions, check out the project <a href="{{site.baseurl}}/guide/">Mapping Guide</a>.</p>
     </div>
 
-    <div class="small-12 columns">
-      <ul class="small-block-grid-1 medium-block-grid-3">
-        {% for country in site.data.countries %}
-          {% assign col = forloop.index0 | modulo:3 | plus:1 %}
-          <li class="country ptm {% if forloop.rindex <= 3 %}last-row {% endif %}
-                                 {% if col == 3 or forloop.last %}last-col{% endif %}">
-            <a href="http://tasks.loggingroads.org/project/{{country.tm_project_id}}"
-               class="clearfix {% unless country.tm_project_id %}disabled{% endunless %}" target="_blank">
-              <div class="large-12 columns mg mg-fw mg-6x {{country.map_glyph}}"></div>
-              <h4 class="text-center ptm phm mvn">{{country.name}}</h4>
-              {% unless country.tm_project_id %}
-                <h4 class="text-center mvn"><em>coming soon...</em></h4>
-              {% endunless %}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
 
-    {% comment %}
-
-      {% for country in site.data.countries %}
-        {% if forloop.index0 | modulo:3 == 0 %}
-          <div class="row small-block-grid-1 medium-block-grid-3">
-        {% endif %}
-          <li class="country ptm keyline-bottom {% unless forloop.index %}keyline-right{% endunless %}">
-            <a href="http://tasks.loggingroads.org/project/{{country.tm_project_id}}"
-               class="clearfix {% if country.tm_project_id == null %}disabled{% endif %}" target="_blank">
-              <div class="large-12 columns mg mg-fw mg-6x {{country.map_glyph}}"></div>
-              <h4 class="text-center pam">{{country.name}}</h4>
-            </a>
-          </li>
-        {% if forloop.index | modulo:3 == 0 or forloop.last %}
-          </div>
-        {% endif %}
-      {% endfor %}
-
-    {% endcomment %}
 
   </div>
 </section>

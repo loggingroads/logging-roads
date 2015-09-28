@@ -1,5 +1,8 @@
-<header class="header {% if page.title == 'home' %}header-home{% endif %} clearfix" style="background-image: linear-gradient(rgba(65, 65, 62, 0.4), rgba(0, 0, 0, 0.9)), url('{{site.baseurl}}/img/{{page.banner}}')">
-
+<header class="header {% if page.title == 'home' %}header-home{% endif %} clearfix" style="">
+{% if page.title == 'home' %}
+  <iframe class="iframe-map" src="http://map.loggingroads.org/#/?hideUI=true&hideLogo=true&disableScroll=true&disableButtons=true">
+</iframe>
+{% endif %}
   <nav class="hide-for-small-only">
     <ul class="">
       <li class="text-center">
@@ -32,21 +35,20 @@
         </li>
       </ul>
     </div>
+
   </div>
 
   {% if page.title == 'home' %}
 
       <div class="row">
-        <div class="small-12 medium-7 columns header-body">
+        <div class="small-12 medium-5 columns header-body">
           <h2 class="mbm">Monitoring Logging in the Congo Basin</h2>
-          <p>The Logging Roads project is a joint initiative of <a href="http://www.globalforestwatch.org/">Global Forest Watch</a> and <a href="http://www.moabi.org">Moabi</a> to monitor the spread of logging roads across the Congo Basin.  The project relies on open contributions from the crowd to interpret satellite imagery and track the growth of logging activity.</p>
           <p class="loud">Anyone, anywhere, can help contribute.</p>
-          <p class="">All data will be added to <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and licensed under the <a href="http://www.openstreetmap.org/copyright">creative commons</a>.</p>
 
           <!-- <h3>Scroll to Learn More</h3> -->
           <h3 class="small-12 columns text-center pas loud" href="#">Scroll to Learn More</h3>
-          <button class="small-6 columns text-center keyline-top keyline-bottom keyline-right scroll-to" href="#" data-scroll="map-container">Track Progress</button>
-          <button class="small-6 columns text-center keyline-top keyline-bottom scroll-to" href="#" data-scroll="countries">Start Mapping</button>
+          <button class="small-6 columns text-center keyline-top keyline-bottom keyline-right scroll-to" href="#" data-scroll="results">Track Progress</button>
+          <button class="small-6 columns text-center keyline-top keyline-bottom scroll-to" href="#" data-scroll="getstarted">Start Mapping</button>
         </div>
       </div>
 
@@ -60,8 +62,6 @@
     </div>
 
   {% endif %}
-
-  <div class="image-attribution"><span>{{page.banner-attribution}}</span></div>
 
 
 </header>

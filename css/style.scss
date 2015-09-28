@@ -38,6 +38,12 @@ p {
 #logo-text {
 	color: $logo;
 	font-size: 3.3rem;
+	white-space: nowrap;
+}
+
+.stats {
+	color: $primary;
+	font-size: 2.3rem;
 }
 
 // video {
@@ -49,6 +55,12 @@ p {
   .video iframe {
     max-width: 100%;
   }
+
+.map-btn {
+	color: white !important;
+	background-color: $primary !important;
+}
+
 
 
 .loud {
@@ -163,6 +175,7 @@ header {
   }
   .masthead {
     position: relative;
+		margin-bottom: 5px !important;
   }
   .masthead a:after {
     position: absolute;
@@ -172,7 +185,21 @@ header {
     right: -18px;
     top: 4px;
   }
+.iframe-map {
+	position: absolute;
+	width: 100%;
+	height:100%;
+	background-color: $bgcolor;
+}
+
+
   .header-body {
+		background-color: $bgcolor;
+		background-color: rgba(0,0,0,0.7);
+		margin-left: 20px;
+		margin-top: 35px;
+		box-shadow: 0 0 0 2px rgba(0,0,0,0.5);
+
     button {
       border-color: $med-gray;
       color: $primary;
@@ -188,7 +215,7 @@ header {
   }
   p {
     color: $text;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     a {
       // color: $med-l-gray;
       // border-bottom: 1px dotted $med-l-gray;
@@ -498,6 +525,11 @@ header {
   html {
     font-size: 0.7rem;
   }
+
+	.header-body{
+		margin-left: 0px !important;
+		margin-top: 0px !important;
+	}
 
   #countries .country.last-col,
   #countries .country.last-row {

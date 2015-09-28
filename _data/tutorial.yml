@@ -2,15 +2,19 @@
       |
       Logging roads are a major indicator of deforestation in the Congo Basin . Until now, their reach has been difficult to visualize, obscuring the rapid rise in deforestation in the region. Often, these roads are discovered only after they have been abandoned.
 
-      Together, [Global Forest Watch](http://www.globalforestwatch.org/) and [Moabi](http://www.moabi.org) are analyzing over a decade of imagery to track rainforest logging road activity.
-  img: Ouesso_2_timelapse-flipped.gif
+      The Logging Roads project is a joint initiative of [Global Forest Watch](http://www.globalforestwatch.org/) and [Moabi](http://www.moabi.org) to monitor the spread of logging roads across the Congo Basin.
+
+      Together, we are analyzing over a decade of imagery to track rainforest logging road activity.
+  img: cifor_wood_truck.jpg
   img-attribution:
         |
-        Image: UMD Landsat
+        Image: CIFOR / Ollivier Girard
 
 - body:
       |
-      But we can’t do it alone.  The Logging Roads Initiative serves as a call to action for those passionate about preserving these diverse and important landscapes. Through crowdsourcing we can drastically improve the oversight of environmental activity.
+      But we can’t do it alone. The project relies on contributions from individual volunteers to interpret satellite imagery and track the growth of logging activity.
+
+      The Logging Roads Initiative serves as a call to action for those passionate about preserving these diverse and important landscapes. Through crowdsourcing we can drastically improve the oversight of environmental activity.
 
       Sounds good?  Let’s get started.
   img: cifor_wood_market2.jpg
@@ -20,9 +24,11 @@
 
 - body:
       |
-      All data is edited within [OpenStreetMap](http://www.openstreetmap.org/) - a global, open geographic database built entirely by contributions from the crowd.
 
-      Use the map further down the page to track the progress of the project.
+      All data is edited within [OpenStreetMap](http://www.openstreetmap.org/) - a global, open geographic database built entirely by contributions from the crowd. Data is licensed under the [Open Data Commons Open Database License (ODbL)](http://www.openstreetmap.org/copyright)
+
+
+      View the [map](http://map.loggingroads.org/) to track the progress of the project.
 
   img: project_map.jpg
 

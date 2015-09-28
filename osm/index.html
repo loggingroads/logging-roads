@@ -1,0 +1,77 @@
+---
+layout: slim
+title: Tracing Roads in OpenStreetMap
+banner: cifor_wood_market.jpg
+---
+
+<h1 class="text-center">Task: Tracing Roads in OpenStreetMap</h1>
+<section id="into">
+  <div class="row">
+    <div class="large-12 columns mbl">
+  <h2 class="text-center">Who Can Participate?</h2>
+<p class="text-center shrink">
+  Anyone with a computer and internet connection can contribute.
+  However, tracing roads does require learning to use OpenStreetMap.
+  Check out the <a href="/guide">Mapping Guide</a> for thorough instructions on the editing process, then get started.
+</p>
+  </div>
+  </div>
+</section>
+<section id="countries">
+  <div class="row">
+
+    <div class="large-12 columns mbl">
+      <h2 class="text-center">Start Mapping</h2>
+      <p class="text-center shrink">To contribute, click on a country below and choose a single grid task from the Tasking Manager.  Editing is handled by the Humanitarian OpenStreetMap Team's Tasking Manager.</p>
+      <p class="text-center shrink">For more detailed instructions, check out the project <a href="{{site.baseurl}}/guide/">Mapping Guide</a>.</p>
+    </div>
+
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3">
+        {% for country in site.data.countries %}
+          {% assign col = forloop.index0 | modulo:3 | plus:1 %}
+          <li class="country ptm {% if forloop.rindex <= 3 %}last-row {% endif %}
+                                 {% if col == 3 or forloop.last %}last-col{% endif %}">
+            <a href="http://tasks.loggingroads.org/project/{{country.tm_project_id}}"
+               class="clearfix {% unless country.tm_project_id %}disabled{% endunless %}" target="_blank">
+              <div class="large-12 columns mg mg-fw mg-6x {{country.map_glyph}}"></div>
+              <h4 class="text-center ptm phm mvn">{{country.name}}</h4>
+              {% unless country.tm_project_id %}
+                <h4 class="text-center mvn"><em>coming soon...</em></h4>
+              {% endunless %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% comment %}
+
+      {% for country in site.data.countries %}
+        {% if forloop.index0 | modulo:3 == 0 %}
+          <div class="row small-block-grid-1 medium-block-grid-3">
+        {% endif %}
+          <li class="country ptm keyline-bottom {% unless forloop.index %}keyline-right{% endunless %}">
+            <a href="http://tasks.loggingroads.org/project/{{country.tm_project_id}}"
+               class="clearfix {% if country.tm_project_id == null %}disabled{% endif %}" target="_blank">
+              <div class="large-12 columns mg mg-fw mg-6x {{country.map_glyph}}"></div>
+              <h4 class="text-center pam">{{country.name}}</h4>
+            </a>
+          </li>
+        {% if forloop.index | modulo:3 == 0 or forloop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    {% endcomment %}
+
+  </div>
+</section>
+<section id="into">
+  <div class="row">
+    <h2>All Open</h2>
+    <p>
+      All data will be uploaded to OpenStreetMap.  <a href="http://loggingroads.org/roads.geojson" download="logging_roads.geojson">Click Here</a> to download an extract of the dataset.
+    </p>
+  </div>
+</section>

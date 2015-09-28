@@ -3,7 +3,7 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
-    osmHistoryBaseURL: 'http://ec2-54-242-150-21.compute-1.amazonaws.com/logging/',
+    osmHistoryBaseURL: 'http://loggingroads.org:3030/',
     blacklist: ['JamesLC'],
     contributorGeoJSONLayer: null,
     loadingContributorGeoJSON: false,
@@ -25,18 +25,11 @@
     },
 
     loadContributors: function(){
-      $.getJSON(app.osmHistoryBaseURL + 'user_list.json', function(data){
+      $.getJSON(app.osmHistoryBaseURL + 'leaders', function(data){
         // sort by number of edits and filter out blacklisted users
         data = data.filter(function(editor){
-          return app.blacklist.indexOf(editor.user) === -1;
-        }).sort(function(a,b){
-          return (b.nodes + b.ways) - (a.nodes + a.ways);
+          return app.blacklist.indexOf(editor.username) === -1;
         });
-
-
-
-        // limit the length of the leaderboard?
-        // data.slice(0,15);
 
 
         // construct panel tab buttons
@@ -73,6 +66,25 @@
           }
         });
 
+        $.getJSON(app.osmHistoryBaseURL + 'total', function(data){
+          var total = parseInt(data.total);
+          var totalChangesContainer = $('#total-changes');
+          totalChangesContainer.append($('<span class="stats">').text(total.toLocaleString()));
+
+        });
+        $.getJSON(app.osmHistoryBaseURL + 'roads', function(data){
+
+          var totalRoads = data.value;
+          var totalRoadsContainer = $('#total-roads');
+          totalRoadsContainer.append($('<span class="stats">').text(totalRoads.toLocaleString()));
+          $.getJSON(app.osmHistoryBaseURL + 'roadswithstartdate', function(data){
+            var totalRoadsWithStartDate = data.value;
+            var pctTagged = (totalRoadsWithStartDate / totalRoads) * 100;
+            var totalStartDateContainer = $('#total-startdate');
+              totalStartDateContainer.append($('<span class="stats">').text(pctTagged.toLocaleString() + '%'));
+          });
+        });
+
         // silly to have to call this again, but must run at the end of the getJSON call
         $(document).foundation();
       });
@@ -81,52 +93,34 @@
 
     addRowTo: function(panel, editor, rank){
       var row = $('<li class="top-editor clearfix">').appendTo( panel ),
-          userNameLink = $('<a href="#">')
-                           .text(editor.user)
-                           .on('click', app.loadContributorGeoJSON);
-      
-      row.append( $('<span class="small-1 columns text-center">').text(rank) );    
-      row.append( $('<span class="small-5 columns">').html(userNameLink) );
-      row.append( $('<span class="small-2 columns text-right">').text(editor.nodes + editor.ways) );
-      row.append( $('<span class="small-2 columns text-right">').text(editor.nodes) );
-      row.append( $('<span class="small-2 columns text-right">').text(editor.ways) );
-    },
+          userNameLink = $('<a href="http://www.openstreetmap.org/user/' + editor.username + '" target="_blank">')
+                           .text(editor.username);
 
-    loadContributorGeoJSON: function(e){
-      e.preventDefault();
-      e.stopPropagation();
+      row.append( $('<span class="small-1 columns text-center">').text(rank) );
+      row.append( $('<span class="small-3 columns">').html(userNameLink) );
+      row.append( $('<span class="small-3 columns text-right">').text(editor.changes) );
 
-      // prevent repeat click when loading geojson
-      if(app.loadingContributorGeoJSON) return false;
-      app.loadingContributorGeoJSON = true;
-
-      var $this = $(this);
-
-      // remove existing geojson layer, if any
-      if(app.contributorGeoJSONLayer){
-        app.map.removeLayer(app.contributorGeoJSONLayer);
-        $('li.top-editor a.active').removeClass('active');
-      }
-
-      $this.addClass('active');
-
-      $('html, body').animate({ scrollTop: $('#map-container').offset().top }, app.ANIMATION.scroll);
-
-      $.getJSON(app.osmHistoryBaseURL + 'user_list_with_geometry/' + this.text + '.json', function(data){
-
-        var geojson = L.mapbox.featureLayer(data).setStyle({
-          className: 'user-edits'
-          // color: '#7AE0FD',
-          // lineCap: 'round',
-          // opacity: 1,
-          // weight: 3
-        });
-        app.map.fitBounds(geojson.getBounds()).addLayer(geojson);
-        app.contributorGeoJSONLayer = geojson;
-
-        app.loadingContributorGeoJSON = false;
+      //get unique tags
+      var tags = [];
+      editor.tags.forEach(function(tag){
+        if($.inArray(tag, tags) == -1){
+          tags.push(tag);
+        }
       });
-    }
+
+
+      row.append( $('<span class="small-5 columns text-right">').text(tags) );
+
+      /*
+      var changeSetLinks = '';
+      editor.changesets.forEach(function(changesetID, i){
+        var count = i + 1;
+        changeSetLinks += '<a href="http://www.openstreetmap.org/changeset/' + changesetID + '" target="_blank">' + count + '</a>&nbsp;';
+      });
+
+      row.append( $('<span class="small-3 columns text-right" style="overflow-wrap: break-word;">').append(changeSetLinks));
+      */
+    },
 
   });
 
