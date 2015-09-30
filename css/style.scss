@@ -398,6 +398,15 @@ header {
   }
 }
 
+.task {
+	height: 50px;
+	border: 1px solid #323538;
+	margin: auto auto;
+}
+
+.task a {
+	color: $primary
+}
 
 #countries {
   .country {

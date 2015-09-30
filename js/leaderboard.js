@@ -85,6 +85,20 @@
           });
         });
 
+        //update to-fix task list
+        $.getJSON('http://loggingroads.org:8000/tasks', function(data){
+
+          var tasks = data.data;
+          var tasksContainer = $('#tofix-tasks');
+          tasks.forEach(function(task){
+            var link = 'http://fix.loggingroads.org/#/task/' + task.task;
+            tasksContainer.append($('<div class="task small-5">')
+            .append($('<a class="loud" href="'+ link +'">').text(task.task)));
+          });
+
+
+        });
+
         // silly to have to call this again, but must run at the end of the getJSON call
         $(document).foundation();
       });
