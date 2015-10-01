@@ -30,14 +30,6 @@
 
       View the [map](http://map.loggingroads.org/) to track the progress of the project.
 
-  img: project_map.jpg
-
-- body:
-      |
-      To contribute, read the project editing [guide](http://loggingroads.org/guide/), choose a country, and start mapping.
-
       All data is freely available for <a href="http://loggingroads.org/roads.geojson" download="logging_roads.geojson">download</a>.
-  img: cifor_wood_market-flipped.jpg
-  img-attribution:
-        |
-        Image: CIFOR / Ollivier Girard
+
+  img: project_map.jpg
