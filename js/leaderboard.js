@@ -93,7 +93,7 @@
           tasks.forEach(function(task){
             var link = 'http://fix.loggingroads.org/#/task/' + task.task;
             tasksContainer.append($('<div class="task small-5">')
-            .append($('<a class="loud" href="'+ link +'">').text(task.task)));
+            .append($('<a class="loud" href="'+ link +'">').text('Tag Logging Road Creation Dates')));
           });
 
 
