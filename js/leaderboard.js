@@ -4,7 +4,7 @@
   // extend app w/ map module
   $.extend(app, {
     osmHistoryBaseURL: 'http://loggingroads.org:3030/',
-    blacklist: ['JamesLC'],
+    blacklist: ['JamesLC', 'Leo B', 'kriscarle'],
     contributorGeoJSONLayer: null,
     loadingContributorGeoJSON: false,
     initLeaderboard: function(){
@@ -93,7 +93,7 @@
           tasks.forEach(function(task){
             var link = 'http://fix.loggingroads.org/#/task/' + task.task;
             tasksContainer.append($('<div class="task small-5">')
-            
+
             .append($('<a class="button large round map-btn" href="'+ link +'">').text('Tag Logging Road Creation Dates')));
           });
 
