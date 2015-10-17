@@ -81,7 +81,7 @@
             var totalRoadsWithStartDate = data.value;
             var pctTagged = (totalRoadsWithStartDate / totalRoads) * 100;
             var totalStartDateContainer = $('#total-startdate');
-              totalStartDateContainer.append($('<span class="stats">').text(pctTagged.toLocaleString() + '%'));
+              totalStartDateContainer.append($('<span class="stats">').text(pctTagged.toPrecision(4).toLocaleString() + '%'));
           });
         });
 
