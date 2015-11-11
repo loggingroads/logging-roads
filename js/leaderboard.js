@@ -21,6 +21,8 @@
         // total contributions over time
 
       this.loadContributors();
+      this.loadStats();
+      this.loadToFixTasks();
 
     },
 
@@ -66,44 +68,49 @@
           }
         });
 
-        $.getJSON(app.osmHistoryBaseURL + 'total', function(data){
-          var total = parseInt(data.total);
-          var totalChangesContainer = $('#total-changes');
-          totalChangesContainer.append($('<span class="stats">').text(total.toLocaleString()));
-
-        });
-        $.getJSON(app.osmHistoryBaseURL + 'roads', function(data){
-
-          var totalRoads = data.value;
-          var totalRoadsContainer = $('#total-roads');
-          totalRoadsContainer.append($('<span class="stats">').text(totalRoads.toLocaleString()));
-          $.getJSON(app.osmHistoryBaseURL + 'roadswithstartdate', function(data){
-            var totalRoadsWithStartDate = data.value;
-            var pctTagged = (totalRoadsWithStartDate / totalRoads) * 100;
-            var totalStartDateContainer = $('#total-startdate');
-              totalStartDateContainer.append($('<span class="stats">').text(pctTagged.toPrecision(4).toLocaleString() + '%'));
-          });
-        });
-
-        //update to-fix task list
-        $.getJSON('http://loggingroads.org:8000/tasks', function(data){
-
-          var tasks = data.data;
-          var tasksContainer = $('#tofix-tasks');
-          tasks.forEach(function(task){
-            var link = 'http://fix.loggingroads.org/#/task/' + task.task;
-            tasksContainer.append($('<div class="task small-5">')
-
-            .append($('<a class="button large round map-btn" href="'+ link +'">').text('Tag Logging Road Creation Dates')));
-          });
-
-
-        });
-
         // silly to have to call this again, but must run at the end of the getJSON call
         $(document).foundation();
       });
 
+    },
+
+    loadStats: function(){
+      $.getJSON(app.osmHistoryBaseURL + 'total', function(data){
+        var total = parseInt(data.total);
+        var totalChangesContainer = $('#total-changes');
+        totalChangesContainer.append($('<span class="stats">').text(total.toLocaleString()));
+
+      });
+      $.getJSON(app.osmHistoryBaseURL + 'roads', function(data){
+
+        var totalRoads = data.value;
+        var totalRoadsContainer = $('#total-roads');
+        totalRoadsContainer.append($('<span class="stats">').text(totalRoads.toLocaleString()));
+        $.getJSON(app.osmHistoryBaseURL + 'roadswithstartdate', function(data){
+          var totalRoadsWithStartDate = data.value;
+          var pctTagged = (totalRoadsWithStartDate / totalRoads) * 100;
+          var totalStartDateContainer = $('#total-startdate');
+            totalStartDateContainer.append($('<span class="stats">').text(pctTagged.toPrecision(4).toLocaleString() + '%'));
+        });
+      });
+
+    },
+
+    loadToFixTasks: function(){
+      //update to-fix task list
+      $.getJSON('http://loggingroads.org:8000/tasks', function(data){
+
+        var tasks = data.data;
+        var tasksContainer = $('#tofix-tasks');
+        tasks.forEach(function(task){
+          var link = 'http://fix.loggingroads.org/#/task/' + task.task;
+          tasksContainer.append($('<div class="task small-5">')
+
+          .append($('<a class="button large round map-btn" href="'+ link +'">').text('Tag Logging Road Creation Dates')));
+        });
+
+
+      });
     },
 
     addRowTo: function(panel, editor, rank){
