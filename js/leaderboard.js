@@ -20,27 +20,30 @@
         // user contributions over time
         // total contributions over time
 
-      this.loadContributors();
-      this.loadStats();
+      this.drawLeaderboard();
+      this.drawStats();
       this.loadToFixTasks();
 
     },
 
-    loadContributors: function(){
+    drawLeaderboard: function(){
+      var editorsContainer = $('#top-editors'),
+          panelContainer = editorsContainer.find('.tabs-content'),
+          editorsPanelTabs = editorsContainer.find('.tabs[data-tab]'),
+          rowsPerPanel = 10;
+
+      // delete existing leaderboard body, if exists
+      panelContainer.empty();
+      editorsPanelTabs.empty();
+
       $.getJSON(app.osmHistoryBaseURL + 'leaders', function(data){
         // sort by number of edits and filter out blacklisted users
         data = data.filter(function(editor){
           return app.blacklist.indexOf(editor.username) === -1;
         });
 
+        var panelCount = Math.ceil(data.length / rowsPerPanel);
 
-        // construct panel tab buttons
-        var editorsContainer = $('#top-editors'),
-            panelContainer = $('<div class="tabs-content">'),
-            rowsPerPanel = 10,
-            panelCount = Math.ceil(data.length / rowsPerPanel);
-
-        var editorsPanelTabs = $('<ul class="tabs text-center" data-tab>');
         for(var panelIdx = 1; panelIdx <= panelCount; panelIdx++){
           var tabButton = $('<li class="tab-title">'),
               tabButtonLink = $('<a href="#panel' + panelIdx + '">' + panelIdx + '</a>');
@@ -74,7 +77,7 @@
 
     },
 
-    loadStats: function(){
+    drawStats: function(){
       $.getJSON(app.osmHistoryBaseURL + 'total', function(data){
         var total = parseInt(data.total);
         var totalChangesContainer = $('#total-changes');
