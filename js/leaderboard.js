@@ -4,7 +4,7 @@
   // extend app w/ map module
   $.extend(app, {
     osmHistoryBaseURL: 'http://loggingroads.org:3030/',
-    blacklist: ['JamesLC', 'Leo B', 'kriscarle'],
+    blacklist: ['JamesLC', 'Leo B', 'kriscarle', 'BKessler_GFW_import'],
     contributorGeoJSONLayer: null,
     loadingContributorGeoJSON: false,
     initLeaderboard: function(){
