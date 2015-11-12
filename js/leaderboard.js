@@ -1,12 +1,31 @@
 ---
 ---
 (function(){
+  // helper functions
+  function unique(collection){
+    return collection.reduce(function(result, item){
+      return result.indexOf(item) === -1 ? result.concat(item) : result;
+    }, []);
+  }
+
+  function fuzzyMatch(query, term){
+    // a very permissive fuzzyMatch algorithm a-la SublimeText
+    // returns true if all values in 'query' array appear in the same order in 'term' array,
+    // though not necessarily sequentially
+    // i.e. allows for dropped letters, does not allow for incorrect letters
+    if(query.length === 0){ return true; }
+
+    var queryLetterIdx = term.indexOf(query[0]);
+    return queryLetterIdx !== -1 && fuzzyMatch(query.slice(1), term.slice(queryLetterIdx +1));
+  }
+
   // extend app w/ map module
   $.extend(app, {
     osmHistoryBaseURL: 'http://loggingroads.org:3030/',
     blacklist: ['JamesLC', 'Leo B', 'kriscarle', 'BKessler_GFW_import'],
     contributorGeoJSONLayer: null,
     loadingContributorGeoJSON: false,
+    filterText: '',
     initLeaderboard: function(){
       // see mapoff sample site: http://mapgive.state.gov/events/mapoff/results/
       // user_list.json
@@ -20,13 +39,36 @@
         // user contributions over time
         // total contributions over time
 
+      // bind event handlers
+      $('.leaderboard-filter').on('keyup', this.filterLeaderboard);
+
       this.drawLeaderboard();
       this.drawStats();
       this.loadToFixTasks();
-
     },
 
-    drawLeaderboard: function(){
+    filterLeaderboard: function(e){
+      var newFilterText = $(this).val();
+
+      // abort if fitler text is unchanged
+      if(app.filterText === newFilterText){
+        return;
+      }else{
+        app.filterText = newFilterText;
+      }
+
+      function filterFn(editor){
+        return editor.tags.reduce(function(bool, tag){
+          return bool || fuzzyMatch(app.filterText, tag);
+        }, false);
+      }
+
+      app.drawLeaderboard(filterFn);
+    },
+
+    drawLeaderboard: function(filterFn){
+      filterFn = filterFn || function(){ return true; }
+
       var editorsContainer = $('#top-editors'),
           panelContainer = editorsContainer.find('.tabs-content'),
           editorsPanelTabs = editorsContainer.find('.tabs[data-tab]'),
@@ -39,7 +81,7 @@
       $.getJSON(app.osmHistoryBaseURL + 'leaders', function(data){
         // sort by number of edits and filter out blacklisted users
         data = data.filter(function(editor){
-          return app.blacklist.indexOf(editor.username) === -1;
+          return app.blacklist.indexOf(editor.username) === -1 && filterFn(editor);
         });
 
         var panelCount = Math.ceil(data.length / rowsPerPanel);
