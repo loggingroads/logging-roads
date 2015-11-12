@@ -40,7 +40,7 @@
         // total contributions over time
 
       // bind event handlers
-      $('.leaderboard-filter').on('keyup', this.filterLeaderboard);
+      $('.tag-filter').on('keyup', this.filterLeaderboard);
 
       this.drawLeaderboard();
       this.drawStats();

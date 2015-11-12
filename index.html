@@ -78,9 +78,11 @@ tm_projects:
   <h2 class="text-center">Leaderboard</h2>
   <p class="text-center shrink mbl">List of top contributors, ranked by number of changes.</p>
 
-  <input class="leaderboard-filter" type="text" name="leaderboard-filter">
+  <div class="small-5 medium-3 columns right">
+    <input class="tag-filter" type="search" name="leaderboard-filter" placeholder="Filter Tag">
+  </div>
 
-  <div class="large-12 columns">
+  <div class="small-12 columns">
     <div id="top-editors">
       <ul>
         <li class="head-row clearfix">
@@ -88,7 +90,6 @@ tm_projects:
           <span class="small-3 columns">User Name</span>
           <span class="small-3 columns text-right">Changes</span>
           <span class="small-5 columns text-right">Tags</span>
-        <!--  <span class="small-3 columns text-right">Change Sets</span>-->
         </li>
       </ul>
 

@@ -28,6 +28,23 @@ small { font-size: 70%; }
 
 strong { font-weight: 600; }
 
+::-webkit-input-placeholder {
+  color: $med-gray;
+  font-style: italic;
+}
+:-moz-placeholder {
+  color: $med-gray;
+  font-style: italic;
+}
+::-moz-placeholder {
+  color: $med-gray;
+  font-style: italic;
+}
+:-ms-input-placeholder {
+  color: $med-gray;
+  font-style: italic;
+}
+
 p {
   color: $med-l-gray;
   font-size: 1.1rem;
@@ -354,6 +371,20 @@ header {
 
 #leaderboard {
   min-height: 600px;
+  input.tag-filter {
+    display: inline;
+    margin: 0;
+    padding-right: 14px;
+    background-color: rgba(160,160,160, 0.1);
+    background-color: $bgcolor-hover;
+    border-color: $med-d-gray;
+    color: $med-gray;
+    transition: all 0.3s;
+    text-align: right;
+    &:focus {
+      border-color: $med-gray;
+    }
+  }
   li.tab-title {
     padding: 0;
     display: inline;
