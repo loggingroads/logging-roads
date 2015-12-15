@@ -2,8 +2,6 @@
 
 #script to update the logging roads prod website
 
-cd ~/kris/loggingroads_prod
-
 #get latest code from Github
 git fetch --all
 git pull
