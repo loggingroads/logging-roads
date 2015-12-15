@@ -1,6 +1,6 @@
 - name: Cameroon
   map_glyph: map-cm
-  tm_project_id:
+  tm_project_id: 5
 
 - name: Central African Republic
   map_glyph: map-cf
@@ -16,11 +16,8 @@
 
 - name: Gabon
   map_glyph: map-ga
-  tm_project_id: 
+  tm_project_id: 7
 
 - name: Republic of Congo
   map_glyph: map-cg
   tm_project_id: 4
-
-
-
