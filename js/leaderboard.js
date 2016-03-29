@@ -3,7 +3,7 @@
 (function(){
   // extend app w/ map module
   $.extend(app, {
-    osmHistoryBaseURL: 'http://loggingroads.org:3030/',
+    osmHistoryBaseURL: 'https://loggingroads.org/info/',
     blacklist: ['JamesLC', 'Leo B', 'kriscarle'],
     contributorGeoJSONLayer: null,
     loadingContributorGeoJSON: false,
@@ -86,7 +86,7 @@
         });
 
         //update to-fix task list
-        $.getJSON('http://loggingroads.org:8000/tasks', function(data){
+        $.getJSON('https://loggingroads.org/tasks/tasks', function(data){
 
           var tasks = data.data;
           var tasksContainer = $('#tofix-tasks');
